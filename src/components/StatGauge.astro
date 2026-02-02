@@ -1,0 +1,52 @@
+---
+/**
+ * Replace placeholders with verified clinic metrics before launch.
+ */
+const { label, value, suffix = "", color = "#176CB4" } = Astro.props as {
+  label: string;
+  value: number | string;
+  suffix?: string;
+  color?: string;
+};
+function fallbackFromPlaceholder(v: string) {
+  let sum = 0;
+  for (let i = 0; i < v.length; i++) sum += v.charCodeAt(i);
+  return 30 + (sum % 65); // 30-95
+}
+const parsedRaw = typeof value === "string" ? (value.startsWith("VALUE_PLACEHOLDER") ? fallbackFromPlaceholder(value) : parseFloat(value)) : value;
+const parsed = isNaN(parsedRaw as number) ? 0 : (parsedRaw as number);
+const defaultMax = 100; // visual default for percentage
+const gaugeMax = suffix === "%" ? defaultMax : Math.max(parsed, 1);
+const clamped = isNaN(parsed) ? 0 : Math.max(0, Math.min(parsed, gaugeMax));
+const radius = 60;
+const circumference = Math.PI * radius;
+const trackStroke = "#e5e7eb"; // brand-muted/light
+const id = `stat-${Date.now()}-${Math.floor(Math.random() * 100000)}`;
+const offsetInitial = circumference - (circumference * clamped) / gaugeMax;
+---
+<div class="flex flex-col items-center justify-center" id={id} data-target={clamped} data-suffix={suffix} data-max={gaugeMax} data-circumference={circumference}>
+  <div class="relative w-[160px] h-[90px]" aria-label={label}>
+    <svg class="absolute inset-0" viewBox={`0 0 ${radius * 2} ${radius + 10}`} role="img">
+      <path
+        d={`M 0 ${radius} A ${radius} ${radius} 0 0 1 ${radius * 2} ${radius}`}
+        fill="none"
+        stroke={trackStroke}
+        stroke-width="14"
+        stroke-linecap="round"
+      />
+      <path
+        id="gauge-path"
+        d={`M 0 ${radius} A ${radius} ${radius} 0 0 1 ${radius * 2} ${radius}`}
+        fill="none"
+        stroke={color}
+        stroke-width="14"
+        stroke-linecap="round"
+        style={`stroke-dasharray:${circumference};stroke-dashoffset:${offsetInitial};`}
+      />
+    </svg>
+  </div>
+  <div class="mt-3 text-center">
+    <div class="text-3xl font-heading text-brand-dark" id="gauge-value" aria-live="polite">{clamped}{suffix}</div>
+    <div class="text-sm text-brand-dark/80">{label}</div>
+  </div>
+</div>

@@ -1,0 +1,550 @@
+{
+  "ui": {
+    "nav": {
+      "services": "Servicios",
+      "about": "Sobre nosotros",
+      "contact": "Contacto",
+      "faq": "Preguntas frecuentes",
+      "call": "Llamar",
+      "schedule": "Agendar cita",
+      "accidenter": "AccidentER"
+    },
+    "footer": {
+      "note": "Aceptamos visitas sin cita.",
+      "blurb": "Atención urgente profesional por accidentes con apoyo bilingüe.",
+      "contactTitle": "Contacto",
+      "phoneLabel": "Teléfono",
+      "addressLabel": "Dirección",
+      "emailLabel": "Correo",
+      "legalTitle": "Legal",
+      "privacy": "Política de privacidad",
+      "terms": "Términos del servicio",
+      "rights": "Todos los derechos reservados."
+    }
+  },
+  "common": {
+    "breadcrumb": {
+      "home": "Inicio",
+      "services": "Servicios"
+    }
+  },
+  "home": {
+    "seo": {
+      "title": "Accident ER – Urgent Care MD | Atención urgente enfocada en accidentes",
+      "description": "Atención centrada en el paciente después de accidentes—valoración, diagnósticos y guía con apoyo bilingüe.",
+      "canonical": "https://accidenter-urgentcaremd.com/es/"
+    },
+    "hero": {
+      "title": "Atención urgente enfocada en accidentes",
+      "subtitle": "Valoración médica calmada y minuciosa tras choques, incidentes laborales y lesiones deportivas.",
+      "primaryCTA": "Llame al +1 801-996-7427",
+      "secondaryCTA": "Planifique su visita",
+      "safetyNote": "Si usted u otra persona tiene una emergencia que amenaza la vida, llame al 911."
+    },
+    "intro": {
+      "title": "Estamos aquí después de un accidente",
+      "text": "Nuestros profesionales realizan una valoración cuidadosa, diagnósticos en el lugar y pasos claros para avanzar con confianza. Atendemos Utah."
+    },
+    "afterAccident": {
+      "title": "Después de un accidente: qué hacer",
+      "steps": [
+        { "title": "Asegure su seguridad", "text": "Muévase a un lugar seguro y verifique síntomas graves." },
+        { "title": "Llame al 911 en emergencias", "text": "Si hay lesiones severas, dificultad para respirar, sangrado abundante o confusión, llame al 911." },
+        { "title": "Busque evaluación médica", "text": "Visite Accident ER – Urgent Care MD para un examen completo y pruebas apropiadas." }
+      ]
+    },
+    "whyAccidentER": {
+      "title": "Por qué elegir Accident ER",
+      "points": [
+        { "title": "Experiencia enfocada en accidentes", "text": "Profesionales con experiencia en evaluar lesiones por choques, caídas e impactos." },
+        { "title": "Diagnóstico en el lugar", "text": "Rayos X y pruebas en el punto de atención para decisiones oportunas." },
+        { "title": "Comunicación clara", "text": "Explicaciones directas, apoyo bilingüe y seguimiento coordinado." },
+        { "title": "Atención eficiente", "text": "Visitas ágiles que priorizan lo necesario." }
+      ]
+    },
+    "closingCTA": {
+      "title": "Listos cuando usted lo esté",
+      "text": "Aceptamos visitas sin cita y también con cita. Traiga reportes del accidente o estudios previos si los tiene.",
+      "CTA": "Llame al +1 801-996-7427 o visítenos hoy"
+    },
+    "tagline": {
+      "title": "Permítanos ayudarle a sentirse mejor más rápido en AccidentER®",
+      "subtitle": "Nuestro objetivo es brindar atención de calidad y atenderle con eficiencia."
+    }
+  },
+  "servicesIndex": {
+    "seo": {
+      "title": "Servicios | Accident ER – Urgent Care MD",
+      "description": "Servicios de atención por accidentes: valoración, diagnósticos y seguimiento para lesiones. Explore y encuentre la atención adecuada.",
+      "canonical": "https://accidenter-urgentcaremd.com/es/servicios/"
+    },
+    "breadcrumb": {
+      "items": [
+        { "label": "Inicio", "href": "/es" },
+        { "label": "Servicios", "href": "/es/servicios" }
+      ]
+    },
+    "hero": {
+      "title": "Servicios de atención por accidentes",
+      "subtitle": "Resumen de valoraciones y tratamientos después de accidentes—explore y elija el servicio adecuado."
+    },
+    "intro": {
+      "title": "Conozca sus opciones",
+      "text": "Explore los servicios para lesiones por choques vehiculares, incidentes laborales y actividades deportivas. Atendemos pacientes en Utah."
+    },
+    "howToChoose": {
+      "title": "Cómo elegir un servicio",
+      "text": "Si no está seguro, empiece con Valoración médica por accidente o contáctenos para orientar su elección."
+    },
+    "closingCTA": {
+      "title": "Aceptamos visitas sin cita",
+      "text": "Puede acudir sin cita o planificar su visita. Traiga reportes del accidente o estudios previos si los tiene.",
+      "CTA": "Llame al +1 801-996-7427 o visítenos hoy"
+    }
+  },
+  "services": {
+    "accident-medical-evaluation": {
+      "name": "Valoración médica por accidente",
+      "shortDescription": "Valoración clínica integral tras un accidente con diagnósticos enfocados."
+    },
+    "concussion-tbi-evaluation": {
+      "name": "Valoración de conmoción y TBI",
+      "shortDescription": "Tamizaje neurológico y guía para conmoción y TBI leve."
+    },
+    "whiplash-neck-injury-evaluation": {
+      "name": "Valoración de latigazo y cuello",
+      "shortDescription": "Evaluación de dolor de cuello, latigazo y lesiones de tejidos blandos."
+    },
+    "back-spine-injury-evaluation": {
+      "name": "Valoración de espalda y columna",
+      "shortDescription": "Evaluación de lesiones agudas y subagudas de la columna y síntomas relacionados."
+    },
+    "soft-tissue-injury-evaluation": {
+      "name": "Valoración de tejidos blandos",
+      "shortDescription": "Examen clínico para esguinces, distensiones y contusiones."
+    },
+    "work-injury-evaluation": {
+      "name": "Valoración de lesiones laborales",
+      "shortDescription": "Evaluación de lesiones relacionadas con el trabajo con guía para retorno laboral."
+    },
+    "diagnostic-evaluation": {
+      "name": "Valoración diagnóstica",
+      "shortDescription": "Imagen y pruebas indicadas para apoyar un diagnóstico preciso."
+    },
+    "motor-vehicle-post-accident-care": {
+      "name": "Atención post‑accidente vehicular",
+      "shortDescription": "Valoración y tratamiento especializado tras choques vehiculares."
+    },
+    "care-plan-coordination": {
+      "name": "Plan de atención y coordinación de seguimiento",
+      "shortDescription": "Plan claro, derivaciones cuando corresponde y seguimiento de recuperación."
+    }
+  },
+  "servicePage": {
+    "entries": {
+      "accident-medical-evaluation": {
+        "name": "Valoración médica por accidente",
+        "seo": {
+          "title": "Valoración médica por accidente | Accident ER – Urgent Care MD",
+          "description": "Valoración integral tras un accidente con diagnósticos enfocados y guía clara.",
+          "canonical": "https://accidenter-urgentcaremd.com/es/servicios/accident-medical-evaluation/"
+        },
+        "hero": {
+          "title": "Valoración médica por accidente",
+          "subtitle": "Examen clínico minucioso tras choques, incidentes laborales o deportes."
+        },
+        "overview": {
+          "text": "Valoración organizada para identificar lesiones, decidir diagnósticos y establecer un plan seguro."
+        },
+        "highlights": [
+          { "title": "Historia y examen enfocados", "text": "Valoración de dolor, función y señales de alarma." },
+          { "title": "Diagnósticos cuando corresponde", "text": "Rayos X y pruebas según hallazgos clínicos." },
+          { "title": "Pasos claros", "text": "Guía escrita y recomendaciones de seguimiento." }
+        ],
+        "closingCTA": {
+          "title": "Listos para atenderle",
+          "text": "Acuda sin cita o planifique su visita. Traiga estudios o reportes si los tiene.",
+          "CTA": "Llame al +1 801-996-7427 o visítenos hoy"
+        }
+      },
+      "concussion-tbi-evaluation": {
+        "name": "Valoración de conmoción y TBI",
+        "seo": {
+          "title": "Valoración de conmoción y TBI | Accident ER – Urgent Care MD",
+          "description": "Tamizaje neurológico, guía de síntomas y recomendaciones de seguimiento para conmoción y TBI leve.",
+          "canonical": "https://accidenter-urgentcaremd.com/es/servicios/concussion-tbi-evaluation/"
+        },
+        "hero": {
+          "title": "Valoración de conmoción y TBI",
+          "subtitle": "Evaluación neurológica cuidadosa con guía práctica de recuperación."
+        },
+        "overview": {
+          "text": "Evaluamos síntomas, realizamos examen dirigido y recomendamos monitoreo, pruebas cuando corresponda y ajustes de actividad."
+        },
+        "highlights": [
+          { "title": "Examen neurológico dirigido", "text": "Tamizaje de síntomas cognitivos y vestibulares." },
+          { "title": "Guía para retomar actividad", "text": "Plan escalonado según resolución de síntomas." },
+          { "title": "Coordinación de seguimiento", "text": "Recomendaciones según severidad y progreso." }
+        ],
+        "closingCTA": {
+          "title": "Comience la recuperación con claridad",
+          "text": "Acuda sin cita o planifique su visita. Traiga detalles del incidente si los tiene.",
+          "CTA": "Llame al +1 801-996-7427 o visítenos hoy"
+        }
+      },
+      "whiplash-neck-injury-evaluation": {
+        "name": "Valoración de latigazo y cuello",
+        "seo": {
+          "title": "Valoración de latigazo y cuello | Accident ER – Urgent Care MD",
+          "description": "Evaluación de dolor de cuello, lesiones de tejidos blandos y latigazo tras choques o impactos.",
+          "canonical": "https://accidenter-urgentcaremd.com/es/servicios/whiplash-neck-injury-evaluation/"
+        },
+        "hero": {
+          "title": "Valoración de latigazo y cuello",
+          "subtitle": "Examen enfocado y guía para lesiones cervicales."
+        },
+        "overview": { "text": "Valoración clínica para identificar distensión de tejidos blandos, límites de movilidad y señales de alarma." },
+        "highlights": [
+          { "title": "Dolor y función", "text": "Evaluación de movilidad y sensibilidad." },
+          { "title": "Diagnóstico cuando corresponde", "text": "Imagen según criterios clínicos." },
+          { "title": "Guía de cuidados en casa", "text": "Pasos prácticos para apoyar la recuperación." }
+        ],
+        "closingCTA": {
+          "title": "Sea evaluado pronto",
+          "text": "Acuda sin cita o planifique una visita.",
+          "CTA": "Llame al +1 801-996-7427 o visítenos hoy"
+        }
+      },
+      "back-spine-injury-evaluation": {
+        "name": "Valoración de espalda y columna",
+        "seo": {
+          "title": "Valoración de espalda y columna | Accident ER – Urgent Care MD",
+          "description": "Evaluación de lesiones agudas y subagudas de la columna con diagnósticos y guía.",
+          "canonical": "https://accidenter-urgentcaremd.com/es/servicios/back-spine-injury-evaluation/"
+        },
+        "hero": {
+          "title": "Valoración de espalda y columna",
+          "subtitle": "Evaluación de síntomas relacionados con la columna y señales de alarma."
+        },
+        "overview": { "text": "Examen dirigido y pruebas cuando corresponda para apoyar una recuperación segura." },
+        "highlights": [
+          { "title": "Tamizaje neurológico", "text": "Valoración de fuerza, sensibilidad y reflejos." },
+          { "title": "Imagen cuando corresponde", "text": "Órdenes según hallazgos clínicos." },
+          { "title": "Guía de actividad", "text": "Recomendaciones para reducir tensión y apoyar la sanación." }
+        ],
+        "closingCTA": {
+          "title": "Apoye su recuperación",
+          "text": "Acuda sin cita o planifique una visita para valoración.",
+          "CTA": "Llame al +1 801-996-7427 o visítenos hoy"
+        }
+      },
+      "soft-tissue-injury-evaluation": {
+        "name": "Valoración de tejidos blandos",
+        "seo": {
+          "title": "Valoración de tejidos blandos | Accident ER – Urgent Care MD",
+          "description": "Evaluación de esguinces, distensiones y contusiones con guía funcional.",
+          "canonical": "https://accidenter-urgentcaremd.com/es/servicios/soft-tissue-injury-evaluation/"
+        },
+        "hero": {
+          "title": "Valoración de tejidos blandos",
+          "subtitle": "Manejo basado en evidencia de lesiones de ligamentos y músculos."
+        },
+        "overview": { "text": "Valoración clínica y recomendaciones prácticas para retomar actividad con seguridad." },
+        "highlights": [
+          { "title": "Valoración funcional", "text": "Evaluación de fuerza y estabilidad." },
+          { "title": "Cuidados de soporte", "text": "Guía sobre protección y carga progresiva." },
+          { "title": "Seguimiento cuando sea necesario", "text": "Coordinación según respuesta de síntomas." }
+        ],
+        "closingCTA": {
+          "title": "Reciba pasos claros",
+          "text": "Acuda sin cita o planifique una visita para iniciar la atención.",
+          "CTA": "Llame al +1 801-996-7427 o visítenos hoy"
+        }
+      },
+      "work-injury-evaluation": {
+        "name": "Valoración de lesiones laborales",
+        "seo": {
+          "title": "Valoración de lesiones laborales | Accident ER – Urgent Care MD",
+          "description": "Evaluación de lesiones laborales con guía práctica y planificación de seguimiento.",
+          "canonical": "https://accidenter-urgentcaremd.com/es/servicios/work-injury-evaluation/"
+        },
+        "hero": {
+          "title": "Valoración de lesiones laborales",
+          "subtitle": "Evaluación enfocada tras incidentes de trabajo."
+        },
+        "overview": { "text": "Valoración de distensiones, esguinces, contusiones y lesiones relacionadas con guía de retorno al trabajo." },
+        "highlights": [
+          { "title": "Examen orientado a función", "text": "Evaluación alineada a demandas laborales." },
+          { "title": "Diagnósticos cuando corresponde", "text": "Pruebas según criterios clínicos." },
+          { "title": "Plan de retorno laboral", "text": "Pasos claros para retomar labores con seguridad." }
+        ],
+        "closingCTA": {
+          "title": "Retome con confianza",
+          "text": "Acuda sin cita o planifique su visita.",
+          "CTA": "Llame al +1 801-996-7427 o visítenos hoy"
+        }
+      },
+      "diagnostic-evaluation": {
+        "name": "Valoración diagnóstica",
+        "seo": {
+          "title": "Valoración diagnóstica | Accident ER – Urgent Care MD",
+          "description": "Imagen y pruebas en el punto de atención cuando corresponde para decisiones clínicas precisas.",
+          "canonical": "https://accidenter-urgentcaremd.com/es/servicios/diagnostic-evaluation/"
+        },
+        "hero": {
+          "title": "Valoración diagnóstica",
+          "subtitle": "Pruebas clínicamente apropiadas para confirmar o refinar el diagnóstico."
+        },
+        "overview": { "text": "Imagen y pruebas guiadas por hallazgos del examen para informar decisiones de tratamiento." },
+        "highlights": [
+          { "title": "Disponibilidad de rayos X", "text": "Órdenes e interpretación cuando corresponda." },
+          { "title": "Pruebas en el punto de atención", "text": "Información oportuna para apoyar la atención." },
+          { "title": "Integración clínica", "text": "Resultados utilizados para definir su plan." }
+        ],
+        "closingCTA": {
+          "title": "Obtenga la claridad necesaria",
+          "text": "Acuda sin cita o planifique una visita para valoración.",
+          "CTA": "Llame al +1 801-996-7427 o visítenos hoy"
+        }
+      },
+      "motor-vehicle-post-accident-care": {
+        "name": "Atención post‑accidente vehicular",
+        "seo": {
+          "title": "Atención post‑accidente vehicular | Accident ER – Urgent Care MD",
+          "description": "Valoración y tratamiento especializado tras choques vehiculares.",
+          "canonical": "https://accidenter-urgentcaremd.com/es/servicios/motor-vehicle-post-accident-care/"
+        },
+        "hero": {
+          "title": "Atención post‑accidente vehicular",
+          "subtitle": "Valoración y tratamiento tras choques vehiculares."
+        },
+        "overview": { "text": "Examen enfocado tras colisiones con diagnósticos indicados y plan de tratamiento claro." },
+        "highlights": [
+          { "title": "Examen enfocado en accidentes", "text": "Valoración de patrones de impacto y señales de alarma." },
+          { "title": "Diagnósticos cuando corresponde", "text": "Rayos X y pruebas según criterios clínicos." },
+          { "title": "Plan y seguimiento", "text": "Pasos claros, derivaciones cuando corresponda y seguimiento." }
+        ],
+        "closingCTA": {
+          "title": "Reciba atención tras un choque",
+          "text": "Acuda sin cita o planifique su visita para valoración.",
+          "CTA": "Llame al +1 801-996-7427 o visítenos hoy"
+        }
+      },
+      "care-plan-coordination": {
+        "name": "Plan de atención y coordinación de seguimiento",
+        "seo": {
+          "title": "Plan de atención y coordinación de seguimiento | Accident ER – Urgent Care MD",
+          "description": "Planes claros, derivaciones cuando corresponda y seguimiento de recuperación.",
+          "canonical": "https://accidenter-urgentcaremd.com/es/servicios/care-plan-coordination/"
+        },
+        "hero": {
+          "title": "Plan de atención y coordinación de seguimiento",
+          "subtitle": "Plan claro y pasos coordinados para apoyar la recuperación."
+        },
+        "overview": { "text": "Organizamos pasos siguientes, derivaciones cuando corresponda y seguimiento del progreso para apoyar una recuperación segura." },
+        "highlights": [
+          { "title": "Plan escrito", "text": "Entienda qué hacer y cuándo." },
+          { "title": "Derivaciones coordinadas", "text": "Cuando se indica atención especializada." },
+          { "title": "Seguimiento del progreso", "text": "Citas de seguimiento alineadas a necesidades clínicas." }
+        ],
+        "closingCTA": {
+          "title": "Mantenga el rumbo",
+          "text": "Acuda sin cita o planifique su visita para obtener un plan claro.",
+          "CTA": "Llame al +1 801-996-7427 o visítenos hoy"
+        }
+      }
+    }
+  },
+  "ui": {
+    "contactForm": {
+      "name": "Nombre completo",
+      "namePlaceholder": "Tu nombre",
+      "phone": "Teléfono",
+      "phonePlaceholder": "Tu número",
+      "email": "Correo",
+      "emailPlaceholder": "orders@accidenter.com",
+      "message": "Mensaje",
+      "messagePlaceholder": "¿Cómo podemos ayudar?",
+      "send": "Enviar mensaje",
+      "consentLabel": "Acepto enviar mis datos para fines de contacto.",
+      "optInLabel": "Deseo recibir información y actualizaciones."
+    },
+    "testimonials": {
+      "fromGoogle": "De reseñas de Google"
+    }
+  }
+  ,
+  "about": {
+    "seo": {
+      "title": "Sobre nosotros | Accident ER – Urgent Care MD",
+      "description": "Sobre Accident ER — atención urgente enfocada en accidentes en Utah.",
+      "canonical": "https://accidenter-urgentcaremd.com/es/about"
+    },
+    "breadcrumb": {
+      "items": [
+        { "label": "Inicio", "href": "/es" },
+        { "label": "Sobre nosotros", "href": "/es/about" }
+      ]
+    },
+    "hero": {
+      "title": "Sobre AccidentER®",
+      "subtitle": "Atención urgente enfocada en accidentes con claridad, seguridad y apoyo."
+    },
+    "stats": {
+      "title": "Visión de impacto de AccidentER®",
+      "items": [
+        { "label": "Visitas apoyadas", "value": "1200", "suffix": "" },
+        { "label": "Valoraciones por accidentes", "value": "450", "suffix": "" },
+        { "label": "Tasa de apoyo bilingüe", "value": "85", "suffix": "%" }
+      ]
+    },
+    "mission": {
+      "title": "Nuestra misión",
+      "text": "Brindar valoración cuidadosa tras accidentes, comunicación clara y pasos prácticos—respetando su tiempo y seguridad."
+    },
+    "ourTeam": {
+      "title": "Nuestro equipo",
+      "text": "Un colectivo de profesionales enfocados en atención por accidentes—trabajando juntos para brindar apoyo bilingüe consistente.",
+      "points": [
+        "Enfoque colaborativo y centrado en el paciente",
+        "Guía clara y seguimiento",
+        "Procesos diseñados para la eficiencia"
+      ]
+    },
+    "howWeCare": {
+      "title": "Cómo atendemos",
+      "text": "Pasos organizados para seguridad, claridad y decisiones oportunas.",
+      "items": [
+        "Ingreso y triaje enfocados",
+        "Examen clínico dirigido",
+        "Diagnósticos indicados cuando corresponde",
+        "Plan escrito y apoyo a la recuperación"
+      ]
+    },
+    "values": {
+      "title": "Nuestros valores",
+      "items": [
+        { "title": "Compasión", "text": "Atención empática que prioriza su seguridad." },
+        { "title": "Claridad", "text": "Explicaciones y guía directas." },
+        { "title": "Eficiencia", "text": "Visitas ágiles que respetan su tiempo." },
+        { "title": "Confiabilidad", "text": "Procesos consistentes y seguimiento coordinado." }
+      ]
+    },
+    "closingCTA": {
+      "title": "Listos cuando usted lo esté",
+      "text": "Aceptamos visitas sin cita y también con cita. Traiga reportes del accidente o estudios previos si los tiene.",
+      "CTA": "Planifique su visita"
+    }
+  }
+  ,
+  "faq": {
+    "seo": {
+      "title": "Preguntas frecuentes | Accident ER – Urgent Care MD",
+      "description": "Respuestas sobre visitas sin cita, atención bilingüe y cuándo llamar al 911.",
+      "canonical": "https://accidenter-urgentcaremd.com/es/faq"
+    },
+    "breadcrumb": {
+      "items": [
+        { "label": "Inicio", "href": "/es" },
+        { "label": "Preguntas frecuentes", "href": "/es/faq" }
+      ]
+    },
+    "hero": {
+      "title": "Preguntas frecuentes",
+      "subtitle": "Respuestas breves sobre la atención en Accident ER – Urgent Care MD en Utah."
+    },
+    "title": "Preguntas frecuentes",
+    "items": [
+      { "question": "¿Aceptan visitas sin cita?", "answer": "Sí. Se aceptan visitas sin cita en los horarios indicados.", "href": "/es/servicios", "hrefLabel": "Ver servicios" },
+      { "question": "¿Brindan atención bilingüe?", "answer": "Sí. Hay apoyo en inglés y español.", "href": "/es/contacto", "hrefLabel": "Contacto" },
+      { "question": "¿Cuándo debo llamar al 911?", "answer": "Ante emergencias que amenacen la vida (sangrado severo, dificultad para respirar, confusión), llame al 911." }
+    ]
+  },
+  "contact": {
+    "seo": {
+      "title": "Contacto | Accident ER – Urgent Care MD",
+      "description": "Contacto de Accident ER – Urgent Care MD en Utah. Llame, obtenga direcciones o vea horarios.",
+      "canonical": "https://accidenter-urgentcaremd.com/es/contacto"
+    },
+    "breadcrumb": {
+      "items": [
+        { "label": "Inicio", "href": "/es" },
+        { "label": "Contacto", "href": "/es/contacto" }
+      ]
+    },
+    "hero": {
+      "title": "Contacto Accident ER – Urgent Care MD",
+      "subtitle": "Clínica única en Utah con atención urgente enfocada en accidentes.",
+      "safetyNote": "Si esto es una emergencia médica, llame al 911."
+    },
+    "quickActions": {
+      "items": [
+        { "title": "Llamar", "text": "Hable con nuestro equipo.", "hrefLabel": "Llamar +1 801-996-7427" },
+        { "title": "Cómo llegar", "text": "Abrir en Google Maps.", "hrefLabel": "Abrir Maps" },
+        { "title": "Horarios", "text": "Lun–Sáb 9:00–18:00 · Dom Cerrado" }
+      ]
+    },
+    "form": {
+      "title": "Envíenos un mensaje",
+      "fields": {
+        "fullName": "Nombre completo",
+        "fullNamePlaceholder": "Su nombre completo",
+        "phone": "Teléfono",
+        "phonePlaceholder": "Su número de teléfono",
+        "email": "Correo (opcional)",
+        "emailPlaceholder": "orders@accidenter.com",
+        "reasonForVisit": "Motivo de la consulta",
+        "reasonForVisitPlaceholder": "Seleccione un motivo",
+        "reasonOptions": {
+          "general": "Pregunta general",
+          "insurance": "Seguro/Facturación",
+          "accident": "Tras un accidente",
+          "other": "Otro"
+        },
+        "message": "Mensaje",
+        "messagePlaceholder": "¿Cómo podemos ayudar?"
+      },
+      "submitLabel": "Enviar",
+      "privacyNote": "Al enviar, acepta ser contactado sobre su consulta.",
+      "successMessage": "Gracias. Nos pondremos en contacto lo antes posible.",
+      "errorMessage": "Hubo un problema al enviar su mensaje. Intente nuevamente."
+    },
+    "details": {
+      "title": "Detalles de la clínica",
+      "phoneLabel": "Teléfono",
+      "addressLabel": "Dirección",
+      "hoursLabel": "Horarios",
+      "bilingualNote": "Atención bilingüe disponible (inglés y español).",
+      "hoursLines": [
+        "Lunes: 9:00–18:00",
+        "Martes: 9:00–18:00",
+        "Miércoles: 9:00–18:00",
+        "Jueves: 9:00–18:00",
+        "Viernes: 9:00–18:00",
+        "Sábado: 9:00–18:00",
+        "Domingo: Cerrado"
+      ]
+    },
+    "map": {
+      "title": "Encuéntrenos",
+      "embedUrl": "https://www.google.com/maps?q=6770%20S%20900%20E%2C%20Midvale%2C%20UT%2084047&output=embed",
+      "parkingNoteTitle": "Estacionamiento / Llegada",
+      "parkingNoteText": "Detalles de estacionamiento e instrucciones de llegada aquí. Llegue unos minutos antes."
+      ,
+      "directionsTitle": "Cómo llegar",
+      "directionsItems": [
+        "Entre por 900 E y siga la señalización hacia AccidentER®",
+        "Estacionamiento gratuito en sitio cerca de la entrada principal",
+        "Busque la marca verde AccidentER® en la entrada de la clínica"
+      ]
+    },
+    "faq": {
+      "title": "Respuestas rápidas",
+      "items": [
+        { "question": "¿Aceptan visitas sin cita?", "answer": "Sí. Se aceptan visitas sin cita en los horarios indicados." },
+        { "question": "¿Brindan atención bilingüe?", "answer": "Sí. Hay apoyo en inglés y español." },
+        { "question": "¿Cuándo debo llamar al 911?", "answer": "Ante emergencias que amenacen la vida (sangrado severo, dificultad para respirar, confusión), llame al 911." }
+      ]
+    }
+  }
+}

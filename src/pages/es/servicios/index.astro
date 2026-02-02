@@ -1,0 +1,151 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import Section from "../../../components/Section.astro";
+import ServiceCard from "../../../components/ServiceCard.astro";
+import CTA from "../../../components/CTA.astro";
+import TestimonialsCarousel from "../../../components/TestimonialsCarousel.astro";
+import FeatureIcon from "../../../components/FeatureIcon.astro";
+import ContactForm from "../../../components/ContactForm.astro";
+import { t } from "../../../i18n";
+import services from "../../../data/services";
+const locale = "es";
+const seo = t(locale, "servicesIndex.seo");
+const breadcrumb = [
+  { label: t(locale, "common.breadcrumb.home"), href: "/es" },
+  { label: t(locale, "common.breadcrumb.services"), href: "/es/servicios" }
+];
+const hero = t(locale, "servicesIndex.hero");
+const intro = t(locale, "servicesIndex.intro");
+const closingCTA = t(locale, "home.closingCTA");
+const ordered = services;
+const imagesBySlug: Record<string, string> = {
+  "accident-medical-evaluation": "accident-medical.jpg",
+  "concussion-tbi-evaluation": "tbi.jpg",
+  "whiplash-neck-injury-evaluation": "neck.jpg",
+  "back-spine-injury-evaluation": "back.jpg",
+  "soft-tissue-injury-evaluation": "soft.jpg",
+  "work-injury-evaluation": "work.jpg",
+  "diagnostic-evaluation": "diagnostic.jpg",
+  "motor-vehicle-post-accident-care": "postaccident.jpg",
+  "care-plan-coordination": "support.jpg"
+};
+---
+<BaseLayout locale={locale} title={seo.title} description={seo.description} canonical={seo.canonical}>
+  <section class="relative overflow-hidden bg-black border-b border-brand-accent min-h-[460px] sm:min-h-[540px] lg:min-h-[620px]">
+    <video id="hero-video" src="/videos/clinic.mp4" class="absolute inset-0 block w-full h-full object-cover object-center transition-opacity duration-700" autoplay muted playsinline poster="/images/services-hero.jpg"></video>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
+    <div class="container relative z-10 py-16 sm:py-24 lg:py-28">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading text-white drop-shadow-lg">Servicios en <span class="text-brand-success">AccidentER®</span></h1>
+            <p class="mt-6 text-white drop-shadow">Valoraciones enfocadas, diagnósticos en sitio y pasos claros.</p>
+            <div class="mt-8 sm:mt-10 flex flex-wrap gap-3 sm:gap-4">
+              <CTA text={"Llamar"} href={"tel:+18019967427"} variant="primary" />
+              <CTA text={"Ver servicios"} href={"/es/servicios"} variant="success" />
+            </div>
+            <p class="mt-6 text-sm text-white drop-shadow">Aceptamos visitas sin cita. Traiga reportes o estudios previos si los tiene.</p>
+          </div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+    <button id="hero-sound" class="absolute bottom-4 right-4 z-10 bg-white/80 text-brand-dark px-3 py-1 rounded-full text-xs">Activar sonido</button>
+    <script>
+      const video = /** @type {HTMLVideoElement|null} */ (document.getElementById("hero-video"));
+      const btn = document.getElementById("hero-sound");
+      if (video && btn) {
+        btn.addEventListener("click", () => {
+          const isMuted = video.hasAttribute("muted");
+          if (isMuted) {
+            video.removeAttribute("muted");
+            btn.textContent = "Silenciar";
+          } else {
+            video.setAttribute("muted", "");
+            btn.textContent = "Activar sonido";
+          }
+        });
+      }
+    </script>
+  </section>
+  <Breadcrumbs items={breadcrumb} />
+  <Section title={"Cómo funciona nuestra atención"} align="center">
+    <div class="rounded-2xl bg-white p-6 border border-brand-accent">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white border border-brand-accent rounded-xl">
+        <img src="/images/browse.jpg" alt="Explora y elige un servicio" class="w-full h-44 sm:h-48 lg:h-52 object-cover rounded-xl" />
+        <div class="p-4">
+          <h3 class="font-heading text-brand-dark text-xl">Explora y elige un servicio</h3>
+          <p class="text-brand-dark mt-2">Revisa servicios de atención por accidentes y elige el que necesitas.</p>
+        </div>
+      </div>
+      <div class="bg-white border border-brand-accent rounded-xl">
+        <img src="/images/appointmen.jpg" alt="Agendar cita" class="w-full h-44 sm:h-48 lg:h-52 object-cover rounded-xl" />
+        <div class="p-4">
+          <h3 class="font-heading text-brand-dark text-xl">Agenda una cita</h3>
+          <p class="text-brand-dark mt-2">Programa tu visita en persona u online con nuestro equipo.</p>
+        </div>
+      </div>
+      <div class="bg-white border border-brand-accent rounded-xl">
+        <img src="/images/consult.jpg" alt="Consulta con un clínico" class="w-full h-44 sm:h-48 lg:h-52 object-cover rounded-xl" />
+        <div class="p-4">
+          <h3 class="font-heading text-brand-dark text-xl">Consulta con un clínico</h3>
+          <p class="text-brand-dark mt-2">Evaluación y diagnósticos con recomendaciones claras.</p>
+        </div>
+      </div>
+      <div class="bg-white border border-brand-accent rounded-xl">
+        <img src="/images/support.jpg" alt="Tratamiento y apoyo" class="w-full h-44 sm:h-48 lg:h-52 object-cover rounded-xl" />
+        <div class="p-4">
+          <h3 class="font-heading text-brand-dark text-xl">Recibe tratamiento y apoyo</h3>
+          <p class="text-brand-dark mt-2">Plan de atención personalizado, seguimiento y soporte de recuperación.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </Section>
+  <Section title={"Atención médica experta para ti y tu familia"} align="center">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {ordered.map((s) => (
+        <ServiceCard
+          name={t(locale, `${s.i18nKey}.name`)}
+          shortDescription={t(locale, `${s.i18nKey}.shortDescription`)}
+          href={`/es/servicios/${s.slug}`}
+          imageSrc={`/images/${imagesBySlug[s.slug]}`}
+        />
+      ))}
+    </div>
+  </Section>
+  <Section title={"Permítanos ayudarle en AccidentER®"} align="center">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center text-center">
+        <FeatureIcon icon="care" title="Atención por Accidentes" description="Cuidado profesional inmediato tras lesiones." />
+        <FeatureIcon icon="diagnostics" title="Diagnóstico en sitio" description="Rayos X y pruebas disponibles en clínica." />
+        <FeatureIcon icon="rehab" title="Apoyo de recuperación" description="Guía para iniciar tu recuperación con seguridad." />
+        <FeatureIcon icon="followup" title="Visitas de seguimiento" description="Atención constante para mantener tu progreso." />
+      </div>
+      <div class="mt-8 flex justify-center">
+        <CTA text="Ver todos los servicios" href="/es/servicios" variant="primary" />
+      </div>
+    </div>
+  </Section>
+  <Section title={"Lo que dicen nuestros pacientes"}>
+    <div class="max-w-6xl mx-auto">
+      <TestimonialsCarousel locale={locale} />
+    </div>
+  </Section>
+  <section class="container py-8">
+    <ContactForm locale={locale} />
+  </section>
+  <Section title={closingCTA.title} align="center">
+    <div class="max-w-6xl mx-auto">
+      <div class="rounded-2xl bg-brand-accent text-brand-dark p-6 flex flex-col md:flex-row md:items-center md:justify-center gap-4 text-center">
+        <p class="text-white">{closingCTA.text}</p>
+        <div class="flex gap-3 justify-center">
+          <CTA text={closingCTA.CTA} href={"tel:+18019967427"} variant="primary" />
+          <CTA text={"Agendar ahora"} href={"mailto:orders@accidenter.com"} variant="success" />
+        </div>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

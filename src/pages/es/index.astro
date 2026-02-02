@@ -1,0 +1,234 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Section from "../../components/Section.astro";
+import CTA from "../../components/CTA.astro";
+import StepCard from "../../components/StepCard.astro";
+import HighlightCard from "../../components/HighlightCard.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+import FeatureIcon from "../../components/FeatureIcon.astro";
+import ContactForm from "../../components/ContactForm.astro";
+import TestimonialsCarousel from "../../components/TestimonialsCarousel.astro";
+import services from "../../data/services";
+import { t } from "../../i18n";
+const locale = "es";
+const seo = t(locale, "home.seo");
+const hero = t(locale, "home.hero");
+const intro = t(locale, "home.intro");
+const afterAccident = t(locale, "home.afterAccident");
+const whyAccidentER = t(locale, "home.whyAccidentER");
+const closingCTA = t(locale, "home.closingCTA");
+const whyImages = [
+  "/images/expertise.jpg",
+  "/images/diagnostics.jpg",
+  "/images/comunication.jpg",
+  "/images/efficient.jpg"
+];
+const importantOrder = [
+  "accident-medical-evaluation",
+  "concussion-tbi-evaluation",
+  "whiplash-neck-injury-evaluation",
+  "back-spine-injury-evaluation",
+  "soft-tissue-injury-evaluation",
+  "work-injury-evaluation"
+];
+const importantServices = importantOrder
+  .map((slug) => services.find((s) => s.slug === slug))
+  .filter(Boolean);
+---
+<BaseLayout locale={locale} title={seo.title} description={seo.description} canonical={seo.canonical}>
+  <section class="relative overflow-hidden bg-black border-b border-brand-accent min-h-[460px] sm:min-h-[540px] lg:min-h-[620px]">
+    <video id="hero-video" src="/videos/hero1.mp4" class="absolute inset-0 block w-full h-full object-cover object-center transition-opacity duration-700" autoplay muted playsinline poster="/images/hero.jpg"></video>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
+    <div class="container relative z-10 py-16 sm:py-24 lg:py-28">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div>
+            <h1 id="hero-title" class="text-4xl sm:text-5xl lg:text-6xl font-heading text-white drop-shadow-lg">{hero.title}</h1>
+            <p id="hero-subtitle" class="mt-6 text-white drop-shadow">{hero.subtitle}</p>
+            <div class="mt-8 sm:mt-10 flex flex-wrap gap-3 sm:gap-4">
+              <CTA id={"hero-primary"} text={hero.primaryCTA} href={"tel:+18019967427"} variant="primary" />
+              <CTA id={"hero-secondary"} text={hero.secondaryCTA} href={"/es/servicios"} variant="success" />
+            </div>
+            <p id="hero-note" class="mt-6 text-sm text-white drop-shadow">{hero.safetyNote}</p>
+          </div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+    <button id="hero-sound" class="absolute bottom-4 right-4 z-10 bg-white/80 text-brand-dark px-3 py-1 rounded-full text-xs">Activar sonido</button>
+    <button id="hero-prev" class="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/70 text-brand-dark px-3 py-2 rounded-full text-sm">‹</button>
+    <button id="hero-next" class="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/70 text-brand-dark px-3 py-2 rounded-full text-sm">›</button>
+    <div id="hero-dots" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+      <button data-index="0" class="h-2 w-2 rounded-full bg-white/80"></button>
+      <button data-index="1" class="h-2 w-2 rounded-full bg-white/40"></button>
+      <button data-index="2" class="h-2 w-2 rounded-full bg-white/40"></button>
+      <button data-index="3" class="h-2 w-2 rounded-full bg-white/40"></button>
+    </div>
+    <script>
+      const video = document.getElementById("hero-video") as HTMLVideoElement | null;
+      const btn = document.getElementById("hero-sound") as HTMLButtonElement | null;
+      const prev = document.getElementById("hero-prev") as HTMLButtonElement | null;
+      const next = document.getElementById("hero-next") as HTMLButtonElement | null;
+      const dots = document.querySelectorAll("#hero-dots button") as NodeListOf<HTMLButtonElement>;
+      const sources = ["/videos/hero1.mp4", "/videos/xray.mp4", "/videos/bilingual.mp4", "/videos/postaccident.mp4"];
+      function shouldLowRes() {
+        const conn = (navigator as any).connection?.effectiveType || "";
+        const isSlow = /(^2g|3g|slow-2g)/i.test(conn);
+        const isMobile = window.matchMedia("(max-width: 640px)").matches;
+        return isSlow || isMobile;
+      }
+      function candidate(i: number) {
+        const base = sources[i];
+        const low = base.replace(".mp4", "-low.mp4");
+        return shouldLowRes() ? { src: low, fallback: base } : { src: base, fallback: null };
+      }
+      const slides = [
+        { title: "AccidentER® — Atención clara y rápida", subtitle: "Aceptamos visitas sin cita. Valoración y pasos claros.", note: "Traiga reportes o estudios previos si los tiene." },
+        { title: "Rayos X y diagnósticos en sitio", subtitle: "Decisiones guiadas por imagen cuando corresponde.", note: "Enfoque en seguridad y claridad en cada paso." },
+        { title: "Apoyo bilingüe — Inglés y Español", subtitle: "Comunicación confiable, con apoyo bilingüe.", note: "Planifique su visita o venga hoy." },
+        { title: "Atención post‑accidente vehicular", subtitle: "Cuidado especializado tras choques.", note: "Valoración enfocada y plan claro." }
+      ];
+      const zoomDesktop = [1, 1, 1.08, 1.10];
+      const zoomMobile = [1.06, 1.06, 1.14, 1.16];
+      let zoom = window.matchMedia("(max-width: 640px)").matches ? zoomMobile : zoomDesktop;
+      const titleEl = document.getElementById("hero-title");
+      const subtitleEl = document.getElementById("hero-subtitle");
+      const noteEl = document.getElementById("hero-note");
+      const ctaPrimary = document.getElementById("hero-primary") as HTMLAnchorElement | null;
+      const ctaSecondary = document.getElementById("hero-secondary") as HTMLAnchorElement | null;
+      let i = 0;
+      let timer: number | null = null;
+      const ROTATION_MS = 9000;
+      function updateDots() {
+        dots.forEach((d, idx) => {
+          d.classList.toggle("bg-white/80", idx === i);
+          d.classList.toggle("bg-white/40", idx !== i);
+        });
+      }
+      function swapVideo(idx: number) {
+        i = (idx + sources.length) % sources.length;
+        if (!video) return;
+        video.classList.add("opacity-0");
+        const cand = candidate(i);
+        video.preload = "metadata";
+        video.src = cand.src;
+        if (cand.fallback) {
+          const onErr = () => {
+            video.removeEventListener("error", onErr);
+            video.src = cand.fallback!;
+            video.load();
+          };
+          video.addEventListener("error", onErr, { once: true });
+        }
+        video.style.transformOrigin = "center center";
+        video.style.willChange = "transform";
+        video.style.transform = `scale(${zoom[i]})`;
+        video.load();
+        video.addEventListener("canplaythrough", () => {
+          video?.play().catch(() => {});
+          video?.classList.remove("opacity-0");
+        }, { once: true });
+        if (titleEl && subtitleEl && noteEl) {
+          titleEl.textContent = slides[i].title;
+          subtitleEl.textContent = slides[i].subtitle;
+          noteEl.textContent = slides[i].note;
+        }
+        if (ctaPrimary && ctaSecondary) {
+          const map = [
+            { p: { text: "Llamar", href: "tel:+18019967427", cls: "button-primary" }, s: { text: "Ver servicios", href: "/es/servicios", cls: "button-success" } },
+            { p: { text: "Ver diagnósticos", href: "/es/servicios", cls: "button-primary" }, s: { text: "Planificar visita", href: "mailto:orders@accidenter.com", cls: "button-success" } },
+            { p: { text: "Llamar (EN/ES)", href: "tel:+18019967427", cls: "button-primary" }, s: { text: "Agendar ahora", href: "mailto:orders@accidenter.com", cls: "button-success" } },
+            { p: { text: "Llamar", href: "tel:+18019967427", cls: "button-primary" }, s: { text: "Atención Post‑Accidente", href: "/es/servicios/motor-vehicle-post-accident-care", cls: "button-success" } }
+          ];
+          const conf = map[i];
+          ctaPrimary.textContent = conf.p.text;
+          ctaPrimary.href = conf.p.href;
+          ctaPrimary.className = conf.p.cls;
+          ctaSecondary.textContent = conf.s.text;
+          ctaSecondary.href = conf.s.href;
+          ctaSecondary.className = conf.s.cls;
+        }
+        updateDots();
+      }
+      if (video) {
+        video.style.transformOrigin = "center center";
+        video.style.willChange = "transform";
+        video.style.transform = `scale(${zoom[i]})`;
+      }
+      function startTimer() {
+        if (timer) clearInterval(timer);
+        timer = window.setInterval(() => swapVideo(i + 1), ROTATION_MS);
+      }
+      if (btn && video) {
+        btn.addEventListener("click", () => {
+          video.muted = !video.muted;
+          btn.textContent = video.muted ? "Activar sonido" : "Silenciar";
+        });
+        prev?.addEventListener("click", () => { swapVideo(i - 1); startTimer(); });
+        next?.addEventListener("click", () => { swapVideo(i + 1); startTimer(); });
+        dots.forEach((d) => d.addEventListener("click", () => {
+          const idx = Number(d.dataset.index || "0");
+          swapVideo(idx);
+          startTimer();
+        }));
+        window.addEventListener("resize", () => {
+          zoom = window.matchMedia("(max-width: 640px)").matches ? zoomMobile : zoomDesktop;
+          if (video) {
+            video.style.transform = `scale(${zoom[i]})`;
+          }
+        });
+        updateDots();
+        startTimer();
+      }
+    </script>
+  </section>
+  <Section title={"Permítanos ayudarle en AccidentER®"} align="center">
+    <div class="max-w-6xl mx-auto">
+      <p class="text-center text-brand-dark text-xl sm:text-2xl">Nuestro objetivo es brindar atención de calidad y atenderle con eficiencia.</p>
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center text-center">
+        <FeatureIcon icon="care" title="Atención por Accidentes" description="Cuidado profesional inmediato tras lesiones." />
+        <FeatureIcon icon="diagnostics" title="Diagnóstico en sitio" description="Rayos X y pruebas disponibles en clínica." />
+        <FeatureIcon icon="rehab" title="Apoyo de recuperación" description="Guía para iniciar tu recuperación con seguridad." />
+        <FeatureIcon icon="followup" title="Visitas de seguimiento" description="Atención constante para mantener tu progreso." />
+      </div>
+      <div class="mt-8 flex justify-center">
+        <CTA text="Ver todos los servicios" href="/es/servicios" variant="primary" />
+      </div>
+    </div>
+  </Section>
+  <Section title={afterAccident.title} align="center">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center text-center">
+        {afterAccident.steps.map((s: any, i: number) => (
+          <StepCard step={i + 1} title={s.title} text={s.text} />
+        ))}
+      </div>
+    </div>
+  </Section>
+  <Section title={whyAccidentER.title} align="center">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center text-center">
+        {whyAccidentER.points.map((p: any, i: number) => (
+          <HighlightCard title={p.title} text={p.text} imageSrc={whyImages[i % whyImages.length]} imageAlt={p.title} />
+        ))}
+      </div>
+    </div>
+  </Section>
+  <section class="container py-8">
+    <ContactForm locale={locale} />
+  </section>
+  <Section title={"Esto opinan nuestros pacientes de AccidentER®"} align="center">
+    <TestimonialsCarousel locale={locale} />
+  </Section>
+  <Section title={closingCTA.title} align="center">
+    <div class="max-w-6xl mx-auto">
+      <div class="rounded-2xl bg-brand-accent text-brand-dark p-6 flex flex-col md:flex-row md:items-center md:justify-center gap-4 text-center">
+        <p class="text-white">{closingCTA.text}</p>
+        <div class="flex gap-3 justify-center">
+          <CTA text={closingCTA.CTA} href={"tel:+18019967427"} variant="primary" />
+          <CTA text={"Agendar ahora"} href={"mailto:orders@accidenter.com"} variant="success" />
+        </div>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

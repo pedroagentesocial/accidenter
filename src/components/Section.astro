@@ -1,0 +1,9 @@
+---
+const { title, align = "left" } = Astro.props as { title: string; align?: "left" | "center" | "right" };
+---
+<section class={`container py-8 sm:py-12 ${align === "center" ? "text-center" : align === "right" ? "text-right" : ""}`}>
+  <h2 class={`mb-4 text-2xl sm:text-3xl md:text-4xl font-heading text-brand-dark ${align === "center" ? "mx-auto" : align === "right" ? "ml-auto" : ""}`}>{title}</h2>
+  <div class={`${align === "center" ? "mx-auto" : align === "right" ? "ml-auto" : ""}`}>
+    <slot />
+  </div>
+</section>

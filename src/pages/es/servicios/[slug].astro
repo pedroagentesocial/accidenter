@@ -1,0 +1,179 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import Section from "../../../components/Section.astro";
+import CTA from "../../../components/CTA.astro";
+import ServiceCard from "../../../components/ServiceCard.astro";
+import StepCard from "../../../components/StepCard.astro";
+import FeatureIcon from "../../../components/FeatureIcon.astro";
+import ActionCard from "../../../components/ActionCard.astro";
+import { t } from "../../../i18n";
+import services from "../../../data/services";
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug } }));
+}
+const locale = "es";
+const { slug } = Astro.params;
+const entry = t(locale, `servicePage.entries.${slug}`);
+const seo = entry?.seo || {
+  title: "Servicio | Accident ER – Urgent Care MD",
+  description: "",
+  canonical: `https://accidenter-urgentcaremd.com/es/servicios/${slug}/`
+};
+const breadcrumbItems = [
+  { label: t(locale, "common.breadcrumb.home"), href: "/es" },
+  { label: t(locale, "common.breadcrumb.services"), href: "/es/servicios" },
+  { label: entry?.name || String(slug), href: `/es/servicios/${slug}` }
+];
+const imagesBySlug = {
+  "accident-medical-evaluation": "accident-medical.jpg",
+  "concussion-tbi-evaluation": "tbi.jpg",
+  "whiplash-neck-injury-evaluation": "neck.jpg",
+  "back-spine-injury-evaluation": "back.jpg",
+  "soft-tissue-injury-evaluation": "soft.jpg",
+  "work-injury-evaluation": "work.jpg",
+  "diagnostic-evaluation": "diagnostic.jpg",
+  "motor-vehicle-post-accident-care": "postaccident.jpg",
+  "care-plan-coordination": "support.jpg"
+};
+const heroImage = `/images/${imagesBySlug[String(slug)]}`;
+---
+<BaseLayout locale={locale} title={seo.title} description={seo.description} canonical={seo.canonical}>
+  <section class="relative overflow-hidden bg-black border-b border-brand-accent min-h-[420px] sm:min-h-[520px]">
+    <img src={heroImage} alt={entry?.name || "Servicio"} class="absolute inset-0 block w-full h-full object-cover object-center" />
+    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
+    <div class="container relative z-10 py-14 sm:py-20">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div>
+            <h1 class="text-4xl sm:text-5xl font-heading text-white drop-shadow-lg">{entry?.hero?.title}</h1>
+            <p class="mt-6 text-white drop-shadow">{entry?.hero?.subtitle}</p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <CTA text={"Llamar"} href={"tel:+18019967427"} variant="primary" />
+              <CTA text={"Planificar visita"} href={"mailto:orders@accidenter.com"} variant="success" />
+            </div>
+          </div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Breadcrumbs items={breadcrumbItems} />
+  <Section title="Resumen">
+    <p class="text-brand-dark">{entry?.overview?.text}</p>
+  </Section>
+  <Section title="Qué esperar">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <StepCard step={1} title={"Ingreso y antecedentes"} text={""} />
+      <StepCard step={2} title={"Examen clínico dirigido"} text={""} />
+      <StepCard step={3} title={"Diagnósticos cuando corresponde"} text={""} />
+      <StepCard step={4} title={"Plan escrito y seguimiento"} text={""} />
+    </div>
+  </Section>
+  <Section title="Síntomas comunes">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="rounded-lg bg-white border border-brand-accent p-4"><h3 class="text-base font-heading text-brand-dark">Dolor tras impacto</h3><p class="mt-1 text-brand-dark/90">Dolor localizado o difuso después de colisión o esfuerzo.</p></div>
+      <div class="rounded-lg bg-white border border-brand-accent p-4"><h3 class="text-base font-heading text-brand-dark">Movimiento limitado</h3><p class="mt-1 text-brand-dark/90">Rigidez cervical o dorsal y menor rango de movimiento.</p></div>
+      <div class="rounded-lg bg-white border border-brand-accent p-4"><h3 class="text-base font-heading text-brand-dark">Inflamación o moretones</h3><p class="mt-1 text-brand-dark/90">Cambios de tejidos blandos tras lesión aguda.</p></div>
+    </div>
+  </Section>
+  <Section title="Cuándo llamar al 911">
+    <p class="text-brand-dark">Sangrado intenso, dificultad para respirar, desmayo, confusión o nuevos síntomas neurológicos severos requieren evaluación de emergencia.</p>
+  </Section>
+  <Section title="Enlaces útiles">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <ActionCard title="Seguro y facturación" text="¿Dudas sobre cobertura? Contáctanos para orientación." href="/es/contacto" hrefLabel="Contacto" />
+      <ActionCard title="Apoyo bilingüe" text="Atención en inglés y español disponible en la clínica." href="/es/contacto" hrefLabel="Ver más" />
+    </div>
+  </Section>
+  {
+    (() => {
+      const faqs = [
+        { q: "¿Necesito cita?", a: "Aceptamos visitas sin cita durante los horarios publicados." },
+        { q: "¿Hacen Rayos X?", a: "Solo cuando están indicados según hallazgos del examen." },
+        { q: "¿Cuánto dura la visita?", a: "Depende de la necesidad; muchas visitas terminan en ~60 minutos." },
+        { q: "¿Hay apoyo bilingüe?", a: "Sí. Atención disponible en inglés y español." }
+      ];
+      return (
+        <Section title={"FAQ del servicio"}>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {faqs.map((f) => (
+              <div class="rounded-xl bg-white border border-brand-accent p-5 shadow-sm">
+                <h3 class="text-base sm:text-lg font-heading text-brand-dark">{f.q}</h3>
+                <p class="mt-2 text-sm sm:text-base text-brand-dark/90">{f.a}</p>
+              </div>
+            ))}
+          </div>
+          <div class="mt-6">
+            <CTA text={"Ver todas las FAQ"} href={"/es/faq"} variant="secondary" />
+          </div>
+        </Section>
+      );
+    })()}
+  }
+  <Section title="Información detallada">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="rounded-lg bg-white border border-brand-accent p-5">
+        <h3 class="text-lg font-heading text-brand-dark">Cómo funciona la evaluación</h3>
+        <p class="mt-2 text-brand-dark">Antecedentes enfocados, examen dirigido y diagnósticos cuando corresponde. Recibes pasos claros con guía escrita.</p>
+      </div>
+      <div class="rounded-lg bg-white border border-brand-accent p-5">
+        <h3 class="text-lg font-heading text-brand-dark">Qué llevar</h3>
+        <p class="mt-2 text-brand-dark">Reportes del accidente y estudios previos si los tienes. Usa ropa cómoda y llega unos minutos antes.</p>
+      </div>
+    </div>
+  </Section>
+  <Section title="Incluye en este servicio">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center text-center">
+      <FeatureIcon icon="care" title="Examen enfocado" description="Evaluación clínica adaptada al mecanismo del accidente." />
+      <FeatureIcon icon="diagnostics" title="Diagnósticos cuando corresponda" description="Rayos X y pruebas guiadas por hallazgos." />
+      <FeatureIcon icon="followup" title="Pasos claros" description="Guía escrita y coordinación de seguimiento." />
+    </div>
+  </Section>
+  <Section title="Puntos clave">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {(entry?.highlights || []).map((h: any) => (
+        <div class="rounded-lg border border-brand-accent p-4 bg-brand-muted">
+          <h3 class="text-lg font-heading text-brand-dark">{h.title}</h3>
+          <p class="mt-2 text-brand-dark">{h.text}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+  {
+    (() => {
+      const imagesBySlug = {
+        "accident-medical-evaluation": "accident-medical.jpg",
+        "concussion-tbi-evaluation": "tbi.jpg",
+        "whiplash-neck-injury-evaluation": "neck.jpg",
+        "back-spine-injury-evaluation": "back.jpg",
+        "soft-tissue-injury-evaluation": "soft.jpg",
+        "work-injury-evaluation": "work.jpg",
+        "diagnostic-evaluation": "diagnostic.jpg",
+        "motor-vehicle-post-accident-care": "postaccident.jpg",
+        "care-plan-coordination": "support.jpg"
+      };
+      const related = services.filter((s) => s.slug !== slug).slice(0, 3);
+      return (
+        <Section title={"Servicios relacionados"} align="center">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {related.map((s) => (
+              <ServiceCard
+                name={t(locale, `${s.i18nKey}.name`)}
+                shortDescription={t(locale, `${s.i18nKey}.shortDescription`)}
+                href={`/es/servicios/${s.slug}`}
+                imageSrc={`/images/${imagesBySlug[s.slug]}`}
+              />
+            ))}
+          </div>
+        </Section>
+      );
+    })()}
+  }
+  <Section title={entry?.closingCTA?.title}>
+    <div class="flex items-center gap-4">
+      <p class="text-brand-dark">{entry?.closingCTA?.text}</p>
+      <CTA text={entry?.closingCTA?.CTA} href={"tel:+18019967427"} />
+    </div>
+  </Section>
+</BaseLayout>

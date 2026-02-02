@@ -1,0 +1,154 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Section from "../../components/Section.astro";
+import TestimonialsCarousel from "../../components/TestimonialsCarousel.astro";
+import FeatureIcon from "../../components/FeatureIcon.astro";
+import StepCard from "../../components/StepCard.astro";
+import StatGauge from "../../components/StatGauge.astro";
+import StatIcon from "../../components/StatIcon.astro";
+import { t } from "../../i18n";
+const locale = "en";
+const about = t(locale, "about");
+const seo = about.seo;
+const breadcrumb = about.breadcrumb.items;
+const hero = about.hero;
+const stats = about.stats;
+const mission = about.mission;
+const ourTeam = about.ourTeam;
+const howWeCare = about.howWeCare;
+const careStatsValues = [
+  { value: 68, suffix: "%" },
+  { value: 24, suffix: "" },
+  { value: 85, suffix: "%" },
+  { value: 120, suffix: "" }
+];
+const values = about.values;
+const closingCTA = about.closingCTA;
+---
+<BaseLayout locale={locale} title={seo.title} description={seo.description} canonical={seo.canonical}>
+  <section class="relative overflow-hidden bg-black border-b border-brand-accent min-h-[460px] sm:min-h-[540px] lg:min-h-[620px]">
+    <video id="hero-video" src="/videos/hero1.mp4" class="absolute inset-0 block w-full h-full object-cover object-center transition-opacity duration-700" autoplay muted playsinline poster="/images/hero.jpg"></video>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
+    <div class="container relative z-10 py-16 sm:py-24 lg:py-28">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading text-white drop-shadow-lg">{hero.title}</h1>
+            <p class="mt-6 text-white drop-shadow">{hero.subtitle}</p>
+          </div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+    <button id="hero-sound" class="absolute bottom-4 right-4 z-10 bg-white/80 text-brand-dark px-3 py-1 rounded-full text-xs">Unmute</button>
+    <script>
+      const video = document.getElementById("hero-video");
+      const btn = document.getElementById("hero-sound");
+      if (video && btn) {
+        btn.addEventListener("click", () => {
+          const isMuted = video.hasAttribute("muted");
+          if (isMuted) {
+            video.removeAttribute("muted");
+            btn.textContent = "Mute";
+          } else {
+            video.setAttribute("muted", "");
+            btn.textContent = "Unmute";
+          }
+        });
+      }
+    </script>
+  </section>
+  <Breadcrumbs items={breadcrumb} />
+  <Section title={stats.title} align="center">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {stats.items.map((s: any, i: number) => {
+        const icons = ["medical", "clipboard", "language"];
+        return (
+          <StatIcon label={s.label} value={s.value} suffix={s.suffix} icon={icons[i % icons.length]} />
+        );
+      })}
+    </div>
+  </Section>
+  <Section title={`AccidentER® — ${mission.title} & ${ourTeam.title}`} align="center">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+      <div class="rounded-xl bg-white border border-brand-accent p-6 shadow-sm min-h-[240px] flex flex-col items-center text-center gap-4">
+        <div class="flex flex-col items-center gap-1">
+          <span class="inline-flex items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary px-2 py-1 text-xs">AccidentER®</span>
+          <span class="text-xs text-brand-dark/70">Urgent Care MD — Utah</span>
+        </div>
+        <FeatureIcon icon="care" title={mission.title} description={mission.text} />
+      </div>
+      <div class="rounded-xl bg-white border border-brand-accent p-6 shadow-sm min-h-[240px] flex flex-col items-center text-center gap-4">
+        <div class="flex flex-col items-center gap-1">
+          <span class="inline-flex items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary px-2 py-1 text-xs">AccidentER®</span>
+          <span class="text-xs text-brand-dark/70">Urgent Care MD — Utah</span>
+        </div>
+        <FeatureIcon icon="followup" title={ourTeam.title} description={ourTeam.text} />
+        <div class="flex flex-wrap items-center justify-center gap-2">
+          <span class="inline-flex items-center gap-1 rounded-full bg-brand-primary/10 text-brand-primary px-3 py-1 text-xs">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            Bilingual support
+          </span>
+          <span class="inline-flex items-center gap-1 rounded-full bg-brand-primary/10 text-brand-primary px-3 py-1 text-xs">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M3 4a2 2 0 0 1 2-2h6l2 2h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4zm4 4h10v2H7V8zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/></svg>
+            On‑site diagnostics
+          </span>
+        </div>
+      </div>
+    </div>
+  </Section>
+  <Section title={howWeCare.title} align="center">
+    <div class="max-w-3xl mx-auto text-brand-dark">{howWeCare.text}</div>
+    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto justify-items-center">
+      {howWeCare.items.map((it: string, i: number) => (
+        <StepCard step={i + 1} title={it} text={""} />
+      ))}
+    </div>
+  </Section>
+  <Section title={values.title} align="center">
+    <div class="max-w-3xl mx-auto grid grid-cols-1 gap-4">
+      {values.items.map((v: any) => (
+        <div class="rounded-xl bg-white border border-brand-accent p-5 shadow-sm text-left">
+          <h3 class="text-base sm:text-lg font-heading text-brand-dark">{v.title}</h3>
+          <p class="mt-2 text-sm sm:text-base text-brand-dark">{v.text}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+  <Section title={"Accreditations & Experience"} align="center">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="rounded-xl overflow-hidden border border-brand-accent bg-white shadow-sm">
+        <img src="https://images.unsplash.com/photo-1583912268180-87f0c7b994c5?auto=format&fit=crop&w=900&q=80" alt="Accident-focused protocols" class="w-full h-28 object-cover" />
+        <div class="p-4">
+          <h3 class="text-base sm:text-lg font-heading text-brand-dark">Accident‑focused protocols</h3>
+          <p class="mt-2 text-sm text-brand-dark">Processes designed for consistent accident evaluation.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-brand-accent bg-white shadow-sm">
+        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80" alt="On-site imaging capability" class="w-full h-28 object-cover" />
+        <div class="p-4">
+          <h3 class="text-base sm:text-lg font-heading text-brand-dark">On‑site imaging capability</h3>
+          <p class="mt-2 text-sm text-brand-dark">X‑ray and testing available on site.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-brand-accent bg-white shadow-sm">
+        <img src="https://images.unsplash.com/photo-1519494080410-f9aa76cb4283?auto=format&fit=crop&w=900&q=80" alt="Clear follow-up" class="w-full h-28 object-cover" />
+        <div class="p-4">
+          <h3 class="text-base sm:text-lg font-heading text-brand-dark">Clear follow‑up</h3>
+          <p class="mt-2 text-sm text-brand-dark">Written guidance and coordinated next steps.</p>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-brand-accent bg-white shadow-sm">
+        <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=900&q=80" alt="Recovery support" class="w-full h-28 object-cover" />
+        <div class="p-4">
+          <h3 class="text-base sm:text-lg font-heading text-brand-dark">Recovery support</h3>
+          <p class="mt-2 text-sm text-brand-dark">Practical recommendations to start healing safely.</p>
+        </div>
+      </div>
+    </div>
+  </Section>
+  <Section title={"What our patients say about AccidentER®"} align="center">
+    <TestimonialsCarousel locale={locale} />
+  </Section>
+</BaseLayout>

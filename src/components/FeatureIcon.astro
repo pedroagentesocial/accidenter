@@ -1,0 +1,33 @@
+---
+const { icon = "care", title, description } = Astro.props as {
+  icon?: "care" | "diagnostics" | "rehab" | "followup";
+  title: string;
+  description: string;
+};
+---
+<div class="flex flex-col items-center text-center rounded-xl bg-white border border-brand-accent p-5 shadow-sm">
+  <div class="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-primary text-white">
+    {icon === "care" && (
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 21s-7-4.35-9-7.5C1.1 11.4 2.5 9 5 9c2.1 0 3.3 1.2 4 2 .7-.8 1.9-2 4-2 2.5 0 3.9 2.4 2 4.5C19 16.65 12 21 12 21z"></path>
+      </svg>
+    )}
+    {icon === "diagnostics" && (
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M4 3h16a1 1 0 011 1v16a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1zm2 4v10h12V7H6zm3 2h2v6H9V9zm6 0h2v6h-2V9z"></path>
+      </svg>
+    )}
+    {icon === "rehab" && (
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5h-2v5H6v2h5v5h2v-5h5v-2h-5V7z"></path>
+      </svg>
+    )}
+    {icon === "followup" && (
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 3a9 9 0 100 18 9 9 0 000-18zm1 5h-2v3H8v2h3v3h2v-3h3v-2h-3V8z"></path>
+      </svg>
+    )}
+  </div>
+  <h3 class="text-base sm:text-lg font-heading text-brand-dark">{title}</h3>
+  <p class="mt-2 text-sm sm:text-base text-brand-dark">{description}</p>
+</div>

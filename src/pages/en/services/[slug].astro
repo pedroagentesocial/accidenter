@@ -1,0 +1,179 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import Section from "../../../components/Section.astro";
+import CTA from "../../../components/CTA.astro";
+import ServiceCard from "../../../components/ServiceCard.astro";
+import StepCard from "../../../components/StepCard.astro";
+import FeatureIcon from "../../../components/FeatureIcon.astro";
+import ActionCard from "../../../components/ActionCard.astro";
+import { t } from "../../../i18n";
+import services from "../../../data/services";
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug } }));
+}
+const locale = "en";
+const { slug } = Astro.params;
+const entry = t(locale, `servicePage.entries.${slug}`);
+const seo = entry?.seo || {
+  title: "Service | Accident ER – Urgent Care MD",
+  description: "",
+  canonical: `https://accidenter-urgentcaremd.com/en/services/${slug}/`
+};
+const breadcrumbItems = [
+  { label: t(locale, "common.breadcrumb.home"), href: "/en" },
+  { label: t(locale, "common.breadcrumb.services"), href: "/en/services" },
+  { label: entry?.name || String(slug), href: `/en/services/${slug}` }
+];
+const imagesBySlug = {
+  "accident-medical-evaluation": "accident-medical.jpg",
+  "concussion-tbi-evaluation": "tbi.jpg",
+  "whiplash-neck-injury-evaluation": "neck.jpg",
+  "back-spine-injury-evaluation": "back.jpg",
+  "soft-tissue-injury-evaluation": "soft.jpg",
+  "work-injury-evaluation": "work.jpg",
+  "diagnostic-evaluation": "diagnostic.jpg",
+  "motor-vehicle-post-accident-care": "postaccident.jpg",
+  "care-plan-coordination": "support.jpg"
+};
+const heroImage = `/images/${imagesBySlug[String(slug)]}`;
+---
+<BaseLayout locale={locale} title={seo.title} description={seo.description} canonical={seo.canonical}>
+  <section class="relative overflow-hidden bg-black border-b border-brand-accent min-h-[420px] sm:min-h-[520px]">
+    <img src={heroImage} alt={entry?.name || "Service"} class="absolute inset-0 block w-full h-full object-cover object-center" />
+    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
+    <div class="container relative z-10 py-14 sm:py-20">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div>
+            <h1 class="text-4xl sm:text-5xl font-heading text-white drop-shadow-lg">{entry?.hero?.title}</h1>
+            <p class="mt-6 text-white drop-shadow">{entry?.hero?.subtitle}</p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <CTA text={"Call"} href={"tel:+18019967427"} variant="primary" />
+              <CTA text={"Plan your visit"} href={"mailto:orders@accidenter.com"} variant="success" />
+            </div>
+          </div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Breadcrumbs items={breadcrumbItems} />
+  <Section title="Overview">
+    <p class="text-brand-dark">{entry?.overview?.text}</p>
+  </Section>
+  <Section title="What to expect">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <StepCard step={1} title={"Check‑in & focused intake"} text={""} />
+      <StepCard step={2} title={"Targeted clinical exam"} text={""} />
+      <StepCard step={3} title={"Diagnostics when indicated"} text={""} />
+      <StepCard step={4} title={"Written plan & follow‑up"} text={""} />
+    </div>
+  </Section>
+  <Section title="Common symptoms">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="rounded-lg bg-white border border-brand-accent p-4"><h3 class="text-base font-heading text-brand-dark">Pain after impact</h3><p class="mt-1 text-brand-dark/90">Localized or diffuse pain following collision or strain.</p></div>
+      <div class="rounded-lg bg-white border border-brand-accent p-4"><h3 class="text-base font-heading text-brand-dark">Limited motion</h3><p class="mt-1 text-brand-dark/90">Neck or back stiffness, reduced range of motion.</p></div>
+      <div class="rounded-lg bg-white border border-brand-accent p-4"><h3 class="text-base font-heading text-brand-dark">Swelling or bruising</h3><p class="mt-1 text-brand-dark/90">Soft‑tissue changes after acute injury.</p></div>
+    </div>
+  </Section>
+  <Section title="When to call 911">
+    <p class="text-brand-dark">Severe bleeding, trouble breathing, fainting, confusion, or new severe neurological symptoms warrant immediate emergency evaluation.</p>
+  </Section>
+  <Section title="Helpful links">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <ActionCard title="Insurance & Billing" text="Questions about coverage? Contact our team for guidance." href="/en/contact" hrefLabel="Contact" />
+      <ActionCard title="Bilingual Support" text="We provide English & Spanish support at the clinic." href="/en/contact" hrefLabel="Learn more" />
+    </div>
+  </Section>
+  {
+    (() => {
+      const faqs = [
+        { q: "Do I need an appointment?", a: "Walk-ins are welcome during posted hours." },
+        { q: "Will X‑ray be done?", a: "Only when clinically indicated based on exam findings." },
+        { q: "How long does the visit take?", a: "Timing varies by need; many visits complete within about 60 minutes." },
+        { q: "Is bilingual support available?", a: "Yes. English & Spanish support are available." }
+      ];
+      return (
+        <Section title={"Service FAQ"}>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {faqs.map((f) => (
+              <div class="rounded-xl bg-white border border-brand-accent p-5 shadow-sm">
+                <h3 class="text-base sm:text-lg font-heading text-brand-dark">{f.q}</h3>
+                <p class="mt-2 text-sm sm:text-base text-brand-dark/90">{f.a}</p>
+              </div>
+            ))}
+          </div>
+          <div class="mt-6">
+            <CTA text={"View all FAQ"} href={"/en/faq"} variant="secondary" />
+          </div>
+        </Section>
+      );
+    })()}
+  }
+  <Section title="Detailed information">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="rounded-lg bg-white border border-brand-accent p-5">
+        <h3 class="text-lg font-heading text-brand-dark">How the evaluation works</h3>
+        <p class="mt-2 text-brand-dark">Focused history, targeted exam, and diagnostics when indicated. You receive clear next steps with written guidance.</p>
+      </div>
+      <div class="rounded-lg bg-white border border-brand-accent p-5">
+        <h3 class="text-lg font-heading text-brand-dark">What to bring</h3>
+        <p class="mt-2 text-brand-dark">Accident reports and prior imaging if available. Wear comfortable clothing and arrive a few minutes early.</p>
+      </div>
+    </div>
+  </Section>
+  <Section title="Included in this service">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center text-center">
+      <FeatureIcon icon="care" title="Accident‑focused exam" description="Clinician assessment tailored to accident mechanisms." />
+      <FeatureIcon icon="diagnostics" title="Diagnostics when indicated" description="X‑ray and tests guided by findings." />
+      <FeatureIcon icon="followup" title="Clear next steps" description="Written guidance and follow‑up coordination." />
+    </div>
+  </Section>
+  <Section title="Highlights">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {(entry?.highlights || []).map((h: any) => (
+        <div class="rounded-lg border border-brand-accent p-4 bg-brand-muted">
+          <h3 class="text-lg font-heading text-brand-dark">{h.title}</h3>
+          <p class="mt-2 text-brand-dark">{h.text}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+  {
+    (() => {
+      const imagesBySlug = {
+        "accident-medical-evaluation": "accident-medical.jpg",
+        "concussion-tbi-evaluation": "tbi.jpg",
+        "whiplash-neck-injury-evaluation": "neck.jpg",
+        "back-spine-injury-evaluation": "back.jpg",
+        "soft-tissue-injury-evaluation": "soft.jpg",
+        "work-injury-evaluation": "work.jpg",
+        "diagnostic-evaluation": "diagnostic.jpg",
+        "motor-vehicle-post-accident-care": "postaccident.jpg",
+        "care-plan-coordination": "support.jpg"
+      };
+      const related = services.filter((s) => s.slug !== slug).slice(0, 3);
+      return (
+        <Section title={"Related services"} align="center">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {related.map((s) => (
+              <ServiceCard
+                name={t(locale, `${s.i18nKey}.name`)}
+                shortDescription={t(locale, `${s.i18nKey}.shortDescription`)}
+                href={`/en/services/${s.slug}`}
+                imageSrc={`/images/${imagesBySlug[s.slug]}`}
+              />
+            ))}
+          </div>
+        </Section>
+      );
+    })()}
+  }
+  <Section title={entry?.closingCTA?.title}>
+    <div class="flex items-center gap-4">
+      <p class="text-brand-dark">{entry?.closingCTA?.text}</p>
+      <CTA text={entry?.closingCTA?.CTA} href={"tel:+18019967427"} />
+    </div>
+  </Section>
+</BaseLayout>

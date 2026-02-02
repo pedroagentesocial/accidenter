@@ -1,0 +1,31 @@
+---
+const { label, value, suffix = "", icon = "medical" } = Astro.props as {
+  label: string;
+  value: number | string;
+  suffix?: string;
+  icon?: "medical" | "clipboard" | "language";
+};
+const parsed = typeof value === "string" ? parseFloat(value) : value;
+const target = isNaN(parsed as number) ? 0 : (parsed as number);
+---
+<div class="rounded-xl border border-brand-accent bg-white p-6 text-center flex flex-col items-center gap-3" data-target={target} data-suffix={suffix}>
+  <div class="h-12 w-12 rounded-full bg-brand-primary/10 flex items-center justify-center">
+    {icon === "medical" && (
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-brand-primary" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 5h-2v3H8v2h3v3h2v-3h3v-2h-3V7Z"/>
+      </svg>
+    )}
+    {icon === "clipboard" && (
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-brand-primary" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M9 2h6a2 2 0 0 1 2 2v1h2a1 1 0 0 1 1 1v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a1 1 0 0 1 1-1h2V4a2 2 0 0 1 2-2Zm1 4V4h4v2h-4Zm-2 5h8v2H8v-2Zm0 4h8v2H8v-2Z"/>
+      </svg>
+    )}
+    {icon === "language" && (
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-brand-primary" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-6 9h3c.1 1.1.39 2.14.83 3.07-.57.37-1.2.66-1.83.85A7.98 7.98 0 0 1 6 11Zm12 0c0 1.77-.58 3.4-1.56 4.73-.62-.19-1.25-.48-1.82-.85.44-.93.72-1.97.82-3.07H18ZM8.8 7.36A8.1 8.1 0 0 1 12 6c1.18 0 2.3.25 3.29.7-.39.88-.92 1.68-1.55 2.39-.56-.06-1.14-.09-1.74-.09s-1.19.03-1.76.1c-.62-.72-1.14-1.52-1.54-2.34Z"/>
+      </svg>
+    )}
+  </div>
+  <div class="text-3xl font-heading text-brand-dark" id="stat-value">{Number.isFinite(target) ? Math.round(target) : 0}{suffix}</div>
+  <div class="text-sm text-brand-dark/80">{label}</div>
+</div>

@@ -1,0 +1,104 @@
+---
+const { locale, form, actionUrl } = Astro.props as {
+  locale: "en" | "es";
+  form: any;
+  actionUrl: string;
+};
+---
+<form id="contact-form" action={actionUrl} method="post" class="grid grid-cols-1 gap-3">
+  <div>
+    <label for="fullName" class="block text-sm font-heading text-brand-dark">{form.fields.fullName}</label>
+    <input id="fullName" name="fullName" required class="w-full rounded-md bg-white px-4 py-3 text-brand-dark placeholder-brand-dark/60 shadow focus:outline-none focus:ring-2 focus:ring-brand-primary" placeholder={form.fields.fullNamePlaceholder} />
+    <p class="mt-1 text-xs text-red-600 hidden" data-error-for="fullName"></p>
+  </div>
+  <div>
+    <label for="phone" class="block text-sm font-heading text-brand-dark">{form.fields.phone}</label>
+    <input id="phone" name="phone" type="tel" required class="w-full rounded-md bg-white px-4 py-3 text-brand-dark placeholder-brand-dark/60 shadow focus:outline-none focus:ring-2 focus:ring-brand-primary" placeholder={form.fields.phonePlaceholder} />
+    <p class="mt-1 text-xs text-red-600 hidden" data-error-for="phone"></p>
+  </div>
+  <div>
+    <label for="email" class="block text-sm font-heading text-brand-dark">{form.fields.email}</label>
+    <input id="email" name="email" type="email" class="w-full rounded-md bg-white px-4 py-3 text-brand-dark placeholder-brand-dark/60 shadow focus:outline-none focus:ring-2 focus:ring-brand-primary" placeholder={form.fields.emailPlaceholder} />
+    <p class="mt-1 text-xs text-red-600 hidden" data-error-for="email"></p>
+  </div>
+  <div>
+    <label for="reasonForVisit" class="block text-sm font-heading text-brand-dark">{form.fields.reasonForVisit}</label>
+    <select id="reasonForVisit" name="reasonForVisit" required class="w-full rounded-md bg-white px-4 py-3 text-brand-dark shadow focus:outline-none focus:ring-2 focus:ring-brand-primary">
+      <option value="" disabled selected>{form.fields.reasonForVisitPlaceholder}</option>
+      <option value="general">{form.fields.reasonOptions.general}</option>
+      <option value="insurance">{form.fields.reasonOptions.insurance}</option>
+      <option value="accident">{form.fields.reasonOptions.accident}</option>
+      <option value="other">{form.fields.reasonOptions.other}</option>
+    </select>
+    <p class="mt-1 text-xs text-red-600 hidden" data-error-for="reasonForVisit"></p>
+  </div>
+  <div>
+    <label for="message" class="block text-sm font-heading text-brand-dark">{form.fields.message}</label>
+    <textarea id="message" name="message" rows="4" class="w-full rounded-md bg-white px-4 py-3 text-brand-dark placeholder-brand-dark/60 shadow focus:outline-none focus:ring-2 focus:ring-brand-primary" placeholder={form.fields.messagePlaceholder}></textarea>
+  </div>
+  <p class="text-xs text-brand-dark/80">{form.privacyNote}</p>
+  <button type="submit" class="button-success">{form.submitLabel}</button>
+  <div id="form-status" class="mt-3 hidden rounded-md border p-3 text-sm" aria-live="polite"></div>
+</form>
+<script>
+  const formEl = document.getElementById("contact-form");
+  const statusEl = document.getElementById("form-status");
+  const locale = "{locale}";
+  function setError(id, msg) {
+    const input = document.getElementById(id);
+    const err = document.querySelector(`[data-error-for="${id}"]`);
+    if (input && err) {
+      input.classList.add("ring-2", "ring-red-500");
+      err.textContent = msg;
+      err.classList.remove("hidden");
+    }
+  }
+  function clearError(id) {
+    const input = document.getElementById(id);
+    const err = document.querySelector(`[data-error-for="${id}"]`);
+    if (input && err) {
+      input.classList.remove("ring-2", "ring-red-500");
+      err.textContent = "";
+      err.classList.add("hidden");
+    }
+  }
+  function validate() {
+    let ok = true;
+    const name = (document.getElementById("fullName") as HTMLInputElement).value.trim();
+    const phone = (document.getElementById("phone") as HTMLInputElement).value.trim();
+    const email = (document.getElementById("email") as HTMLInputElement).value.trim();
+    const reason = (document.getElementById("reasonForVisit") as HTMLSelectElement).value;
+    clearError("fullName"); clearError("phone"); clearError("email"); clearError("reasonForVisit");
+    if (!name) { ok = false; setError("fullName", locale === "es" ? "Este campo es obligatorio" : "This field is required"); }
+    const phoneOk = /^\+?[0-9\s\-()]{7,}$/.test(phone);
+    if (!phoneOk) { ok = false; setError("phone", locale === "es" ? "Ingrese un teléfono válido" : "Please enter a valid phone"); }
+    if (email) {
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!emailOk) { ok = false; setError("email", locale === "es" ? "Ingrese un correo válido" : "Please enter a valid email"); }
+    }
+    if (!reason) { ok = false; setError("reasonForVisit", locale === "es" ? "Seleccione un motivo" : "Please select a reason"); }
+    return ok;
+  }
+  formEl?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!validate()) {
+      if (statusEl) {
+        statusEl.className = "mt-3 rounded-md border border-red-500 bg-red-50 p-3 text-sm text-red-700";
+        statusEl.textContent = "{form.errorMessage}";
+        statusEl.classList.remove("hidden");
+      }
+      return;
+    }
+    (formEl.querySelector("button[type=submit]") as HTMLButtonElement)?.setAttribute("disabled", "true");
+    setTimeout(() => {
+      (formEl.querySelector("button[type=submit]") as HTMLButtonElement)?.removeAttribute("disabled");
+      (formEl as HTMLFormElement).reset();
+      clearError("fullName"); clearError("phone"); clearError("email"); clearError("reasonForVisit");
+      if (statusEl) {
+        statusEl.className = "mt-3 rounded-md border border-green-500 bg-green-50 p-3 text-sm text-green-700";
+        statusEl.textContent = "{form.successMessage}";
+        statusEl.classList.remove("hidden");
+      }
+    }, 600);
+  });
+</script>

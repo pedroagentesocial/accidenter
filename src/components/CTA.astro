@@ -1,0 +1,4 @@
+---
+const { text, href, variant = "primary", id } = Astro.props as { text: string; href: string; variant?: "primary" | "secondary" | "tertiary" | "success"; id?: string };
+---
+<a id={id} href={href} class={variant === "primary" ? "button-primary" : variant === "secondary" ? "button-secondary" : variant === "success" ? "button-success" : "button-tertiary"}>{text}</a>

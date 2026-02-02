@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Section from "../../components/Section.astro";
+import CTA from "../../components/CTA.astro";
+import { t } from "../../i18n";
+const locale = "es";
+const faq = t(locale, "faq");
+const seo = faq.seo;
+const breadcrumb = faq.breadcrumb.items;
+const hero = faq.hero;
+const items = faq.items;
+---
+<BaseLayout locale={locale} title={seo.title} description={seo.description} canonical={seo.canonical}>
+  <section class="relative overflow-hidden bg-black border-b border-brand-accent min-h-[460px] sm:min-h-[540px] lg:min-h-[620px]">
+    <video id="hero-video" src="/videos/bilingual.mp4" class="absolute inset-0 block w-full h-full object-cover object-center transition-opacity duration-700" autoplay muted playsinline poster="/images/hero.jpg"></video>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
+    <div class="container relative z-10 py-16 sm:py-24 lg:py-28">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading text-white drop-shadow-lg">{hero.title}</h1>
+            <p class="mt-6 text-white drop-shadow">{hero.subtitle}</p>
+          </div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+    <button id="hero-sound" class="absolute bottom-4 right-4 z-10 bg-white/80 text-brand-dark px-3 py-1 rounded-full text-xs">Activar sonido</button>
+    <script>
+      const video = document.getElementById("hero-video");
+      const btn = document.getElementById("hero-sound");
+      if (video && btn) {
+        btn.addEventListener("click", () => {
+          const isMuted = video.hasAttribute("muted");
+          if (isMuted) {
+            video.removeAttribute("muted");
+            btn.textContent = "Silenciar";
+          } else {
+            video.setAttribute("muted", "");
+            btn.textContent = "Activar sonido";
+          }
+        });
+      }
+    </script>
+  </section>
+  <Breadcrumbs items={breadcrumb} />
+  <Section title={faq.title} align="center">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {items.map((it: any) => (
+        <div class="rounded-xl bg-white border border-brand-accent p-5 shadow-sm flex flex-col gap-3">
+          <h3 class="text-lg font-heading text-brand-dark">{it.question}</h3>
+          <p class="text-sm text-brand-dark/90">{it.answer}</p>
+          {it.href && it.hrefLabel && (
+            <div class="pt-1">
+              <a href={it.href} class="inline-flex items-center rounded-md border border-brand-primary bg-brand-primary text-white px-4 py-2 hover:bg-brand-primary/90 hover:text-white transition">{it.hrefLabel}</a>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </Section>
+</BaseLayout>

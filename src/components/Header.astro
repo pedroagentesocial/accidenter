@@ -1,0 +1,53 @@
+---
+import { t } from "../i18n";
+const { locale = "en", pathname = "/en" } = Astro.props as {
+  locale: "en" | "es";
+  pathname: string;
+};
+function switchLocalePath(path: string) {
+  if (locale === "en") {
+    if (path.startsWith("/en/contact")) return path.replace("/en/contact", "/es/contacto");
+    if (path.startsWith("/en/services")) return path.replace("/en/services", "/es/servicios");
+    if (path.startsWith("/en")) return path.replace("/en", "/es") || "/es";
+    return "/es";
+  } else {
+    if (path.startsWith("/es/contacto")) return path.replace("/es/contacto", "/en/contact");
+    if (path.startsWith("/es/servicios")) return path.replace("/es/servicios", "/en/services");
+    if (path.startsWith("/es")) return path.replace("/es", "/en") || "/en";
+    return "/en";
+  }
+}
+const switchHref = switchLocalePath(pathname);
+const servicesHref = locale === "en" ? "/en/services" : "/es/servicios";
+const aboutHref = locale === "en" ? "/en/about" : "/es/about";
+const contactHref = locale === "en" ? "/en/contact" : "/es/contacto";
+const faqHref = locale === "en" ? "/en/faq" : "/es/faq";
+const homeHref = locale === "en" ? "/en" : "/es";
+const scheduleText = t(locale, "ui.nav.schedule") ?? (locale === "en" ? "Schedule visit" : "Agendar cita");
+---
+<header class="header absolute top-0 left-0 w-full z-30 bg-transparent">
+  <div class="w-full px-4 sm:px-6 grid grid-cols-[1fr_auto] items-center py-4">
+    <div class="flex items-center gap-6">
+      <a href={homeHref} class="flex items-center gap-3">
+        <img src="/images/logo.png" alt="Accident ER – Urgent Care MD logo" class="h-28 w-28 rounded logo-light" loading="eager" />
+      </a>
+      <nav class="flex items-center gap-6">
+        <a href={servicesHref} class="text-white text-base hover:text-brand-primary whitespace-nowrap font-semibold">{t(locale, "ui.nav.services") ?? (locale === "en" ? "Services" : "Servicios")}</a>
+        <a href={aboutHref} class="text-white text-base hover:text-brand-primary whitespace-nowrap font-semibold">{t(locale, "ui.nav.about") ?? (locale === "en" ? "About Us" : "Sobre nosotros")}</a>
+        <a href={contactHref} class="text-white text-base hover:text-brand-primary whitespace-nowrap font-semibold">{t(locale, "ui.nav.contact") ?? (locale === "en" ? "Contact" : "Contacto")}</a>
+        <a href={faqHref} class="text-white text-base hover:text-brand-primary whitespace-nowrap font-semibold">{t(locale, "ui.nav.faq") ?? "FAQ"}</a>
+      </nav>
+    </div>
+    <nav class="ml-auto mr-0 flex items-center gap-3 sm:gap-6 justify-end">
+      <a href={switchHref} class="button-outline-light">{locale === "en" ? "ES" : "EN"}</a>
+      <a href={"tel:+18019967427"} class="button-primary inline-flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.72 11.72 0 003.68.59 1 1 0 011 1v3.5a1 1 0 01-1 1A17.5 17.5 0 013.5 5a1 1 0 011-1H8a1 1 0 011 1c0 1.26.21 2.5.59 3.68a1 1 0 01-.24 1.01l-2.73 2.73z"/></svg>
+        <span>+1 801-996-7427</span>
+      </a>
+      <a href={"mailto:orders@accidenter.com"} class="button-success inline-flex items-center gap-2 text-white" title={scheduleText} aria-label={scheduleText}>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M6 2a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H6zm0 2h12v3H6V4zm0 5h12v11H6V9zm2 2v2h8v-2H8z"/></svg>
+        <span class="inline whitespace-nowrap">{scheduleText}</span>
+      </a>
+    </nav>
+  </div>
+</header>

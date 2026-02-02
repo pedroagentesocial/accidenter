@@ -1,0 +1,167 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Section from "../../components/Section.astro";
+import ActionCard from "../../components/ActionCard.astro";
+import ContactPageForm from "../../components/ContactPageForm.astro";
+import { t } from "../../i18n";
+const locale = "en";
+const contact = t(locale, "contact");
+const seo = contact.seo;
+const breadcrumb = contact.breadcrumb.items;
+const hero = contact.hero;
+const quickActions = contact.quickActions.items;
+const form = contact.form;
+const details = contact.details;
+const map = contact.map;
+const faq = contact.faq;
+---
+<BaseLayout locale={locale} title={seo.title} description={seo.description} canonical={seo.canonical}>
+  <section class="relative overflow-hidden bg-black border-b border-brand-accent min-h-[460px] sm:min-h-[540px] lg:min-h-[620px]">
+    <video id="hero-video" src="/videos/xray.mp4" class="absolute inset-0 block w-full h-full object-cover object-center transition-opacity duration-700" autoplay muted playsinline poster="/images/hero.jpg"></video>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
+    <div class="container relative z-10 py-16 sm:py-24 lg:py-28">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div class="">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading text-white drop-shadow-lg">{hero.title}</h1>
+            <p class="mt-6 text-white drop-shadow">{hero.subtitle}</p>
+            <p class="mt-2 text-sm text-white/80 drop-shadow">{hero.safetyNote}</p>
+          </div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+    <button id="hero-sound" class="absolute bottom-4 right-4 z-10 bg-white/80 text-brand-dark px-3 py-1 rounded-full text-xs">Unmute</button>
+    <script>
+      const video = document.getElementById("hero-video");
+      const btn = document.getElementById("hero-sound");
+      if (video && btn) {
+        btn.addEventListener("click", () => {
+          const isMuted = video.hasAttribute("muted");
+          if (isMuted) {
+            video.removeAttribute("muted");
+            btn.textContent = "Mute";
+          } else {
+            video.setAttribute("muted", "");
+            btn.textContent = "Unmute";
+          }
+        });
+      }
+    </script>
+  </section>
+  <Breadcrumbs items={breadcrumb} />
+  <Section title={""} align="center">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <ActionCard title={quickActions[0].title} text={quickActions[0].text} href={`tel:+18019967427`} hrefLabel={quickActions[0].hrefLabel} />
+      <ActionCard title={quickActions[1].title} text={quickActions[1].text} href={"https://www.google.com/maps/search/?api=1&query=6770%20S%20900%20E%2C%20Midvale%2C%20UT%2084047"} hrefLabel={quickActions[1].hrefLabel} />
+      <ActionCard title={quickActions[2].title} text={quickActions[2].text} />
+    </div>
+  </Section>
+  <Section title={form.title} align="center">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="rounded-2xl bg-white p-6 border border-brand-accent">
+        <h3 class="text-xl font-heading text-brand-dark mb-4">{form.title}</h3>
+        <ContactPageForm locale={locale} form={form} actionUrl={"ACTION_URL_PLACEHOLDER"} />
+      </div>
+      <div class="rounded-2xl bg-white p-6 border border-brand-accent">
+        <h3 class="text-xl font-heading text-brand-dark">{details.title}</h3>
+        <div class="mt-4 space-y-4">
+          <div>
+            <p class="text-sm font-heading text-brand-dark">{details.phoneLabel}</p>
+            <a class="text-brand-dark hover:text-brand-primary underline-offset-2 hover:underline" href="tel:+18019967427">+1 801-996-7427</a>
+          </div>
+          <div class="h-px bg-brand-accent/40"></div>
+          <div>
+            <p class="text-sm font-heading text-brand-dark">{details.addressLabel}</p>
+            <a class="text-brand-dark hover:text-brand-primary underline-offset-2 hover:underline" href="https://www.google.com/maps/search/?api=1&query=6770%20S%20900%20E%2C%20Midvale%2C%20UT%2084047">6770 S 900 E, Midvale, UT 84047, EE. UU.</a>
+          </div>
+          <div class="h-px bg-brand-accent/40"></div>
+          <div>
+            <p class="text-sm font-heading text-brand-dark">{details.hoursLabel}</p>
+            <ul class="text-brand-dark">
+              {(details.hoursLines || []).map((h: string) => (
+                <li class="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-brand-success" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5h-2v6h6v-2h-4V7z"/></svg>
+                  <span>{h}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="h-px bg-brand-accent/40"></div>
+          <p class="text-sm text-brand-dark/80">{details.bilingualNote}</p>
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <a id="schedule-email-link" class="button-secondary w-full inline-flex items-center justify-center gap-2" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16a2 2 0 012 2v1l-10 6L2 7V6a2 2 0 012-2zm0 6.35l8 4.8 8-4.8V18a2 2 0 01-2 2H6a2 2 0 01-2-2v-7.65z"/></svg>
+              <span>Schedule via Email</span>
+            </a>
+            <a id="google-calendar-link" class="button-outline-dark w-full inline-flex items-center justify-center gap-2" href="#" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2v2H5a2 2 0 00-2 2v1h18V6a2 2 0 00-2-2h-2V2h-2v2H9V2H7zm16 7H1v11a2 2 0 002 2h18a2 2 0 002-2V9zm-5 6h-6v-2h4v-3h2v5z"/></svg>
+              <span>Add to Calendar</span>
+            </a>
+          </div>
+          <script>
+            const emailLink = document.getElementById("schedule-email-link") as HTMLAnchorElement | null;
+            const calLink = document.getElementById("google-calendar-link") as HTMLAnchorElement | null;
+            function pad(n) { return n.toString().padStart(2, "0"); }
+            function nextSlot() {
+              const d = new Date();
+              d.setDate(d.getDate() + 1);
+              const day = d.getDay();
+              if (day === 0) d.setDate(d.getDate() + 1);
+              d.setHours(10, 0, 0, 0);
+              return d;
+            }
+            const slot = nextSlot();
+            const yyyy = slot.getFullYear();
+            const mm = pad(slot.getMonth() + 1);
+            const dd = pad(slot.getDate());
+            const HH = pad(slot.getHours());
+            const human = `${yyyy}-${mm}-${dd} ${HH}:00`;
+            const address = "6770 S 900 E, Midvale, UT 84047, EE. UU.";
+            const subject = encodeURIComponent(`Schedule Visit Request — ${human}`);
+            const body = encodeURIComponent(`Hello AccidentER,\n\nI would like to schedule a visit around ${human}.\n\nPhone: \nReason: \n\nAddress: ${address}\n\nThank you.`);
+            const mailto = `mailto:orders@accidenter.com?subject=${subject}&body=${body}`;
+            const gDate = `${yyyy}${mm}${dd}T${HH}0000Z`;
+            const gEnd = `${yyyy}${mm}${dd}T${pad(slot.getHours() + 1)}0000Z`;
+            const gText = encodeURIComponent("AccidentER® Visit");
+            const gDetails = encodeURIComponent("Visit AccidentER® — Urgent Care MD");
+            const gLocation = encodeURIComponent(address);
+            const gUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${gText}&dates=${gDate}/${gEnd}&details=${gDetails}&location=${gLocation}`;
+            emailLink?.setAttribute("href", mailto);
+            calLink?.setAttribute("href", gUrl);
+          </script>
+        </div>
+      </div>
+    </div>
+  </Section>
+  <Section title={map.title} align="center">
+    <div class="rounded-2xl overflow-hidden border border-brand-accent">
+      <iframe src={map.embedUrl} class="w-full h-72" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="mt-3 max-w-3xl mx-auto">
+      <h4 class="text-base font-heading text-brand-dark">{map.parkingNoteTitle}</h4>
+      <p class="text-sm text-brand-dark/90">{map.parkingNoteText}</p>
+    </div>
+    <div class="mt-6 max-w-6xl mx-auto">
+      <h4 class="text-base font-heading text-brand-dark">{map.directionsTitle}</h4>
+      <div class="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {(map.directionsItems || []).map((d: string) => (
+          <div class="rounded-xl bg-white border border-brand-accent p-4 shadow-sm">
+            <p class="text-sm text-brand-dark/90">{d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Section>
+  <Section title={faq.title} align="center">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {faq.items.map((item: any) => (
+        <div class="rounded-xl bg-white border border-brand-accent p-5 shadow-sm">
+          <h3 class="text-lg font-heading text-brand-dark">{item.question}</h3>
+          <p class="mt-2 text-sm text-brand-dark/90">{item.answer}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+</BaseLayout>

@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+@font-face {
+  font-family: "Mont";
+  src: url("./fonts/Mont-ExtraLightDEMO.otf") format("opentype");
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "The Seasons";
+  src: url("./fonts/The Seasons Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Moontime";
+  src: url("./fonts/FontsFree-Net-MoonTime-Regular-1.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Yeseva One";
+  src: url("./fonts/YesevaOne-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-body text-brand-dark bg-brand-muted;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  @apply font-heading text-brand-dark;
+}
+
+.container {
+  @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+}
+
+.header {
+  @apply bg-transparent;
+}
+.footer {
+  @apply bg-brand-muted;
+}
+
+.button-primary {
+  @apply inline-flex items-center rounded-md border border-brand-primary bg-brand-primary text-white px-5 py-3 transition hover:bg-brand-primary/90 hover:text-white hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2;
+}
+
+.button-secondary {
+  @apply inline-flex items-center rounded-md border border-brand-success text-brand-success bg-transparent px-5 py-3 hover:bg-brand-success hover:text-white hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-success focus-visible:ring-offset-2;
+}
+
+.button-success {
+  @apply inline-flex items-center rounded-md border border-brand-success bg-brand-success text-white px-5 py-3 transition hover:bg-brand-success/90 hover:text-white hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-success focus-visible:ring-offset-2;
+}
+.button-tertiary {
+  @apply inline-flex items-center rounded-md bg-brand-dark text-white px-5 py-3 hover:bg-brand-dark/90 hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark focus-visible:ring-offset-2;
+}
+
+.button-outline-dark {
+  @apply inline-flex items-center rounded-md border border-brand-dark text-brand-dark bg-transparent px-5 py-3 hover:bg-brand-dark/5 hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark focus-visible:ring-offset-2;
+}
+
+.button-outline-light {
+  @apply inline-flex items-center rounded-md border border-white text-white bg-transparent px-5 py-3 hover:bg-white/10 hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2;
+}
+
+.footer {
+  @apply bg-brand-dark text-white;
+}
+
+.logo-dark {
+  filter: brightness(0) saturate(100%);
+}
+
+.logo-light {
+  filter: brightness(0) invert(1);
+}
