@@ -18,6 +18,33 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+      - name: Prepare low-res videos
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+          FTP_PATH: ${{ secrets.FTP_PATH }}
+        run: |
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+          mkdir -p tmp_videos
+          vids=("hero1" "bilingual" "postaccident")
+          for v in "${vids[@]}"; do
+            echo "Downloading $v.mp4"
+            curl --ftp-pasv --fail -s --user "${FTP_USERNAME}:${FTP_PASSWORD}" \
+              "ftp://${FTP_SERVER}:${FTP_PORT}/${FTP_PATH}/videos/${v}.mp4" \
+              --output "tmp_videos/${v}.mp4" || echo "Skip download for ${v}.mp4"
+          done
+          for v in "${vids[@]}"; do
+            if [ -f "tmp_videos/${v}.mp4" ]; then
+              echo "Transcoding ${v}.mp4 -> ${v}-low.mp4"
+              ffmpeg -hide_banner -y -i "tmp_videos/${v}.mp4" -vf "scale=-2:720" -c:v libx264 -preset veryfast -crf 26 -c:a aac -b:a 128k "tmp_videos/${v}-low.mp4"
+              echo "Uploading ${v}-low.mp4"
+              curl --ftp-pasv --fail -s --ftp-create-dirs --user "${FTP_USERNAME}:${FTP_PASSWORD}" \
+                -T "tmp_videos/${v}-low.mp4" \
+                "ftp://${FTP_SERVER}:${FTP_PORT}/${FTP_PATH}/videos/${v}-low.mp4"
+            fi
+          done
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
