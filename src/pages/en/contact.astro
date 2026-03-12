@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import Section from "../../components/Section.astro";
 import ActionCard from "../../components/ActionCard.astro";
-import ContactPageForm from "../../components/ContactPageForm.astro";
+import ContactForm from "../../components/ContactForm.astro";
 import { t } from "../../i18n";
 const locale = "en";
 const contact = t(locale, "contact");
@@ -11,10 +11,13 @@ const seo = contact.seo;
 const breadcrumb = contact.breadcrumb.items;
 const hero = contact.hero;
 const quickActions = contact.quickActions.items;
-const form = contact.form;
-const details = contact.details;
 const map = contact.map;
 const faq = contact.faq;
+const leadSurvey = {
+  title: "Need help after an accident?",
+  description: "Open the guided intake form and share your accident details with our team.",
+  buttonLabel: "Open accident assistance form"
+};
 ---
 <BaseLayout locale={locale} title={seo.title} description={seo.description} canonical={seo.canonical}>
   <section class="relative overflow-hidden bg-black border-b border-brand-accent min-h-[460px] sm:min-h-[540px] lg:min-h-[620px]">
@@ -58,83 +61,65 @@ const faq = contact.faq;
       <ActionCard title={quickActions[2].title} text={quickActions[2].text} />
     </div>
   </Section>
-  <Section title={form.title} align="center">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div class="rounded-2xl bg-white p-6 border border-brand-accent">
-        <h3 class="text-xl font-heading text-brand-dark mb-4">{form.title}</h3>
-        <ContactPageForm locale={locale} form={form} actionUrl={"ACTION_URL_PLACEHOLDER"} />
+  <Section title={leadSurvey.title} align="center">
+    <div class="max-w-4xl mx-auto rounded-2xl bg-white p-6 border border-brand-accent shadow-sm">
+      <p class="text-brand-dark/90">{leadSurvey.description}</p>
+      <div class="mt-4 flex justify-center">
+        <button type="button" id="open-assistance-modal-en" class="button-success inline-flex items-center justify-center">
+          {leadSurvey.buttonLabel}
+        </button>
       </div>
-      <div class="rounded-2xl bg-white p-6 border border-brand-accent">
-        <h3 class="text-xl font-heading text-brand-dark">{details.title}</h3>
-        <div class="mt-4 space-y-4">
-          <div>
-            <p class="text-sm font-heading text-brand-dark">{details.phoneLabel}</p>
-            <a class="text-brand-dark hover:text-brand-primary underline-offset-2 hover:underline" href="tel:+18019967427">+1 801-996-7427</a>
+      <div id="assistance-modal-en" class="fixed inset-0 z-[120] hidden" aria-hidden="true">
+        <div id="assistance-modal-overlay-en" class="absolute inset-0 bg-black/70"></div>
+        <div class="relative z-[121] min-h-screen flex items-center justify-center p-4">
+          <div class="w-full max-w-5xl rounded-2xl bg-white border border-brand-accent shadow-xl overflow-hidden">
+            <div class="flex items-center justify-between px-4 py-3 border-b border-brand-accent">
+              <h3 class="font-heading text-brand-dark">{leadSurvey.buttonLabel}</h3>
+              <button type="button" id="close-assistance-modal-en" class="button-outline-dark">×</button>
+            </div>
+            <div class="p-0">
+              <iframe
+                src="https://api.leadconnectorhq.com/widget/survey/VPSfhjdEmD58v7jc5ocl"
+                style="border:none;width:100%;"
+                scrolling="no"
+                id="VPSfhjdEmD58v7jc5ocl"
+                title="survey"
+                class="w-full min-h-[620px]"
+              ></iframe>
+            </div>
           </div>
-          <div class="h-px bg-brand-accent/40"></div>
-          <div>
-            <p class="text-sm font-heading text-brand-dark">{details.addressLabel}</p>
-            <a class="text-brand-dark hover:text-brand-primary underline-offset-2 hover:underline" href="https://www.google.com/maps/search/?api=1&query=6770%20S%20900%20E%2C%20Midvale%2C%20UT%2084047">6770 S 900 E, Midvale, UT 84047, EE. UU.</a>
-          </div>
-          <div class="h-px bg-brand-accent/40"></div>
-          <div>
-            <p class="text-sm font-heading text-brand-dark">{details.hoursLabel}</p>
-            <ul class="text-brand-dark">
-              {(details.hoursLines || []).map((h: string) => (
-                <li class="flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-brand-success" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5h-2v6h6v-2h-4V7z"/></svg>
-                  <span>{h}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div class="h-px bg-brand-accent/40"></div>
-          <p class="text-sm text-brand-dark/80">{details.bilingualNote}</p>
-          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <a id="schedule-email-link" class="button-secondary w-full inline-flex items-center justify-center gap-2" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16a2 2 0 012 2v1l-10 6L2 7V6a2 2 0 012-2zm0 6.35l8 4.8 8-4.8V18a2 2 0 01-2 2H6a2 2 0 01-2-2v-7.65z"/></svg>
-              <span>Schedule via Email</span>
-            </a>
-            <a id="google-calendar-link" class="button-outline-dark w-full inline-flex items-center justify-center gap-2" href="#" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2v2H5a2 2 0 00-2 2v1h18V6a2 2 0 00-2-2h-2V2h-2v2H9V2H7zm16 7H1v11a2 2 0 002 2h18a2 2 0 002-2V9zm-5 6h-6v-2h4v-3h2v5z"/></svg>
-              <span>Add to Calendar</span>
-            </a>
-          </div>
-          <script>
-            const emailLink = document.getElementById("schedule-email-link") as HTMLAnchorElement | null;
-            const calLink = document.getElementById("google-calendar-link") as HTMLAnchorElement | null;
-            function pad(n) { return n.toString().padStart(2, "0"); }
-            function nextSlot() {
-              const d = new Date();
-              d.setDate(d.getDate() + 1);
-              const day = d.getDay();
-              if (day === 0) d.setDate(d.getDate() + 1);
-              d.setHours(10, 0, 0, 0);
-              return d;
-            }
-            const slot = nextSlot();
-            const yyyy = slot.getFullYear();
-            const mm = pad(slot.getMonth() + 1);
-            const dd = pad(slot.getDate());
-            const HH = pad(slot.getHours());
-            const human = `${yyyy}-${mm}-${dd} ${HH}:00`;
-            const address = "6770 S 900 E, Midvale, UT 84047, EE. UU.";
-            const subject = encodeURIComponent(`Schedule Visit Request — ${human}`);
-            const body = encodeURIComponent(`Hello AccidentER,\n\nI would like to schedule a visit around ${human}.\n\nPhone: \nReason: \n\nAddress: ${address}\n\nThank you.`);
-            const mailto = `mailto:orders@accidenter.com?subject=${subject}&body=${body}`;
-            const gDate = `${yyyy}${mm}${dd}T${HH}0000Z`;
-            const gEnd = `${yyyy}${mm}${dd}T${pad(slot.getHours() + 1)}0000Z`;
-            const gText = encodeURIComponent("AccidentER® Visit");
-            const gDetails = encodeURIComponent("Visit AccidentER® — Urgent Care MD");
-            const gLocation = encodeURIComponent(address);
-            const gUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${gText}&dates=${gDate}/${gEnd}&details=${gDetails}&location=${gLocation}`;
-            emailLink?.setAttribute("href", mailto);
-            calLink?.setAttribute("href", gUrl);
-          </script>
         </div>
       </div>
     </div>
+    <script is:inline src="https://link.msgsndr.com/js/form_embed.js"></script>
+    <script>
+      const assistanceModalEn = document.getElementById("assistance-modal-en");
+      const openAssistanceModalEn = document.getElementById("open-assistance-modal-en");
+      const closeAssistanceModalEn = document.getElementById("close-assistance-modal-en");
+      const assistanceModalOverlayEn = document.getElementById("assistance-modal-overlay-en");
+      function showAssistanceModalEn() {
+        if (!assistanceModalEn) return;
+        assistanceModalEn.classList.remove("hidden");
+        assistanceModalEn.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+      function hideAssistanceModalEn() {
+        if (!assistanceModalEn) return;
+        assistanceModalEn.classList.add("hidden");
+        assistanceModalEn.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      }
+      openAssistanceModalEn?.addEventListener("click", showAssistanceModalEn);
+      closeAssistanceModalEn?.addEventListener("click", hideAssistanceModalEn);
+      assistanceModalOverlayEn?.addEventListener("click", hideAssistanceModalEn);
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") hideAssistanceModalEn();
+      });
+    </script>
   </Section>
+  <section class="container py-8">
+    <ContactForm locale={locale} />
+  </section>
   <Section title={map.title} align="center">
     <div class="rounded-2xl overflow-hidden border border-brand-accent">
       <iframe src={map.embedUrl} class="w-full h-72" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

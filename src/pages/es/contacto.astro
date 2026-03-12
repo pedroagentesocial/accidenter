@@ -15,6 +15,11 @@ const form = contact.form;
 const details = contact.details;
 const map = contact.map;
 const faq = contact.faq;
+const leadSurvey = {
+  title: "¿Necesitas ayuda después de un accidente?",
+  description: "Abre el formulario guiado y comparte los detalles del accidente con nuestro equipo.",
+  buttonLabel: "Abrir formulario de asistencia"
+};
 ---
 <BaseLayout locale={locale} title={seo.title} description={seo.description} canonical={seo.canonical}>
   <section class="relative overflow-hidden bg-black border-b border-brand-accent min-h-[460px] sm:min-h-[540px] lg:min-h-[620px]">
@@ -57,6 +62,62 @@ const faq = contact.faq;
       <ActionCard title={quickActions[1].title} text={quickActions[1].text} href={"https://www.google.com/maps/search/?api=1&query=6770%20S%20900%20E%2C%20Midvale%2C%20UT%2084047"} hrefLabel={quickActions[1].hrefLabel} />
       <ActionCard title={quickActions[2].title} text={quickActions[2].text} />
     </div>
+  </Section>
+  <Section title={leadSurvey.title} align="center">
+    <div class="max-w-4xl mx-auto rounded-2xl bg-white p-6 border border-brand-accent shadow-sm">
+      <p class="text-brand-dark/90">{leadSurvey.description}</p>
+      <div class="mt-4 flex justify-center">
+        <button type="button" id="open-assistance-modal-es" class="button-success inline-flex items-center justify-center">
+          {leadSurvey.buttonLabel}
+        </button>
+      </div>
+      <div id="assistance-modal-es" class="fixed inset-0 z-[120] hidden" aria-hidden="true">
+        <div id="assistance-modal-overlay-es" class="absolute inset-0 bg-black/70"></div>
+        <div class="relative z-[121] min-h-screen flex items-center justify-center p-4">
+          <div class="w-full max-w-5xl rounded-2xl bg-white border border-brand-accent shadow-xl overflow-hidden">
+            <div class="flex items-center justify-between px-4 py-3 border-b border-brand-accent">
+              <h3 class="font-heading text-brand-dark">{leadSurvey.buttonLabel}</h3>
+              <button type="button" id="close-assistance-modal-es" class="button-outline-dark">×</button>
+            </div>
+            <div class="p-0">
+              <iframe
+                src="https://api.leadconnectorhq.com/widget/survey/VPSfhjdEmD58v7jc5ocl"
+                style="border:none;width:100%;"
+                scrolling="no"
+                id="VPSfhjdEmD58v7jc5ocl"
+                title="survey"
+                class="w-full min-h-[620px]"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script is:inline src="https://link.msgsndr.com/js/form_embed.js"></script>
+    <script>
+      const assistanceModalEs = document.getElementById("assistance-modal-es");
+      const openAssistanceModalEs = document.getElementById("open-assistance-modal-es");
+      const closeAssistanceModalEs = document.getElementById("close-assistance-modal-es");
+      const assistanceModalOverlayEs = document.getElementById("assistance-modal-overlay-es");
+      function showAssistanceModalEs() {
+        if (!assistanceModalEs) return;
+        assistanceModalEs.classList.remove("hidden");
+        assistanceModalEs.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+      function hideAssistanceModalEs() {
+        if (!assistanceModalEs) return;
+        assistanceModalEs.classList.add("hidden");
+        assistanceModalEs.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      }
+      openAssistanceModalEs?.addEventListener("click", showAssistanceModalEs);
+      closeAssistanceModalEs?.addEventListener("click", hideAssistanceModalEs);
+      assistanceModalOverlayEs?.addEventListener("click", hideAssistanceModalEs);
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") hideAssistanceModalEs();
+      });
+    </script>
   </Section>
   <Section title={form.title} align="center">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">

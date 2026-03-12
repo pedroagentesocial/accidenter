@@ -19,6 +19,8 @@ const path = Astro.url.pathname;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/images/logo.svg" type="image/svg+xml" />
+    <link rel="icon" href="/images/logo.png" sizes="32x32" />
   </head>
   <body>
     <Header locale={locale} pathname={path} />

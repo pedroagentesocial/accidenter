@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Section from "../../components/Section.astro";
+import ContactForm from "../../components/ContactForm.astro";
+import TestimonialsCarousel from "../../components/TestimonialsCarousel.astro";
+import CTA from "../../components/CTA.astro";
+import { t } from "../../i18n";
+const locale = "es";
+const seo = {
+  title: "Política de Privacidad | Accident ER – Urgent Care MD",
+  description: "Cómo Accident ER recopila, usa y protege la información personal.",
+  canonical: "https://accidenter-urgentcaremd.com/es/politica-de-privacidad"
+};
+const breadcrumb = [
+  { label: t(locale, "common.breadcrumb.home"), href: "/es" },
+  { label: "Política de Privacidad", href: "/es/politica-de-privacidad" }
+];
+const closingCTA = t(locale, "home.closingCTA");
+---
+<BaseLayout locale={locale} title={seo.title} description={seo.description} canonical={seo.canonical}>
+  <section class="relative overflow-hidden bg-black border-b border-brand-accent min-h-[420px] sm:min-h-[520px]">
+    <video src="/videos/bilingual.mp4" class="absolute inset-0 block w-full h-full object-cover object-center" autoplay muted playsinline poster="/images/accident-medical.jpg"></video>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-transparent"></div>
+    <div class="container relative z-10 py-16 sm:py-24 lg:py-28">
+      <div class="max-w-4xl">
+        <p class="text-white/80 text-sm uppercase tracking-[0.2em]">Legal</p>
+        <h1 class="mt-3 text-4xl sm:text-5xl lg:text-6xl font-heading text-white">Política de Privacidad</h1>
+        <p class="mt-5 text-white/90 max-w-2xl">Protegemos tu información y la utilizamos únicamente para apoyar tu atención, comunicación y coordinación de citas.</p>
+      </div>
+    </div>
+  </section>
+  <Breadcrumbs items={breadcrumb} />
+  <Section title="Cómo tratamos tus datos" align="center">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-left">
+        <h3 class="text-lg font-heading text-brand-dark">Información recopilada</h3>
+        <p class="mt-2 text-brand-dark/90">Nombre, teléfono, correo y mensaje enviados desde formularios del sitio.</p>
+      </div>
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-left">
+        <h3 class="text-lg font-heading text-brand-dark">Finalidad</h3>
+        <p class="mt-2 text-brand-dark/90">Responder consultas, agendar visitas y dar seguimiento a la comunicación del paciente.</p>
+      </div>
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-left">
+        <h3 class="text-lg font-heading text-brand-dark">Control</h3>
+        <p class="mt-2 text-brand-dark/90">Puedes solicitar acceso, corrección o eliminación de tus datos enviados.</p>
+      </div>
+    </div>
+  </Section>
+  <Section title="Detalle de la Política de Privacidad" align="center">
+    <div class="max-w-4xl mx-auto space-y-4 text-left">
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-brand-dark">
+        <p>Recopilamos la información que compartes en nuestros formularios, incluyendo nombre, teléfono, correo y detalles del mensaje, para coordinar citas y comunicación clínica.</p>
+      </div>
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-brand-dark">
+        <p>Usamos la información enviada para responder consultas, agendar visitas y dar seguimiento a tu solicitud. No vendemos información personal.</p>
+      </div>
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-brand-dark">
+        <p>Podemos usar proveedores de confianza para procesar formularios y comunicaciones. Estos proveedores deben proteger tus datos adecuadamente.</p>
+      </div>
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-brand-dark">
+        <p>Al enviar tu información, aceptas recibir contacto por teléfono, correo o SMS cuando aplique a tu solicitud. Pueden aplicar tarifas de tu operador.</p>
+      </div>
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-brand-dark">
+        <p>Si deseas solicitar acceso, corrección o eliminación de tus datos, contáctanos en <a class="underline hover:no-underline" href="mailto:orders@accidenter.com">orders@accidenter.com</a>.</p>
+        <p class="mt-3 text-sm text-brand-dark/70">Última actualización: 11 de marzo de 2026.</p>
+      </div>
+    </div>
+  </Section>
+  <section class="container py-8">
+    <ContactForm locale={locale} />
+  </section>
+  <Section title="Esto opinan nuestros pacientes de AccidentER®" align="center">
+    <TestimonialsCarousel locale={locale} />
+  </Section>
+  <Section title={closingCTA.title} align="center">
+    <div class="max-w-6xl mx-auto">
+      <div class="rounded-2xl bg-brand-accent text-brand-dark p-6 flex flex-col md:flex-row md:items-center md:justify-center gap-4 text-center">
+        <p class="text-white">{closingCTA.text}</p>
+        <div class="flex gap-3 justify-center">
+          <CTA text={closingCTA.CTA} href={"tel:+18019967427"} variant="primary" />
+          <CTA text={"Agendar ahora"} href={"mailto:orders@accidenter.com"} variant="success" />
+        </div>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

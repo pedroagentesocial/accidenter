@@ -70,17 +70,23 @@ const importantServices = importantOrder
       const prev = document.getElementById("hero-prev") as HTMLButtonElement | null;
       const next = document.getElementById("hero-next") as HTMLButtonElement | null;
       const dots = document.querySelectorAll("#hero-dots button") as NodeListOf<HTMLButtonElement>;
-      const sources = ["/videos/hero1.mp4", "/videos/xray.mp4", "/videos/bilingual.mp4", "/videos/postaccident.mp4"];
+      const sources = ["/videos/hero1.mp4", "/videos/hero2.mp4", "/videos/bilingual.mp4", "/videos/postaccident.mp4"];
+      const fallbacks = [
+        ["/videos/hero1.mp4"],
+        ["/videos/hero1.mp4", "/videos/bilingual.mp4"],
+        ["/videos/bilingual.mp4"],
+        ["/videos/postaccident.mp4"]
+      ];
       function shouldLowRes() {
         const conn = (navigator as any).connection?.effectiveType || "";
         const isSlow = /(^2g|3g|slow-2g)/i.test(conn);
         const isMobile = window.matchMedia("(max-width: 640px)").matches;
         return isSlow || isMobile;
       }
-      function candidate(i: number) {
+      function candidateList(i: number) {
         const base = sources[i];
         const low = base.replace(".mp4", "-low.mp4");
-        return shouldLowRes() ? { src: low, fallback: base } : { src: base, fallback: null };
+        return shouldLowRes() ? [low, base, ...fallbacks[i]] : [base, ...fallbacks[i]];
       }
       const slides = [
         { title: "AccidentER® — Atención clara y rápida", subtitle: "Aceptamos visitas sin cita. Valoración y pasos claros.", note: "Traiga reportes o estudios previos si los tiene." },
@@ -109,25 +115,31 @@ const importantServices = importantOrder
         i = (idx + sources.length) % sources.length;
         if (!video) return;
         video.classList.add("opacity-0");
-        const cand = candidate(i);
-        video.preload = "metadata";
-        video.src = cand.src;
-        if (cand.fallback) {
-          const onErr = () => {
-            video.removeEventListener("error", onErr);
-            video.src = cand.fallback!;
+        const list = candidateList(i);
+        let pos = 0;
+        const onErr = () => {
+          pos++;
+          if (pos < list.length) {
+            video.src = list[pos];
             video.load();
-          };
-          video.addEventListener("error", onErr, { once: true });
-        }
+          } else {
+            video.removeEventListener("error", onErr);
+          }
+        };
+        video.addEventListener("error", onErr);
+        video.preload = "metadata";
+        video.src = list[pos];
+        video.load();
         video.style.transformOrigin = "center center";
         video.style.willChange = "transform";
         video.style.transform = `scale(${zoom[i]})`;
         video.load();
-        video.addEventListener("canplaythrough", () => {
+        const onReady = () => {
           video?.play().catch(() => {});
           video?.classList.remove("opacity-0");
-        }, { once: true });
+        };
+        video.addEventListener("loadeddata", onReady, { once: true });
+        video.addEventListener("canplaythrough", onReady, { once: true });
         if (titleEl && subtitleEl && noteEl) {
           titleEl.textContent = slides[i].title;
           subtitleEl.textContent = slides[i].subtitle;
@@ -219,6 +231,69 @@ const importantServices = importantOrder
   </section>
   <Section title={"Esto opinan nuestros pacientes de AccidentER®"} align="center">
     <TestimonialsCarousel locale={locale} />
+    <div class="mt-6 max-w-4xl mx-auto rounded-2xl p-6 shadow-sm">
+      <div class="flex justify-center">
+        <button type="button" id="open-review-modal-es" class="button-success inline-flex items-center justify-center">
+          Escribe tu opinión
+        </button>
+      </div>
+      <div id="review-modal-es" class="fixed inset-0 z-[120] hidden" aria-hidden="true">
+        <div id="review-modal-overlay-es" class="absolute inset-0 bg-black/70"></div>
+        <div class="relative z-[121] min-h-screen flex items-center justify-center p-4">
+          <div class="w-full max-w-5xl rounded-2xl bg-white border border-brand-accent shadow-xl overflow-hidden">
+            <div class="flex items-center justify-between px-4 py-3 border-b border-brand-accent">
+              <h3 class="font-heading text-brand-dark">Escribe tu opinión</h3>
+              <button type="button" id="close-review-modal-es" class="button-outline-dark">×</button>
+            </div>
+            <div class="p-0">
+              <iframe
+                src="https://api.leadconnectorhq.com/widget/form/api0Lg5MZ8ZSi5fOyHmj"
+                style="width:100%;height:100%;border:none;border-radius:3px"
+                id="inline-api0Lg5MZ8ZSi5fOyHmj-es"
+                data-layout="{'id':'INLINE'}"
+                data-trigger-type="alwaysShow"
+                data-trigger-value=""
+                data-activation-type="alwaysActivated"
+                data-activation-value=""
+                data-deactivation-type="neverDeactivate"
+                data-deactivation-value=""
+                data-form-name="Internal Review Form"
+                data-height="604"
+                data-layout-iframe-id="inline-api0Lg5MZ8ZSi5fOyHmj-es"
+                data-form-id="api0Lg5MZ8ZSi5fOyHmj"
+                title="Internal Review Form"
+                class="w-full min-h-[604px]"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script is:inline src="https://link.msgsndr.com/js/form_embed.js"></script>
+      <script>
+        const reviewModalEs = document.getElementById("review-modal-es");
+        const openReviewModalEs = document.getElementById("open-review-modal-es");
+        const closeReviewModalEs = document.getElementById("close-review-modal-es");
+        const reviewModalOverlayEs = document.getElementById("review-modal-overlay-es");
+        function showReviewModalEs() {
+          if (!reviewModalEs) return;
+          reviewModalEs.classList.remove("hidden");
+          reviewModalEs.setAttribute("aria-hidden", "false");
+          document.body.style.overflow = "hidden";
+        }
+        function hideReviewModalEs() {
+          if (!reviewModalEs) return;
+          reviewModalEs.classList.add("hidden");
+          reviewModalEs.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+        }
+        openReviewModalEs?.addEventListener("click", showReviewModalEs);
+        closeReviewModalEs?.addEventListener("click", hideReviewModalEs);
+        reviewModalOverlayEs?.addEventListener("click", hideReviewModalEs);
+        window.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") hideReviewModalEs();
+        });
+      </script>
+    </div>
   </Section>
   <Section title={closingCTA.title} align="center">
     <div class="max-w-6xl mx-auto">

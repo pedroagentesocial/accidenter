@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Section from "../../components/Section.astro";
+import ContactForm from "../../components/ContactForm.astro";
+import TestimonialsCarousel from "../../components/TestimonialsCarousel.astro";
+import CTA from "../../components/CTA.astro";
+import { t } from "../../i18n";
+const locale = "es";
+const seo = {
+  title: "Términos del Servicio | Accident ER – Urgent Care MD",
+  description: "Términos que regulan el uso del sitio web y formularios de Accident ER.",
+  canonical: "https://accidenter-urgentcaremd.com/es/terminos-del-servicio"
+};
+const breadcrumb = [
+  { label: t(locale, "common.breadcrumb.home"), href: "/es" },
+  { label: "Términos del Servicio", href: "/es/terminos-del-servicio" }
+];
+const closingCTA = t(locale, "home.closingCTA");
+---
+<BaseLayout locale={locale} title={seo.title} description={seo.description} canonical={seo.canonical}>
+  <section class="relative overflow-hidden bg-black border-b border-brand-accent min-h-[420px] sm:min-h-[520px]">
+    <video src="/videos/hero1.mp4" class="absolute inset-0 block w-full h-full object-cover object-center" autoplay muted playsinline poster="/images/back.jpg"></video>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-transparent"></div>
+    <div class="container relative z-10 py-16 sm:py-24 lg:py-28">
+      <div class="max-w-4xl">
+        <p class="text-white/80 text-sm uppercase tracking-[0.2em]">Legal</p>
+        <h1 class="mt-3 text-4xl sm:text-5xl lg:text-6xl font-heading text-white">Términos del Servicio</h1>
+        <p class="mt-5 text-white/90 max-w-2xl">Estos términos definen cómo se usa este sitio y sus formularios para mantener una comunicación clara y segura.</p>
+      </div>
+    </div>
+  </section>
+  <Breadcrumbs items={breadcrumb} />
+  <Section title="Resumen de términos" align="center">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-left">
+        <h3 class="text-lg font-heading text-brand-dark">Uso del sitio</h3>
+        <p class="mt-2 text-brand-dark/90">La información enviada debe ser veraz y el uso del sitio debe ser legítimo.</p>
+      </div>
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-left">
+        <h3 class="text-lg font-heading text-brand-dark">Alcance médico</h3>
+        <p class="mt-2 text-brand-dark/90">Los formularios no reemplazan emergencias ni atención inmediata del 911.</p>
+      </div>
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-left">
+        <h3 class="text-lg font-heading text-brand-dark">Política de citas</h3>
+        <p class="mt-2 text-brand-dark/90">Las solicitudes se confirman por el equipo y dependen de disponibilidad.</p>
+      </div>
+    </div>
+  </Section>
+  <Section title="Detalle de los Términos del Servicio" align="center">
+    <div class="max-w-4xl mx-auto space-y-4 text-left">
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-brand-dark">
+        <p>Al usar este sitio web y enviar formularios, aceptas proporcionar información veraz y utilizar el sitio solo para fines legítimos.</p>
+      </div>
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-brand-dark">
+        <p>Los formularios enviados no crean una relación médico-paciente y no sustituyen la atención de emergencia. En una emergencia médica, llama al 911.</p>
+      </div>
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-brand-dark">
+        <p>Las solicitudes de cita están sujetas a disponibilidad y confirmación por nuestro equipo. Enviar una solicitud no garantiza un horario específico.</p>
+      </div>
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-brand-dark">
+        <p>Podemos actualizar el contenido del sitio, información de servicios o estos términos en cualquier momento. El uso continuo implica aceptación de los cambios.</p>
+      </div>
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-brand-dark">
+        <p>Todo el contenido, marca y materiales del sitio pertenecen o están licenciados a Accident ER y no pueden reutilizarse sin autorización.</p>
+      </div>
+      <div class="rounded-xl border border-brand-accent bg-white p-5 shadow-sm text-brand-dark">
+        <p>Para consultas sobre estos términos, escribe a <a class="underline hover:no-underline" href="mailto:orders@accidenter.com">orders@accidenter.com</a>.</p>
+        <p class="mt-3 text-sm text-brand-dark/70">Última actualización: 11 de marzo de 2026.</p>
+      </div>
+    </div>
+  </Section>
+  <section class="container py-8">
+    <ContactForm locale={locale} />
+  </section>
+  <Section title="Esto opinan nuestros pacientes de AccidentER®" align="center">
+    <TestimonialsCarousel locale={locale} />
+  </Section>
+  <Section title={closingCTA.title} align="center">
+    <div class="max-w-6xl mx-auto">
+      <div class="rounded-2xl bg-brand-accent text-brand-dark p-6 flex flex-col md:flex-row md:items-center md:justify-center gap-4 text-center">
+        <p class="text-white">{closingCTA.text}</p>
+        <div class="flex gap-3 justify-center">
+          <CTA text={closingCTA.CTA} href={"tel:+18019967427"} variant="primary" />
+          <CTA text={"Agendar ahora"} href={"mailto:orders@accidenter.com"} variant="success" />
+        </div>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

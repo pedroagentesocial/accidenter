@@ -8,11 +8,15 @@ function switchLocalePath(path: string) {
   if (locale === "en") {
     if (path.startsWith("/en/contact")) return path.replace("/en/contact", "/es/contacto");
     if (path.startsWith("/en/services")) return path.replace("/en/services", "/es/servicios");
+    if (path.startsWith("/en/privacy-policy")) return path.replace("/en/privacy-policy", "/es/politica-de-privacidad");
+    if (path.startsWith("/en/terms-of-service")) return path.replace("/en/terms-of-service", "/es/terminos-del-servicio");
     if (path.startsWith("/en")) return path.replace("/en", "/es") || "/es";
     return "/es";
   } else {
     if (path.startsWith("/es/contacto")) return path.replace("/es/contacto", "/en/contact");
     if (path.startsWith("/es/servicios")) return path.replace("/es/servicios", "/en/services");
+    if (path.startsWith("/es/politica-de-privacidad")) return path.replace("/es/politica-de-privacidad", "/en/privacy-policy");
+    if (path.startsWith("/es/terminos-del-servicio")) return path.replace("/es/terminos-del-servicio", "/en/terms-of-service");
     if (path.startsWith("/es")) return path.replace("/es", "/en") || "/en";
     return "/en";
   }
@@ -44,10 +48,49 @@ const scheduleText = t(locale, "ui.nav.schedule") ?? (locale === "en" ? "Schedul
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.72 11.72 0 003.68.59 1 1 0 011 1v3.5a1 1 0 01-1 1A17.5 17.5 0 013.5 5a1 1 0 011-1H8a1 1 0 011 1c0 1.26.21 2.5.59 3.68a1 1 0 01-.24 1.01l-2.73 2.73z"/></svg>
         <span>+1 801-996-7427</span>
       </a>
-      <a href={"mailto:orders@accidenter.com"} class="button-success inline-flex items-center gap-2 text-white" title={scheduleText} aria-label={scheduleText}>
+      <button type="button" id="open-booking-modal" class="button-success inline-flex items-center gap-2 text-white" title={scheduleText} aria-label={scheduleText}>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M6 2a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H6zm0 2h12v3H6V4zm0 5h12v11H6V9zm2 2v2h8v-2H8z"/></svg>
         <span class="inline whitespace-nowrap">{scheduleText}</span>
-      </a>
+      </button>
     </nav>
   </div>
 </header>
+<div id="booking-modal" class="fixed inset-0 z-[120] hidden" aria-hidden="true">
+  <div id="booking-modal-overlay" class="absolute inset-0 bg-black/70"></div>
+  <div class="relative z-[121] min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-5xl rounded-2xl bg-white border border-brand-accent shadow-xl overflow-hidden">
+      <div class="flex items-center justify-between px-4 py-3 border-b border-brand-accent">
+        <h3 class="font-heading text-brand-dark">{scheduleText}</h3>
+        <button type="button" id="close-booking-modal" class="button-outline-dark">×</button>
+      </div>
+      <div class="p-0">
+        <iframe src="https://api.leadconnectorhq.com/widget/booking/SLtn70zGBAWxozn4sZA5" style="width:100%;border:none;overflow:hidden;" scrolling="no" id="SLtn70zGBAWxozn4sZA5_1773261199338" title="booking" class="w-full min-h-[680px]"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+<script is:inline src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
+<script>
+  const bookingModal = document.getElementById("booking-modal");
+  const openBookingModal = document.getElementById("open-booking-modal");
+  const closeBookingModal = document.getElementById("close-booking-modal");
+  const bookingModalOverlay = document.getElementById("booking-modal-overlay");
+  function showBookingModal() {
+    if (!bookingModal) return;
+    bookingModal.classList.remove("hidden");
+    bookingModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+  function hideBookingModal() {
+    if (!bookingModal) return;
+    bookingModal.classList.add("hidden");
+    bookingModal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+  openBookingModal?.addEventListener("click", showBookingModal);
+  closeBookingModal?.addEventListener("click", hideBookingModal);
+  bookingModalOverlay?.addEventListener("click", hideBookingModal);
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") hideBookingModal();
+  });
+</script>
