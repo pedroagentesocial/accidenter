@@ -28,6 +28,20 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Resolve deploy directory
+        id: deploy_dir
+        env:
+          FTP_PATH: ${{ secrets.FTP_PATH }}
+        run: |
+          raw="${FTP_PATH:-/}"
+          clean="$(echo "$raw" | tr -d '\r' | sed 's#//*#/#g' | sed 's#/$##')"
+          if [ -z "$clean" ] || [ "$clean" = "/" ] || [ "$clean" = "public_html" ] || [ "$clean" = "/public_html" ]; then
+            target="/"
+          else
+            target="$clean"
+          fi
+          echo "target=$target" >> "$GITHUB_OUTPUT"
+          echo "Resolved deploy dir: $target"
       - name: Prepare low-res videos
         continue-on-error: true
         env:
@@ -35,15 +49,16 @@ jobs:
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_PORT: ${{ secrets.FTP_PORT }}
-          FTP_PATH: ${{ secrets.FTP_PATH }}
+          DEPLOY_DIR: ${{ steps.deploy_dir.outputs.target }}
         run: |
           sudo apt-get update && sudo apt-get install -y ffmpeg
           mkdir -p tmp_videos
+          base="${DEPLOY_DIR%/}"
           vids=("hero1" "bilingual" "postaccident")
           for v in "${vids[@]}"; do
             echo "Downloading $v.mp4"
             curl --ftp-pasv --fail -s --user "${FTP_USERNAME}:${FTP_PASSWORD}" \
-              "ftp://${FTP_SERVER}:${FTP_PORT}/${FTP_PATH}/videos/${v}.mp4" \
+              "ftp://${FTP_SERVER}:${FTP_PORT}${base}/videos/${v}.mp4" \
               --output "tmp_videos/${v}.mp4" || echo "Skip download for ${v}.mp4"
           done
           for v in "${vids[@]}"; do
@@ -53,7 +68,7 @@ jobs:
               echo "Uploading ${v}-low.mp4"
               curl --ftp-pasv --fail -s --ftp-create-dirs --user "${FTP_USERNAME}:${FTP_PASSWORD}" \
                 -T "tmp_videos/${v}-low.mp4" \
-                "ftp://${FTP_SERVER}:${FTP_PORT}/${FTP_PATH}/videos/${v}-low.mp4"
+                "ftp://${FTP_SERVER}:${FTP_PORT}${base}/videos/${v}-low.mp4"
             fi
           done
       - name: Deploy via FTP
@@ -64,7 +79,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: ${{ secrets.FTP_PORT }}
-          server-dir: ${{ secrets.FTP_PATH }}/
+          server-dir: ${{ steps.deploy_dir.outputs.target }}/
           local-dir: dist/
           exclude: |
             **/.git*
