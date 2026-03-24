@@ -16,9 +16,9 @@ module.exports = {
         heading: ["Yeseva One", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Ubuntu", "Cantarell", "Noto Sans", "serif"],
         accent: ["The Seasons", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Ubuntu", "Cantarell", "Noto Sans", "sans-serif"],
         script: ["Moontime", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Ubuntu", "Cantarell", "Noto Sans", "sans-serif"],
-        body: ["Mont", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Ubuntu", "Cantarell", "Noto Sans", "sans-serif"]
+        body: ["Segoe UI", "Inter", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", "Ubuntu", "sans-serif"]
       }
     }
   },
-  plugins: []
+  plugins: [require("tailwindcss-animate")]
 }

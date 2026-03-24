@@ -11,40 +11,64 @@ const termsHref = locale === "en" ? "/en/terms-of-service" : "/es/terminos-del-s
 ---
 <footer class="footer relative z-50 bg-brand-dark text-white">
   <div class="w-full px-4 sm:px-6 lg:px-8 py-10">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-white">
-      <div class="flex flex-col items-center text-center">
-        <a href={locale === "en" ? "/en" : "/es"} class="flex items-center justify-center gap-3">
-          <img src="/images/logo.png" alt="Accident ER – Urgent Care MD logo" class="h-32 w-32 rounded logo-light" loading="lazy" />
-        </a>
-        <p class="mt-3">{t(locale, "ui.footer.blurb") ?? (locale === "en" ? "Professional urgent care after accidents with bilingual support." : "Atención urgente profesional por accidentes con apoyo bilingüe.")}</p>
+    <div class="w-full rounded-3xl border border-white/10 bg-white/5 p-5 sm:p-7 lg:p-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-white">
+        <div class="flex flex-col items-center sm:items-start text-center sm:text-left">
+          <a href={homeHref} class="flex items-center justify-center sm:justify-start gap-3">
+            <img src="/images/logo.png" alt="Accident ER – Urgent Care MD logo" class="h-24 w-24 rounded logo-light" loading="lazy" />
+          </a>
+          <span class="mt-3 inline-flex items-center rounded-full border border-brand-success/35 bg-brand-success/15 px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-brand-success">
+            {t(locale, "ui.footer.note") ?? (locale === "en" ? "Walk-in welcome." : "Aceptamos visitas sin cita.")}
+          </span>
+          <p class="mt-3 text-white/85 text-sm leading-relaxed">{t(locale, "ui.footer.blurb") ?? (locale === "en" ? "Professional urgent care after accidents with bilingual support." : "Atención urgente profesional por accidentes con apoyo bilingüe.")}</p>
+          <div class="mt-4 flex items-center gap-2.5">
+            <a href="https://www.instagram.com/explore/search/keyword/?q=AccidentER%20Urgent%20Care%20MD" target="_blank" rel="noopener noreferrer" class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white transition-transform duration-300 hover:scale-110" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5a4.25 4.25 0 0 0-4.25-4.25h-8.5Zm8.88 2.12a1.12 1.12 0 1 1 0 2.25 1.12 1.12 0 0 1 0-2.25ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/search/top?q=AccidentER%20Urgent%20Care%20MD" target="_blank" rel="noopener noreferrer" class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white transition-transform duration-300 hover:scale-110" aria-label="Facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.87.25-1.46 1.5-1.46h1.6V4.94A21.4 21.4 0 0 0 14.2 4c-2.37 0-3.99 1.45-3.99 4.1V11H7.5v3h2.71v8h3.29Z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/search?q=AccidentER%20Urgent%20Care%20MD" target="_blank" rel="noopener noreferrer" class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white transition-transform duration-300 hover:scale-110" aria-label="TikTok">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.76 3c.58 1.38 1.72 2.56 3.24 3.14v2.52a7.1 7.1 0 0 1-3.2-.86v5.28a5.94 5.94 0 1 1-5.1-5.88v2.6a3.36 3.36 0 1 0 2.52 3.24V3h2.54Z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="text-center sm:text-left">
+          <h3 class="font-heading text-white">{t(locale, "ui.nav.accidenter") ?? "AccidentER"}</h3>
+          <ul class="mt-3 space-y-2 text-sm">
+            <li><a href={servicesHref} class="inline-flex items-center gap-2 text-white/90 hover:text-white"><span class="h-1.5 w-1.5 rounded-full bg-brand-success"></span>{t(locale, "ui.nav.services") ?? (locale === "en" ? "Services" : "Servicios")}</a></li>
+            <li><a href={faqHref} class="inline-flex items-center gap-2 text-white/90 hover:text-white"><span class="h-1.5 w-1.5 rounded-full bg-brand-success"></span>{t(locale, "ui.nav.faq") ?? "FAQ"}</a></li>
+            <li><a href={aboutHref} class="inline-flex items-center gap-2 text-white/90 hover:text-white"><span class="h-1.5 w-1.5 rounded-full bg-brand-success"></span>{t(locale, "ui.nav.about") ?? (locale === "en" ? "About Us" : "Sobre nosotros")}</a></li>
+          </ul>
+        </div>
+        <div class="text-center sm:text-left">
+          <h3 class="font-heading text-white">{t(locale, "ui.footer.legalTitle") ?? (locale === "en" ? "Legal" : "Legal")}</h3>
+          <ul class="mt-3 space-y-2 text-sm">
+            <li><a href={privacyHref} class="inline-flex items-center gap-2 text-white/90 hover:text-white"><span class="h-1.5 w-1.5 rounded-full bg-brand-success"></span>{t(locale, "ui.footer.privacy") ?? (locale === "en" ? "Privacy Policy" : "Política de privacidad")}</a></li>
+            <li><a href={termsHref} class="inline-flex items-center gap-2 text-white/90 hover:text-white"><span class="h-1.5 w-1.5 rounded-full bg-brand-success"></span>{t(locale, "ui.footer.terms") ?? (locale === "en" ? "Terms of Service" : "Términos del servicio")}</a></li>
+          </ul>
+        </div>
+        <div class="text-center sm:text-left">
+          <h3 class="font-heading text-white">{t(locale, "ui.footer.contactTitle") ?? (locale === "en" ? "Contact" : "Contacto")}</h3>
+          <ul class="mt-3 space-y-3 text-sm">
+            <li class="flex w-full items-start gap-2 text-white/90">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-brand-success" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.32.56 3.57.56a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.3 21 3 13.7 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.56 3.57a1 1 0 0 1-.24 1.02l-2.2 2.2Z"/></svg>
+              <a class="hover:underline" href="tel:+18019967427">+1 801-996-7427</a>
+            </li>
+            <li class="flex w-full items-start gap-2 text-white/90">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-brand-success" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.19 7 13 7 13s7-7.81 7-13c0-3.87-3.13-7-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"/></svg>
+              <span>6770 S 900 E, Midvale, UT 84047, EE. UU.</span>
+            </li>
+            <li class="flex w-full items-start gap-2 text-white/90">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-brand-success" viewBox="0 0 24 24" fill="currentColor"><path d="M4 5h16a1 1 0 0 1 1 1v.73l-9 5.4-9-5.4V6a1 1 0 0 1 1-1Zm17 3.27V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8.27l8.49 5.1a1 1 0 0 0 1.02 0L21 8.27Z"/></svg>
+              <a class="hover:underline" href="mailto:orders@accidenter.com">orders@accidenter.com</a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="flex flex-col items-end text-right">
-        <h3 class="w-full text-center font-heading text-white">{t(locale, "ui.nav.accidenter") ?? "AccidentER"}</h3>
-        <ul class="mt-3 space-y-2 w-full text-center">
-          <li><a href={servicesHref} class="no-underline hover:underline">{t(locale, "ui.nav.services") ?? (locale === "en" ? "Services" : "Servicios")}</a></li>
-          <li><a href={faqHref} class="no-underline hover:underline">{t(locale, "ui.nav.faq") ?? "FAQ"}</a></li>
-          <li><a href={aboutHref} class="no-underline hover:underline">{t(locale, "ui.nav.about") ?? (locale === "en" ? "About Us" : "Sobre nosotros")}</a></li>
-        </ul>
-      </div>
-      <div class="flex flex-col items-end text-right">
-        <h3 class="w-full text-center font-heading text-white">{t(locale, "ui.footer.legalTitle") ?? (locale === "en" ? "Legal" : "Legal")}</h3>
-        <ul class="mt-3 space-y-2 w-full text-center">
-          <li><a href={privacyHref} class="no-underline hover:underline">{t(locale, "ui.footer.privacy") ?? (locale === "en" ? "Privacy Policy" : "Política de privacidad")}</a></li>
-          <li><a href={termsHref} class="no-underline hover:underline">{t(locale, "ui.footer.terms") ?? (locale === "en" ? "Terms of Service" : "Términos del servicio")}</a></li>
-        </ul>
-      </div>
-      <div class="flex flex-col items-end text-right">
-        <h3 class="w-full text-center font-heading text-white">{t(locale, "ui.footer.contactTitle") ?? (locale === "en" ? "Contact" : "Contacto")}</h3>
-        <ul class="mt-3 space-y-2 w-full text-center">
-          <li><span class="text-white">{t(locale, "ui.footer.phoneLabel") ?? (locale === "en" ? "Phone" : "Teléfono")}:</span> <a class="no-underline hover:underline" href="tel:+18019967427">+1 801-996-7427</a></li>
-          <li><span class="text-white">{t(locale, "ui.footer.addressLabel") ?? (locale === "en" ? "Address" : "Dirección")}:</span> <span>6770 S 900 E, Midvale, UT 84047, EE. UU.</span></li>
-          <li><span class="text-white">{t(locale, "ui.footer.emailLabel") ?? (locale === "en" ? "Email" : "Correo")}:</span> <a class="no-underline hover:underline" href="mailto:orders@accidenter.com">orders@accidenter.com</a></li>
-        </ul>
+      <div class="mt-6 border-t border-white/10 pt-4 text-sm text-white/80 text-center">
+        <span>© {year} Accident ER – Urgent Care MD. {t(locale, "ui.footer.rights") ?? (locale === "en" ? "All rights reserved." : "Todos los derechos reservados.")}</span>
       </div>
     </div>
-  </div>
-  <div class="w-full border-t border-brand-accent"></div>
-  <div class="w-full px-4 sm:px-6 lg:px-8 pt-6 pb-10 text-sm text-white text-center">
-    <span class="inline-block">© {year} Accident ER – Urgent Care MD. {t(locale, "ui.footer.rights") ?? (locale === "en" ? "All rights reserved." : "Todos los derechos reservados.")}</span>
   </div>
 </footer>

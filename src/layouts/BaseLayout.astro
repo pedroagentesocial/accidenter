@@ -2,7 +2,7 @@
 import "../styles/global.css";
 import { t } from "../i18n";
 import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
+import AppHeader from "../components/react/AppHeader";
 const { locale = "en", title, description, canonical } = Astro.props as {
   locale: string;
   title: string;
@@ -10,6 +10,14 @@ const { locale = "en", title, description, canonical } = Astro.props as {
   canonical: string;
 };
 const path = Astro.url.pathname;
+const lang = (locale === "es" ? "es" : "en") as "en" | "es";
+const labels = {
+  services: t(lang, "ui.nav.services") ?? (lang === "en" ? "Services" : "Servicios"),
+  about: t(lang, "ui.nav.about") ?? (lang === "en" ? "About Us" : "Sobre nosotros"),
+  contact: t(lang, "ui.nav.contact") ?? (lang === "en" ? "Contact" : "Contacto"),
+  faq: t(lang, "ui.nav.faq") ?? "FAQ",
+  schedule: t(lang, "ui.nav.schedule") ?? (lang === "en" ? "Schedule visit" : "Agendar cita")
+};
 ---
 <!DOCTYPE html>
 <html lang={locale}>
@@ -19,11 +27,11 @@ const path = Astro.url.pathname;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/images/logo.svg" type="image/svg+xml" />
-    <link rel="icon" href="/images/logo.png" sizes="32x32" />
+    <link rel="icon" href="/images/favicon-black.svg" type="image/svg+xml" />
+    <link rel="icon" href="/images/favicon-black.svg" sizes="32x32" />
   </head>
   <body>
-    <Header locale={locale} pathname={path} />
+    <AppHeader client:load locale={lang} pathname={path} labels={labels} />
     <main>
       <slot />
     </main>

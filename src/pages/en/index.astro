@@ -2,18 +2,17 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Section from "../../components/Section.astro";
 import CTA from "../../components/CTA.astro";
-import StepCard from "../../components/StepCard.astro";
-import HighlightCard from "../../components/HighlightCard.astro";
-import ServiceCard from "../../components/ServiceCard.astro";
-import FeatureIcon from "../../components/FeatureIcon.astro";
 import ContactForm from "../../components/ContactForm.astro";
 import TestimonialsCarousel from "../../components/TestimonialsCarousel.astro";
+import HeroSection from "../../components/react/HeroSection";
+import ModernIntroSection from "../../components/react/ModernIntroSection";
+import AfterAccidentSection from "../../components/react/AfterAccidentSection";
+import WhyChooseSection from "../../components/react/WhyChooseSection";
 import services from "../../data/services";
 import { t } from "../../i18n";
 const locale = "en";
 const seo = t(locale, "home.seo");
 const hero = t(locale, "home.hero");
-const intro = t(locale, "home.intro");
 const afterAccident = t(locale, "home.afterAccident");
 const whyAccidentER = t(locale, "home.whyAccidentER");
 const closingCTA = t(locale, "home.closingCTA");
@@ -34,204 +33,35 @@ const importantOrder = [
 const importantServices = importantOrder
   .map((slug) => services.find((s) => s.slug === slug))
   .filter(Boolean);
+const clinicMapEmbed = "https://www.google.com/maps?q=6770%20S%20900%20E%2C%20Midvale%2C%20UT%2084047&output=embed";
+const clinicDirections = "https://www.google.com/maps/search/?api=1&query=6770%20S%20900%20E%2C%20Midvale%2C%20UT%2084047";
 ---
 <BaseLayout locale={locale} title={seo.title} description={seo.description} canonical={seo.canonical}>
-  <section class="relative overflow-hidden bg-black border-b border-brand-accent min-h-[460px] sm:min-h-[540px] lg:min-h-[620px]">
-    <video id="hero-video" src="/videos/hero1.mp4" class="absolute inset-0 block w-full h-full object-cover object-center transition-opacity duration-700" autoplay muted playsinline poster="/images/hero.jpg"></video>
-    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
-    <div class="container relative z-10 py-16 sm:py-24 lg:py-28">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div>
-            <h1 id="hero-title" class="text-4xl sm:text-5xl lg:text-6xl font-heading text-white drop-shadow-lg">{hero.title}</h1>
-            <p id="hero-subtitle" class="mt-6 text-white drop-shadow">{hero.subtitle}</p>
-            <div class="mt-8 sm:mt-10 flex flex-wrap gap-3 sm:gap-4">
-              <CTA id={"hero-primary"} text={hero.primaryCTA} href={"tel:+18019967427"} variant="primary" />
-              <CTA id={"hero-secondary"} text={hero.secondaryCTA} href={"/en/services"} variant="success" />
-            </div>
-            <p id="hero-note" class="mt-6 text-sm text-white drop-shadow">{hero.safetyNote}</p>
-          </div>
-          <div></div>
-        </div>
-      </div>
-    </div>
-    <button id="hero-sound" class="absolute bottom-4 right-4 z-10 bg-white/80 text-brand-dark px-3 py-1 rounded-full text-xs">Unmute</button>
-    <button id="hero-prev" class="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/70 text-brand-dark px-3 py-2 rounded-full text-sm">‹</button>
-    <button id="hero-next" class="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/70 text-brand-dark px-3 py-2 rounded-full text-sm">›</button>
-    <div id="hero-dots" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
-      <button data-index="0" class="h-2 w-2 rounded-full bg-white/80"></button>
-      <button data-index="1" class="h-2 w-2 rounded-full bg-white/40"></button>
-      <button data-index="2" class="h-2 w-2 rounded-full bg-white/40"></button>
-      <button data-index="3" class="h-2 w-2 rounded-full bg-white/40"></button>
-    </div>
-    <script>
-      const video = document.getElementById("hero-video") as HTMLVideoElement | null;
-      const btn = document.getElementById("hero-sound") as HTMLButtonElement | null;
-      const prev = document.getElementById("hero-prev") as HTMLButtonElement | null;
-      const next = document.getElementById("hero-next") as HTMLButtonElement | null;
-      const dots = document.querySelectorAll("#hero-dots button") as NodeListOf<HTMLButtonElement>;
-      const sources = ["/videos/hero1.mp4", "/videos/hero2.mp4", "/videos/bilingual.mp4", "/videos/postaccident.mp4"];
-      const fallbacks = [
-        ["/videos/hero1.mp4"],
-        ["/videos/hero1.mp4", "/videos/bilingual.mp4"],
-        ["/videos/bilingual.mp4"],
-        ["/videos/postaccident.mp4"]
-      ];
-      function shouldLowRes() {
-        const conn = (navigator as any).connection?.effectiveType || "";
-        const isSlow = /(^2g|3g|slow-2g)/i.test(conn);
-        const isMobile = window.matchMedia("(max-width: 640px)").matches;
-        return isSlow || isMobile;
-      }
-      function candidateList(i: number) {
-        const base = sources[i];
-        const low = base.replace(".mp4", "-low.mp4");
-        return shouldLowRes() ? [low, base, ...fallbacks[i]] : [base, ...fallbacks[i]];
-      }
-      const slides = [
-        { title: "AccidentER® — Fast, clear accident care", subtitle: "Walk-in welcome. Evaluations and next steps made simple.", note: "Bring reports or prior imaging if available." },
-        { title: "On‑site X‑ray & diagnostics", subtitle: "Decisions guided by imaging when indicated.", note: "We focus on safety and clarity at every step." },
-        { title: "Bilingual support — English & Spanish", subtitle: "Communication you can trust, con apoyo bilingüe.", note: "Plan your visit or walk in today." },
-        { title: "Motor Vehicle Post‑Accident Care", subtitle: "Specialist care after car collisions.", note: "Focused evaluation and clear plan." }
-      ];
-      const zoomDesktop = [1, 1, 1.08, 1.10];
-      const zoomMobile = [1.06, 1.06, 1.14, 1.16];
-      let zoom = window.matchMedia("(max-width: 640px)").matches ? zoomMobile : zoomDesktop;
-      const titleEl = document.getElementById("hero-title");
-      const subtitleEl = document.getElementById("hero-subtitle");
-      const noteEl = document.getElementById("hero-note");
-      const ctaPrimary = document.getElementById("hero-primary") as HTMLAnchorElement | null;
-      const ctaSecondary = document.getElementById("hero-secondary") as HTMLAnchorElement | null;
-      let i = 0;
-      let timer: number | null = null;
-      const ROTATION_MS = 9000;
-      function updateDots() {
-        dots.forEach((d, idx) => {
-          d.classList.toggle("bg-white/80", idx === i);
-          d.classList.toggle("bg-white/40", idx !== i);
-        });
-      }
-      function swapVideo(idx: number) {
-        i = (idx + sources.length) % sources.length;
-        if (!video) return;
-        video.classList.add("opacity-0");
-        const list = candidateList(i);
-        let pos = 0;
-        const onErr = () => {
-          pos++;
-          if (pos < list.length) {
-            video.src = list[pos];
-            video.load();
-          } else {
-            video.removeEventListener("error", onErr);
-          }
-        };
-        video.addEventListener("error", onErr);
-        video.preload = "metadata";
-        video.src = list[pos];
-        video.load();
-        video.style.transformOrigin = "center center";
-        video.style.willChange = "transform";
-        video.style.transform = `scale(${zoom[i]})`;
-        video.load();
-        const onReady = () => {
-          video?.play().catch(() => {});
-          video?.classList.remove("opacity-0");
-        };
-        video.addEventListener("loadeddata", onReady, { once: true });
-        video.addEventListener("canplaythrough", onReady, { once: true });
-        if (titleEl && subtitleEl && noteEl) {
-          titleEl.textContent = slides[i].title;
-          subtitleEl.textContent = slides[i].subtitle;
-          noteEl.textContent = slides[i].note;
-        }
-        if (ctaPrimary && ctaSecondary) {
-          const map = [
-            { p: { text: "Call", href: "tel:+18019967427", cls: "button-primary" }, s: { text: "View Services", href: "/en/services", cls: "button-success" } },
-            { p: { text: "View Diagnostics", href: "/en/services", cls: "button-primary" }, s: { text: "Plan your visit", href: "mailto:orders@accidenter.com", cls: "button-success" } },
-            { p: { text: "Call (EN/ES)", href: "tel:+18019967427", cls: "button-primary" }, s: { text: "Schedule Now", href: "mailto:orders@accidenter.com", cls: "button-success" } },
-            { p: { text: "Call", href: "tel:+18019967427", cls: "button-primary" }, s: { text: "Post‑Accident Care", href: "/en/services/motor-vehicle-post-accident-care", cls: "button-success" } }
-          ];
-          const conf = map[i];
-          ctaPrimary.textContent = conf.p.text;
-          ctaPrimary.href = conf.p.href;
-          ctaPrimary.className = conf.p.cls;
-          ctaSecondary.textContent = conf.s.text;
-          ctaSecondary.href = conf.s.href;
-          ctaSecondary.className = conf.s.cls;
-        }
-        updateDots();
-      }
-      if (video) {
-        video.style.transformOrigin = "center center";
-        video.style.willChange = "transform";
-        video.style.transform = `scale(${zoom[i]})`;
-      }
-      function startTimer() {
-        if (timer) clearInterval(timer);
-        timer = window.setInterval(() => swapVideo(i + 1), ROTATION_MS);
-      }
-      if (btn && video) {
-        btn.addEventListener("click", () => {
-          video.muted = !video.muted;
-          btn.textContent = video.muted ? "Unmute" : "Mute";
-        });
-        prev?.addEventListener("click", () => { swapVideo(i - 1); startTimer(); });
-        next?.addEventListener("click", () => { swapVideo(i + 1); startTimer(); });
-        dots.forEach((d) => d.addEventListener("click", () => {
-          const idx = Number(d.dataset.index || "0");
-          swapVideo(idx);
-          startTimer();
-        }));
-        window.addEventListener("resize", () => {
-          zoom = window.matchMedia("(max-width: 640px)").matches ? zoomMobile : zoomDesktop;
-          if (video) {
-            video.style.transform = `scale(${zoom[i]})`;
-          }
-        });
-        updateDots();
-        startTimer();
-      }
-    </script>
-  </section>
-  <Section title={"Let us help you AccidentER®"} align="center">
-    <div class="max-w-6xl mx-auto">
-      <p class="text-center text-brand-dark text-xl sm:text-2xl">Our goal is to provide quality care and get you in and out as quickly as possible.</p>
-      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center text-center">
-        <FeatureIcon icon="care" title="Accident Care" description="Immediate, professional care after injuries." />
-        <FeatureIcon icon="diagnostics" title="On‑Site Diagnostics" description="X‑ray and testing available on site." />
-        <FeatureIcon icon="rehab" title="Recovery Support" description="Guidance to start your recovery safely." />
-        <FeatureIcon icon="followup" title="Follow‑Up Visits" description="Consistent care to keep you on track." />
-      </div>
-      <div class="mt-8 flex justify-center">
-        <CTA text="View All Services" href="/en/services" variant="primary" />
-      </div>
-    </div>
-  </Section>
-  <Section title={afterAccident.title} align="center">
-    <div class="max-w-6xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center text-center">
-        {afterAccident.steps.map((s: any, i: number) => (
-          <StepCard step={i + 1} title={s.title} text={s.text} />
-        ))}
-      </div>
-    </div>
-  </Section>
-  <Section title={whyAccidentER.title} align="center">
-    <div class="max-w-6xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center text-center">
-        {whyAccidentER.points.map((p: any, i: number) => (
-          <HighlightCard title={p.title} text={p.text} imageSrc={whyImages[i % whyImages.length]} imageAlt={p.title} />
-        ))}
-      </div>
-    </div>
-  </Section>
-  <section class="container py-8">
+  <HeroSection
+    client:load
+    locale={locale}
+    title={hero.title}
+    subtitle={hero.subtitle}
+    safetyNote={hero.safetyNote}
+    primaryCTA={hero.primaryCTA}
+    secondaryCTA={hero.secondaryCTA}
+  />
+  <ModernIntroSection
+    client:load
+    locale={locale}
+    title="Let us help you AccidentER®"
+    description="Our goal is to deliver high-quality care and get you safely in and out as quickly as possible."
+    ctaText="View All Services"
+    ctaHref="/en/services"
+  />
+  <AfterAccidentSection client:load locale={locale} title={afterAccident.title} steps={afterAccident.steps} />
+  <WhyChooseSection client:load locale={locale} title={whyAccidentER.title} points={whyAccidentER.points} images={whyImages} />
+  <section class="container py-6 sm:py-8">
     <ContactForm locale={locale} />
   </section>
-  <Section title={"What our patients say about AccidentER®"} align="center">
+  <Section title={"Real stories from AccidentER® patients"} align="center">
     <TestimonialsCarousel locale={locale} />
-    <div class="mt-6 max-w-4xl mx-auto rounded-2xl p-6 shadow-sm">
+    <div class="mt-5 sm:mt-6 max-w-4xl mx-auto rounded-2xl p-4 sm:p-6 shadow-sm">
       <div class="flex justify-center">
         <button type="button" id="open-review-modal-en" class="button-success inline-flex items-center justify-center">
           Write your opinion
@@ -295,15 +125,56 @@ const importantServices = importantOrder
       </script>
     </div>
   </Section>
-  <Section title={closingCTA.title} align="center">
+  <section class="container py-8 sm:py-12">
     <div class="max-w-6xl mx-auto">
-      <div class="rounded-2xl bg-brand-accent text-brand-dark p-6 flex flex-col md:flex-row md:items-center md:justify-center gap-4 text-center">
-        <p class="text-white">{closingCTA.text}</p>
-        <div class="flex gap-3 justify-center">
-          <CTA text={closingCTA.CTA} href={"tel:+18019967427"} variant="primary" />
-          <CTA text={"Schedule Now"} href={"mailto:orders@accidenter.com"} variant="success" />
+      <div class="rounded-3xl border border-brand-accent/40 bg-[#f4f8ff] p-4 sm:p-6 lg:p-8 shadow-[0_18px_45px_-30px_rgba(10,26,47,0.45)]">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 items-stretch">
+          <div class="lg:col-span-3 overflow-hidden rounded-2xl border border-brand-accent/30 min-h-[280px]">
+            <iframe
+              src={clinicMapEmbed}
+              class="h-full w-full min-h-[280px]"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="AccidentER clinic map"
+            ></iframe>
+          </div>
+          <div class="lg:col-span-2 rounded-2xl border border-brand-dark/10 bg-brand-dark p-4 sm:p-5 text-white flex flex-col justify-start">
+            <span class="inline-flex w-fit items-center rounded-full border border-brand-success/35 bg-brand-success/15 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-brand-success">Walk-in care</span>
+            <p class="mt-3 text-sm sm:text-base text-white/90">Fast accident-focused care with bilingual support and on-site diagnostics.</p>
+            <ul class="mt-3.5 space-y-2 text-sm text-white/80">
+              <li class="flex items-start gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-brand-success/90" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.19 7 13 7 13s7-7.81 7-13c0-3.87-3.13-7-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"/></svg>
+                <span>6770 S 900 E, Midvale, UT 84047</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-brand-success/90" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.75a.75.75 0 0 1 .75.75v8.25h4.75a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75V2.5a.75.75 0 0 1 .75-.75ZM12 4a8 8 0 1 0 8 8 .75.75 0 0 1 1.5 0 9.5 9.5 0 1 1-9.5-9.5.75.75 0 0 1 0 1.5Z"/></svg>
+                <span>Mon–Fri · 9:00 AM–7:00 PM</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-brand-success/90" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.75a.75.75 0 0 1 .75.75v8.25h4.75a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75V2.5a.75.75 0 0 1 .75-.75ZM12 4a8 8 0 1 0 8 8 .75.75 0 0 1 1.5 0 9.5 9.5 0 1 1-9.5-9.5.75.75 0 0 1 0 1.5Z"/></svg>
+                <span>Sat · 9:00 AM–3:00 PM</span>
+              </li>
+            </ul>
+            <div class="mt-4 flex flex-col items-center gap-2.5">
+              <div class="w-fit scale-90 sm:scale-95 origin-center"><CTA text={"Call Now"} href={"tel:+18019967427"} variant="primary" /></div>
+              <div class="w-fit scale-90 sm:scale-95 origin-center"><CTA text={"Open in Maps"} href={clinicDirections} variant="success" /></div>
+            </div>
+            <div class="mt-4 border-t border-white/15 pt-3">
+              <div class="flex items-center justify-center gap-2.5">
+                <a href="https://www.instagram.com/explore/search/keyword/?q=AccidentER%20Urgent%20Care%20MD" target="_blank" rel="noopener noreferrer" class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white transition-transform duration-300 hover:scale-110" aria-label="Instagram">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5a4.25 4.25 0 0 0-4.25-4.25h-8.5Zm8.88 2.12a1.12 1.12 0 1 1 0 2.25 1.12 1.12 0 0 1 0-2.25ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/></svg>
+                </a>
+                <a href="https://www.facebook.com/search/top?q=AccidentER%20Urgent%20Care%20MD" target="_blank" rel="noopener noreferrer" class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white transition-transform duration-300 hover:scale-110" aria-label="Facebook">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.87.25-1.46 1.5-1.46h1.6V4.94A21.4 21.4 0 0 0 14.2 4c-2.37 0-3.99 1.45-3.99 4.1V11H7.5v3h2.71v8h3.29Z"/></svg>
+                </a>
+                <a href="https://www.tiktok.com/search?q=AccidentER%20Urgent%20Care%20MD" target="_blank" rel="noopener noreferrer" class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white transition-transform duration-300 hover:scale-110" aria-label="TikTok">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.76 3c.58 1.38 1.72 2.56 3.24 3.14v2.52a7.1 7.1 0 0 1-3.2-.86v5.28a5.94 5.94 0 1 1-5.1-5.88v2.6a3.36 3.36 0 1 0 2.52 3.24V3h2.54Z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </Section>
+  </section>
 </BaseLayout>

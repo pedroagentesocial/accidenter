@@ -39,15 +39,16 @@ const imagesBySlug = {
 const heroImage = `/images/${imagesBySlug[String(slug)]}`;
 ---
 <BaseLayout locale={locale} title={seo.title} description={seo.description} canonical={seo.canonical}>
-  <section class="relative overflow-hidden bg-black border-b border-brand-accent min-h-[420px] sm:min-h-[520px]">
+  <section class="relative overflow-hidden bg-black border-b border-brand-accent min-h-[440px] sm:min-h-[560px]">
     <img src={heroImage} alt={entry?.name || "Servicio"} class="absolute inset-0 block w-full h-full object-cover object-center" />
     <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
     <div class="container relative z-10 py-14 sm:py-20">
       <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
           <div>
+            <span class="inline-flex items-center rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.14em] text-white/90">Detalle del servicio</span>
             <h1 class="text-4xl sm:text-5xl font-heading text-white drop-shadow-lg">{entry?.hero?.title}</h1>
-            <p class="mt-6 text-white drop-shadow">{entry?.hero?.subtitle}</p>
+            <p class="mt-5 text-white/95 drop-shadow max-w-2xl">{entry?.hero?.subtitle}</p>
             <div class="mt-8 flex flex-wrap gap-3">
               <CTA text={"Llamar"} href={"tel:+18019967427"} variant="primary" />
               <CTA text={"Planificar visita"} href={"mailto:orders@accidenter.com"} variant="success" />
@@ -60,28 +61,34 @@ const heroImage = `/images/${imagesBySlug[String(slug)]}`;
   </section>
   <Breadcrumbs items={breadcrumbItems} />
   <Section title="Resumen">
-    <p class="text-brand-dark">{entry?.overview?.text}</p>
+    <div class="max-w-6xl mx-auto rounded-3xl border border-brand-accent/40 bg-white p-5 sm:p-6 lg:p-7 shadow-sm">
+      <p class="text-brand-dark/90 text-base sm:text-lg leading-relaxed">{entry?.overview?.text}</p>
+    </div>
   </Section>
   <Section title="Qué esperar">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <StepCard step={1} title={"Ingreso y antecedentes"} text={""} />
-      <StepCard step={2} title={"Examen clínico dirigido"} text={""} />
-      <StepCard step={3} title={"Diagnósticos cuando corresponde"} text={""} />
-      <StepCard step={4} title={"Plan escrito y seguimiento"} text={""} />
+    <div class="max-w-6xl mx-auto rounded-3xl border border-brand-accent/40 bg-[#f7fbff] p-5 sm:p-6 lg:p-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StepCard step={1} title={"Ingreso y antecedentes"} text={""} />
+        <StepCard step={2} title={"Examen clínico dirigido"} text={""} />
+        <StepCard step={3} title={"Diagnósticos cuando corresponde"} text={""} />
+        <StepCard step={4} title={"Plan escrito y seguimiento"} text={""} />
+      </div>
     </div>
   </Section>
   <Section title="Síntomas comunes">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div class="rounded-lg bg-white border border-brand-accent p-4"><h3 class="text-base font-heading text-brand-dark">Dolor tras impacto</h3><p class="mt-1 text-brand-dark/90">Dolor localizado o difuso después de colisión o esfuerzo.</p></div>
-      <div class="rounded-lg bg-white border border-brand-accent p-4"><h3 class="text-base font-heading text-brand-dark">Movimiento limitado</h3><p class="mt-1 text-brand-dark/90">Rigidez cervical o dorsal y menor rango de movimiento.</p></div>
-      <div class="rounded-lg bg-white border border-brand-accent p-4"><h3 class="text-base font-heading text-brand-dark">Inflamación o moretones</h3><p class="mt-1 text-brand-dark/90">Cambios de tejidos blandos tras lesión aguda.</p></div>
+    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="rounded-2xl bg-white border border-brand-accent/40 p-5 shadow-sm"><h3 class="text-base font-heading text-brand-dark">Dolor tras impacto</h3><p class="mt-2 text-brand-dark/90">Dolor localizado o difuso después de colisión o esfuerzo.</p></div>
+      <div class="rounded-2xl bg-white border border-brand-accent/40 p-5 shadow-sm"><h3 class="text-base font-heading text-brand-dark">Movimiento limitado</h3><p class="mt-2 text-brand-dark/90">Rigidez cervical o dorsal y menor rango de movimiento.</p></div>
+      <div class="rounded-2xl bg-white border border-brand-accent/40 p-5 shadow-sm"><h3 class="text-base font-heading text-brand-dark">Inflamación o moretones</h3><p class="mt-2 text-brand-dark/90">Cambios de tejidos blandos tras lesión aguda.</p></div>
     </div>
   </Section>
   <Section title="Cuándo llamar al 911">
-    <p class="text-brand-dark">Sangrado intenso, dificultad para respirar, desmayo, confusión o nuevos síntomas neurológicos severos requieren evaluación de emergencia.</p>
+    <div class="max-w-6xl mx-auto rounded-2xl border border-[#f5c26b] bg-[#fff8e8] p-5 sm:p-6">
+      <p class="text-brand-dark">Sangrado intenso, dificultad para respirar, desmayo, confusión o nuevos síntomas neurológicos severos requieren evaluación de emergencia.</p>
+    </div>
   </Section>
   <Section title="Enlaces útiles">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
       <ActionCard title="Seguro y facturación" text="¿Dudas sobre cobertura? Contáctanos para orientación." href="/es/contacto" hrefLabel="Contacto" />
       <ActionCard title="Apoyo bilingüe" text="Atención en inglés y español disponible en la clínica." href="/es/contacto" hrefLabel="Ver más" />
     </div>
@@ -96,9 +103,9 @@ const heroImage = `/images/${imagesBySlug[String(slug)]}`;
       ];
       return (
         <Section title={"FAQ del servicio"}>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl mx-auto">
             {faqs.map((f) => (
-              <div class="rounded-xl bg-white border border-brand-accent p-5 shadow-sm">
+              <div class="rounded-2xl bg-white border border-brand-accent/40 p-5 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                 <h3 class="text-base sm:text-lg font-heading text-brand-dark">{f.q}</h3>
                 <p class="mt-2 text-sm sm:text-base text-brand-dark/90">{f.a}</p>
               </div>
@@ -112,28 +119,30 @@ const heroImage = `/images/${imagesBySlug[String(slug)]}`;
     })()}
   }
   <Section title="Información detallada">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="rounded-lg bg-white border border-brand-accent p-5">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="rounded-2xl bg-white border border-brand-accent/40 p-5 shadow-sm">
         <h3 class="text-lg font-heading text-brand-dark">Cómo funciona la evaluación</h3>
         <p class="mt-2 text-brand-dark">Antecedentes enfocados, examen dirigido y diagnósticos cuando corresponde. Recibes pasos claros con guía escrita.</p>
       </div>
-      <div class="rounded-lg bg-white border border-brand-accent p-5">
+      <div class="rounded-2xl bg-white border border-brand-accent/40 p-5 shadow-sm">
         <h3 class="text-lg font-heading text-brand-dark">Qué llevar</h3>
         <p class="mt-2 text-brand-dark">Reportes del accidente y estudios previos si los tienes. Usa ropa cómoda y llega unos minutos antes.</p>
       </div>
     </div>
   </Section>
   <Section title="Incluye en este servicio">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center text-center">
-      <FeatureIcon icon="care" title="Examen enfocado" description="Evaluación clínica adaptada al mecanismo del accidente." />
-      <FeatureIcon icon="diagnostics" title="Diagnósticos cuando corresponda" description="Rayos X y pruebas guiadas por hallazgos." />
-      <FeatureIcon icon="followup" title="Pasos claros" description="Guía escrita y coordinación de seguimiento." />
+    <div class="max-w-6xl mx-auto rounded-3xl border border-brand-accent/40 bg-[#f7fbff] p-5 sm:p-6 lg:p-7">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center text-center">
+        <FeatureIcon icon="care" title="Examen enfocado" description="Evaluación clínica adaptada al mecanismo del accidente." />
+        <FeatureIcon icon="diagnostics" title="Diagnósticos cuando corresponda" description="Rayos X y pruebas guiadas por hallazgos." />
+        <FeatureIcon icon="followup" title="Pasos claros" description="Guía escrita y coordinación de seguimiento." />
+      </div>
     </div>
   </Section>
   <Section title="Puntos clave">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
       {(entry?.highlights || []).map((h: any) => (
-        <div class="rounded-lg border border-brand-accent p-4 bg-brand-muted">
+        <div class="rounded-2xl border border-brand-accent/40 p-5 bg-brand-muted shadow-sm">
           <h3 class="text-lg font-heading text-brand-dark">{h.title}</h3>
           <p class="mt-2 text-brand-dark">{h.text}</p>
         </div>
@@ -156,7 +165,7 @@ const heroImage = `/images/${imagesBySlug[String(slug)]}`;
       const related = services.filter((s) => s.slug !== slug).slice(0, 3);
       return (
         <Section title={"Servicios relacionados"} align="center">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {related.map((s) => (
               <ServiceCard
                 name={t(locale, `${s.i18nKey}.name`)}
@@ -170,10 +179,13 @@ const heroImage = `/images/${imagesBySlug[String(slug)]}`;
       );
     })()}
   }
-  <Section title={entry?.closingCTA?.title}>
-    <div class="flex items-center gap-4">
-      <p class="text-brand-dark">{entry?.closingCTA?.text}</p>
-      <CTA text={entry?.closingCTA?.CTA} href={"tel:+18019967427"} />
+  <Section title={entry?.closingCTA?.title} align="center">
+    <div class="max-w-6xl mx-auto rounded-3xl border border-brand-accent/40 bg-white p-5 sm:p-6 lg:p-7">
+      <p class="text-brand-dark/85 max-w-3xl mx-auto">{entry?.closingCTA?.text}</p>
+      <div class="mt-5 flex flex-wrap justify-center gap-3">
+        <CTA text={entry?.closingCTA?.CTA} href={"tel:+18019967427"} />
+        <CTA text={"Agendar ahora"} href={"mailto:orders@accidenter.com"} variant="success" />
+      </div>
     </div>
   </Section>
 </BaseLayout>

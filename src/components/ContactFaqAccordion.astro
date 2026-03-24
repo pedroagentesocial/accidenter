@@ -1,0 +1,129 @@
+---
+type FaqItem = {
+  question: string;
+  answer: string;
+};
+
+type Props = {
+  items: FaqItem[];
+  locale?: "en" | "es";
+};
+
+const { items = [], locale = "en" } = Astro.props as Props;
+const panelPrefix = `faq-panel-${locale}`;
+const triggerPrefix = `faq-trigger-${locale}`;
+---
+<div class="faq-accordion">
+  {items.map((item, i) => {
+    const panelId = `${panelPrefix}-${i}`;
+    const triggerId = `${triggerPrefix}-${i}`;
+    return (
+      <article class="faq-item">
+        <button
+          id={triggerId}
+          type="button"
+          class={`faq-trigger ${i === 0 ? "is-open" : ""}`}
+          aria-expanded={i === 0 ? "true" : "false"}
+          aria-controls={panelId}
+          data-faq-trigger
+        >
+          <span class="faq-question">{item.question}</span>
+          <span class="faq-plus">{i === 0 ? "−" : "+"}</span>
+        </button>
+        <div
+          id={panelId}
+          role="region"
+          aria-labelledby={triggerId}
+          class={`faq-panel ${i === 0 ? "is-open" : ""}`}
+          data-faq-panel
+        >
+          <div class="faq-content">
+            <p>{item.answer}</p>
+          </div>
+        </div>
+      </article>
+    );
+  })}
+</div>
+<script>
+  const accordions = Array.from(document.querySelectorAll(".faq-accordion"));
+  accordions.forEach((root) => {
+    const triggers = Array.from(root.querySelectorAll("[data-faq-trigger]"));
+    const panels = Array.from(root.querySelectorAll("[data-faq-panel]"));
+    if (!triggers.length || !panels.length) return;
+    const openAt = (index) => {
+      triggers.forEach((trigger, idx) => {
+        const panel = panels[idx];
+        const isOpen = idx === index;
+        trigger.classList.toggle("is-open", isOpen);
+        trigger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        const symbol = trigger.querySelector(".faq-plus");
+        if (symbol) symbol.textContent = isOpen ? "−" : "+";
+        panel.classList.toggle("is-open", isOpen);
+      });
+    };
+    triggers.forEach((trigger, idx) => {
+      trigger.addEventListener("click", () => openAt(idx));
+    });
+  });
+</script>
+<style>
+  .faq-accordion {
+    display: grid;
+    gap: .75rem;
+    max-width: 64rem;
+    margin: 0 auto;
+  }
+  .faq-item {
+    border: 1px solid rgba(10, 26, 47, 0.16);
+    border-radius: 1rem;
+    background: #fff;
+    overflow: hidden;
+    box-shadow: 0 6px 18px -18px rgba(10, 26, 47, 0.7);
+  }
+  .faq-trigger {
+    width: 100%;
+    border: 0;
+    background: #fff;
+    text-align: left;
+    padding: 1rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+    color: #0a1a2f;
+  }
+  .faq-trigger.is-open {
+    background: #f7fbff;
+  }
+  .faq-question {
+    font-weight: 700;
+    line-height: 1.35;
+  }
+  .faq-plus {
+    font-size: 1.2rem;
+    line-height: 1;
+    color: #0f4a77;
+  }
+  .faq-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .35s ease;
+  }
+  .faq-panel.is-open {
+    grid-template-rows: 1fr;
+  }
+  .faq-content {
+    overflow: hidden;
+    padding: 0 1rem;
+  }
+  .faq-panel.is-open .faq-content {
+    padding-bottom: 1rem;
+  }
+  .faq-content p {
+    margin: 0;
+    color: rgba(10, 26, 47, .86);
+    line-height: 1.55;
+  }
+</style>

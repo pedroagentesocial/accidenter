@@ -43,7 +43,7 @@ html {
 }
 
 body {
-  @apply font-body text-brand-dark bg-brand-muted;
+  @apply font-body font-normal antialiased text-brand-dark bg-white;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -62,26 +62,26 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .button-primary {
-  @apply inline-flex items-center rounded-md border border-brand-primary bg-brand-primary text-white px-5 py-3 transition hover:bg-brand-primary/90 hover:text-white hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2;
+  @apply inline-flex items-center rounded-[48px] border border-brand-primary bg-brand-primary text-white px-5 py-3 transition hover:bg-brand-primary/90 hover:text-white hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2;
 }
 
 .button-secondary {
-  @apply inline-flex items-center rounded-md border border-brand-success text-brand-success bg-transparent px-5 py-3 hover:bg-brand-success hover:text-white hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-success focus-visible:ring-offset-2;
+  @apply inline-flex items-center rounded-[48px] border border-brand-success text-brand-success bg-transparent px-5 py-3 hover:bg-brand-success hover:text-white hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-success focus-visible:ring-offset-2;
 }
 
 .button-success {
-  @apply inline-flex items-center rounded-md border border-brand-success bg-brand-success text-white px-5 py-3 transition hover:bg-brand-success/90 hover:text-white hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-success focus-visible:ring-offset-2;
+  @apply inline-flex items-center rounded-[48px] border border-brand-success bg-brand-success text-white px-5 py-3 transition hover:bg-brand-success/90 hover:text-white hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-success focus-visible:ring-offset-2;
 }
 .button-tertiary {
-  @apply inline-flex items-center rounded-md bg-brand-dark text-white px-5 py-3 hover:bg-brand-dark/90 hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark focus-visible:ring-offset-2;
+  @apply inline-flex items-center rounded-[48px] bg-brand-dark text-white px-5 py-3 hover:bg-brand-dark/90 hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark focus-visible:ring-offset-2;
 }
 
 .button-outline-dark {
-  @apply inline-flex items-center rounded-md border border-brand-dark text-brand-dark bg-transparent px-5 py-3 hover:bg-brand-dark/5 hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark focus-visible:ring-offset-2;
+  @apply inline-flex items-center rounded-[48px] border border-brand-dark text-brand-dark bg-transparent px-5 py-3 hover:bg-brand-dark/5 hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-dark focus-visible:ring-offset-2;
 }
 
 .button-outline-light {
-  @apply inline-flex items-center rounded-md border border-white text-white bg-transparent px-5 py-3 hover:bg-white/10 hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2;
+  @apply inline-flex items-center rounded-[48px] border border-white text-white bg-transparent px-5 py-3 hover:bg-white/10 hover:shadow-md focus-visible:shadow-md hover:scale-105 focus-visible:scale-105 active:scale-95 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2;
 }
 
 .footer {

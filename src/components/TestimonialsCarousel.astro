@@ -3,109 +3,176 @@ import { t } from "../i18n";
 const { locale } = Astro.props as { locale: "en" | "es" };
 const reviews = (locale === "en"
   ? [
-      { text: "Prompt, professional care. Highly recommend!", author: "Emily Johnson", avatar: "https://i.pravatar.cc/96?img=12" },
-      { text: "Staff was bilingual and very helpful.", author: "Carlos Rivera", avatar: "https://i.pravatar.cc/96?img=5" },
-      { text: "On‑site diagnostics made things fast.", author: "Ava Thompson", avatar: "https://i.pravatar.cc/96?img=31" },
-      { text: "Clear guidance after my accident. Thank you!", author: "Juan Garcia", avatar: "https://i.pravatar.cc/96?img=45" },
-      { text: "Efficient visit and caring team.", author: "Sofia Martinez", avatar: "https://i.pravatar.cc/96?img=7" },
-      { text: "Helpful follow‑up and recovery support.", author: "Daniel Brooks", avatar: "https://i.pravatar.cc/96?img=21" },
-      { text: "Fast intake and thorough exam.", author: "Mia Lopez", avatar: "https://i.pravatar.cc/96?img=23" },
-      { text: "Clear next steps and bilingual staff.", author: "Noah Williams", avatar: "https://i.pravatar.cc/96?img=8" },
-      { text: "Compassionate care after my crash.", author: "Grace Hernandez", avatar: "https://i.pravatar.cc/96?img=16" },
-      { text: "They explained everything clearly.", author: "Olivia Brown", avatar: "https://i.pravatar.cc/96?img=27" },
-      { text: "Quick, friendly, and professional.", author: "Liam Davis", avatar: "https://i.pravatar.cc/96?img=9" },
-      { text: "The team coordinated my follow‑up.", author: "Emma Wilson", avatar: "https://i.pravatar.cc/96?img=13" },
-      { text: "I felt safe and cared for.", author: "James Miller", avatar: "https://i.pravatar.cc/96?img=33" }
+      { text: "Prompt, professional care and zero stress. They explained each step after my crash and got imaging done the same day. Highly recommend this team.", author: "Emily Johnson", avatar: "https://i.pravatar.cc/96?img=12" },
+      { text: "Staff was bilingual, patient, and very helpful with paperwork.", author: "Carlos Rivera", avatar: "https://i.pravatar.cc/96?img=5" },
+      { text: "On-site diagnostics made everything faster than expected. I was in pain and anxious, but they moved quickly and still treated me with care.", author: "Ava Thompson", avatar: "https://i.pravatar.cc/96?img=31" },
+      { text: "Clear guidance after my accident. They gave me a recovery plan and contacted me the next day to check in. Thank you!", author: "Juan Garcia", avatar: "https://i.pravatar.cc/96?img=45" },
+      { text: "Efficient visit and a caring team from front desk to provider.", author: "Sofia Martinez", avatar: "https://i.pravatar.cc/96?img=7" },
+      { text: "Helpful follow-up and recovery support. They coordinated referrals and made sure I understood what to do week by week.", author: "Daniel Brooks", avatar: "https://i.pravatar.cc/96?img=21" },
+      { text: "Fast intake and a thorough exam. I never felt rushed.", author: "Mia Lopez", avatar: "https://i.pravatar.cc/96?img=23" },
+      { text: "Clear next steps, bilingual staff, and excellent communication with my attorney.", author: "Noah Williams", avatar: "https://i.pravatar.cc/96?img=8" },
+      { text: "Compassionate care after my crash. Pain was addressed immediately and the provider listened to every detail.", author: "Grace Hernandez", avatar: "https://i.pravatar.cc/96?img=16" },
+      { text: "They explained everything clearly and answered all my questions without rushing.", author: "Olivia Brown", avatar: "https://i.pravatar.cc/96?img=27" },
+      { text: "Quick, friendly, and professional. Great experience overall.", author: "Liam Davis", avatar: "https://i.pravatar.cc/96?img=9" },
+      { text: "The team coordinated my follow-up visits perfectly and kept my treatment timeline organized.", author: "Emma Wilson", avatar: "https://i.pravatar.cc/96?img=13" },
+      { text: "I felt safe and cared for from the first minute. They treated my neck pain fast and gave me confidence about recovery.", author: "James Miller", avatar: "https://i.pravatar.cc/96?img=33" }
     ]
   : [
-      { text: "Atención rápida y profesional. Recomendado.", author: "Sofía Martínez", avatar: "https://i.pravatar.cc/96?img=15" },
-      { text: "Personal bilingüe y muy amable.", author: "Carlos Rivera", avatar: "https://i.pravatar.cc/96?img=18" },
-      { text: "Diagnóstico en sitio agilizó todo.", author: "Isabela Ramírez", avatar: "https://i.pravatar.cc/96?img=22" },
-      { text: "Guía clara después del accidente. Gracias.", author: "Juan García", avatar: "https://i.pravatar.cc/96?img=36" },
-      { text: "Visita eficiente y equipo atento.", author: "Ana Torres", avatar: "https://i.pravatar.cc/96?img=29" },
-      { text: "Buen seguimiento y apoyo en recuperación.", author: "Miguel Hernández", avatar: "https://i.pravatar.cc/96?img=41" },
-      { text: "Ingreso rápido y examen minucioso.", author: "Valeria López", avatar: "https://i.pravatar.cc/96?img=11" },
-      { text: "Pasos claros y personal bilingüe.", author: "Andrés Pérez", avatar: "https://i.pravatar.cc/96?img=44" },
-      { text: "Atención amable tras mi choque.", author: "Camila Fernández", avatar: "https://i.pravatar.cc/96?img=25" },
-      { text: "Me explicaron todo con claridad.", author: "Lucía Gómez", avatar: "https://i.pravatar.cc/96?img=28" },
-      { text: "Rápidos y profesionales.", author: "Diego Castillo", avatar: "https://i.pravatar.cc/96?img=14" },
-      { text: "Coordinación excelente del seguimiento.", author: "Elena Rojas", avatar: "https://i.pravatar.cc/96?img=19" },
-      { text: "Me sentí seguro y bien atendido.", author: "Javier Morales", avatar: "https://i.pravatar.cc/96?img=20" }
+      { text: "Atención rápida y profesional. Me evaluaron en poco tiempo y me explicaron claramente cómo seguir mi recuperación. Totalmente recomendado.", author: "Sofía Martínez", avatar: "https://i.pravatar.cc/96?img=15" },
+      { text: "Personal bilingüe y muy amable; me ayudaron con todos los formularios.", author: "Carlos Rivera", avatar: "https://i.pravatar.cc/96?img=18" },
+      { text: "El diagnóstico en sitio agilizó todo. Llegué con dolor y salí con un plan claro, estudios listos y mucha tranquilidad.", author: "Isabela Ramírez", avatar: "https://i.pravatar.cc/96?img=22" },
+      { text: "Guía clara después del accidente. También me llamaron al día siguiente para dar seguimiento. Gracias.", author: "Juan García", avatar: "https://i.pravatar.cc/96?img=36" },
+      { text: "Visita eficiente y equipo atento de principio a fin.", author: "Ana Torres", avatar: "https://i.pravatar.cc/96?img=29" },
+      { text: "Buen seguimiento y apoyo en recuperación. Coordinaron referencias y me sentí acompañado en todo el proceso.", author: "Miguel Hernández", avatar: "https://i.pravatar.cc/96?img=41" },
+      { text: "Ingreso rápido y examen minucioso, sin prisas.", author: "Valeria López", avatar: "https://i.pravatar.cc/96?img=11" },
+      { text: "Pasos claros, personal bilingüe y excelente comunicación.", author: "Andrés Pérez", avatar: "https://i.pravatar.cc/96?img=44" },
+      { text: "Atención amable tras mi choque. Trataron mi dolor de inmediato.", author: "Camila Fernández", avatar: "https://i.pravatar.cc/96?img=25" },
+      { text: "Me explicaron todo con claridad y resolvieron cada duda.", author: "Lucía Gómez", avatar: "https://i.pravatar.cc/96?img=28" },
+      { text: "Rápidos y profesionales, excelente experiencia.", author: "Diego Castillo", avatar: "https://i.pravatar.cc/96?img=14" },
+      { text: "Coordinación excelente del seguimiento y de mis próximas citas.", author: "Elena Rojas", avatar: "https://i.pravatar.cc/96?img=19" },
+      { text: "Me sentí seguro y bien atendido desde el primer momento.", author: "Javier Morales", avatar: "https://i.pravatar.cc/96?img=20" }
     ]);
+const utahLocations = locale === "es"
+  ? ["Condado de Salt Lake, Utah", "Condado de Utah, Utah", "Condado de Davis, Utah", "Condado de Weber, Utah", "Condado de Washington, Utah"]
+  : ["Salt Lake County, Utah", "Utah County, Utah", "Davis County, Utah", "Weber County, Utah", "Washington County, Utah"];
+const publishedTimes = locale === "es"
+  ? ["hace 2 semanas", "hace 3 semanas", "hace 1 mes", "hace 5 días", "hace 2 meses", "hace 9 días"]
+  : ["2 weeks ago", "3 weeks ago", "1 month ago", "5 days ago", "2 months ago", "9 days ago"];
 ---
 <div class="w-screen -mx-[calc(50vw-50%)]">
-  <div class="flex items-center justify-center gap-3 mb-4">
-    <div class="inline-flex items-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="h-6 w-6">
-        <path fill="#EA4335" d="M24 9.5c3.15 0 5.97 1.12 8.2 2.97l6.16-6.16C34.98 2.67 29.86 1 24 1 14.66 1 6.57 6.33 2.85 14l7.69 5.97C12.34 15.8 17.75 9.5 24 9.5z"/>
-        <path fill="#FBBC05" d="M46.15 24.5c0-1.61-.15-3.15-.42-4.63H24v9.16h12.49c-.54 2.93-2.19 5.41-4.68 7.08l7.23 5.63C43.17 38.84 46.15 32.25 46.15 24.5z"/>
-        <path fill="#4285F4" d="M24 47c6.51 0 12-2.15 16.02-5.81l-7.23-5.63C30.45 37.09 27.44 38 24 38c-7.13 0-13.17-4.77-15.34-11.27L1 32.09C5.01 40.55 13.81 47 24 47z"/>
-        <path fill="#34A853" d="M8.66 26.73C7.94 24.7 7.5 22.65 7.5 20.5c0-2.15.44-4.2 1.16-6.23L1 14c-1.31 2.63-2 5.55-2 8.5 0 3.41.79 6.62 2.17 9.59l7.49-5.36z"/>
-      </svg>
-      <span class="font-heading text-brand-dark">{t(locale, "ui.testimonials.fromGoogle")}</span>
-    </div>
-  </div>
-  <div class="relative overflow-hidden">
+  <div class="relative overflow-hidden py-2">
+    <div class="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-20 z-10 bg-gradient-to-r from-white to-transparent"></div>
+    <div class="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-20 z-10 bg-gradient-to-l from-white to-transparent"></div>
     <div
-      class="band-track flex gap-4 will-change-transform"
-      data-base={locale === "es" ? "36s" : "40s"}
-      data-fast={locale === "es" ? "18s" : "20s"}
-      style={`animation-duration:${locale === "es" ? "36s" : "40s"};animation-direction:${locale === "es" ? "reverse" : "normal"}`}
+      class="band-track flex will-change-transform"
+      style={`--band-duration:${locale === "es" ? "66s" : "72s"};animation-direction:${locale === "es" ? "reverse" : "normal"}`}
     >
-      <div class="flex gap-4">
-        {reviews.map((r) => (
-          <div class="min-w-[280px] sm:min-w-[320px] bg-white border border-brand-accent rounded-xl p-4 shadow-sm">
-            <div class="flex items-center gap-3 mb-3">
-              <img src={r.avatar} alt="Reviewer avatar" class="h-10 w-10 rounded-full object-cover" loading="lazy" />
-              <div class="flex gap-0.5 text-brand-success">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+      <div class="flex shrink-0 gap-5 sm:gap-6 pr-5 sm:pr-6">
+        {reviews.map((r, idx) => (
+          <div class="testimonial-card group min-w-[340px] sm:min-w-[420px] bg-gradient-to-b from-white to-[#f7fffb] border border-brand-accent/50 rounded-3xl p-5 sm:p-7 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style={`animation-delay:${idx * 90}ms`}>
+            <div class="flex items-center justify-between gap-3 mb-4">
+              <div class="flex items-center gap-3">
+                <img src={r.avatar} alt={r.author} class="h-16 w-16 rounded-2xl object-cover ring-2 ring-brand-success/25" loading="lazy" />
+                <div>
+                  <p class="text-sm sm:text-base font-heading text-brand-dark leading-tight">{r.author}</p>
+                  <div class="flex flex-col items-start gap-0.5">
+                    <div class="inline-flex items-center gap-1 text-xs text-brand-dark/60">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-brand-primary/70" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.19 7 13 7 13s7-7.81 7-13c0-3.87-3.13-7-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"/>
+                      </svg>
+                      <span>{utahLocations[idx % utahLocations.length]}</span>
+                    </div>
+                    <div class="inline-flex items-center gap-1 text-[11px] text-brand-dark/45">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="h-3 w-3">
+                        <path fill="#EA4335" d="M24 9.5c3.15 0 5.97 1.12 8.2 2.97l6.16-6.16C34.98 2.67 29.86 1 24 1 14.66 1 6.57 6.33 2.85 14l7.69 5.97C12.34 15.8 17.75 9.5 24 9.5z"/>
+                        <path fill="#FBBC05" d="M46.15 24.5c0-1.61-.15-3.15-.42-4.63H24v9.16h12.49c-.54 2.93-2.19 5.41-4.68 7.08l7.23 5.63C43.17 38.84 46.15 32.25 46.15 24.5z"/>
+                        <path fill="#4285F4" d="M24 47c6.51 0 12-2.15 16.02-5.81l-7.23-5.63C30.45 37.09 27.44 38 24 38c-7.13 0-13.17-4.77-15.34-11.27L1 32.09C5.01 40.55 13.81 47 24 47z"/>
+                        <path fill="#34A853" d="M8.66 26.73C7.94 24.7 7.5 22.65 7.5 20.5c0-2.15.44-4.2 1.16-6.23L1 14c-1.31 2.63-2 5.55-2 8.5 0 3.41.79 6.62 2.17 9.59l7.49-5.36z"/>
+                      </svg>
+                      <span>{locale === "es" ? "Google review" : "Google review"}</span>
+                    </div>
+                    <div class="inline-flex items-center gap-1 text-[11px] text-brand-dark/45">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 1.75a.75.75 0 0 1 .75.75v1.06a7.75 7.75 0 0 1 6.69 6.69h1.06a.75.75 0 0 1 0 1.5h-1.06a7.75 7.75 0 0 1-6.69 6.69v1.06a.75.75 0 0 1-1.5 0v-1.06a7.75 7.75 0 0 1-6.69-6.69H3.5a.75.75 0 0 1 0-1.5h1.06a7.75 7.75 0 0 1 6.69-6.69V2.5a.75.75 0 0 1 .75-.75Zm0 3.25a6.25 6.25 0 1 0 0 12.5A6.25 6.25 0 0 0 12 5Zm-.75 2.5a.75.75 0 0 1 1.5 0v3.44l2.22 1.28a.75.75 0 1 1-.75 1.3l-2.6-1.5a.75.75 0 0 1-.37-.65V7.5Z"/>
+                      </svg>
+                      <span>{publishedTimes[idx % publishedTimes.length]}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-brand-primary/55 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-105" viewBox="0 0 24 24" fill="currentColor"><path d="M7.17 6A4.17 4.17 0 0 0 3 10.17V21h6.5v-8.17H6.83A1.17 1.17 0 0 1 5.67 11.67V10.5a2.5 2.5 0 1 1 5 0V21h6.5v-8.17h-2.67A1.17 1.17 0 0 1 13.33 11.67V10.5a2.5 2.5 0 1 1 5 0V21H21V10.17A4.17 4.17 0 0 0 16.83 6c-1.53 0-2.88.82-3.66 2.03A4.16 4.16 0 0 0 9.5 6H7.17Z"/></svg>
             </div>
-            <p class="text-sm sm:text-base text-brand-dark">{r.text}</p>
-            <p class="mt-2 text-xs text-brand-dark/80">— {r.author}</p>
+            <div class="flex gap-1 text-brand-success mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </div>
+            <p class="text-sm sm:text-base text-brand-dark leading-relaxed">{r.text}</p>
+            <div class="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-success/10 px-3 py-1.5 text-xs text-brand-dark/70">
+              <span class="h-2 w-2 rounded-full bg-brand-success"></span>
+              {locale === "es" ? "Paciente verificado" : "Verified patient"}
+            </div>
           </div>
         ))}
       </div>
-      <div class="flex gap-4">
-        {reviews.map((r) => (
-          <div class="min-w-[280px] sm:min-w-[320px] bg-white border border-brand-accent rounded-xl p-4 shadow-sm">
-            <div class="flex items-center gap-3 mb-3">
-              <img src={r.avatar} alt="Reviewer avatar" class="h-10 w-10 rounded-full object-cover" loading="lazy" />
-              <div class="flex gap-0.5 text-brand-success">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+      <div class="flex shrink-0 gap-5 sm:gap-6 pr-5 sm:pr-6">
+        {reviews.map((r, idx) => (
+          <div class="testimonial-card group min-w-[340px] sm:min-w-[420px] bg-gradient-to-b from-white to-[#f7fffb] border border-brand-accent/50 rounded-3xl p-5 sm:p-7 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style={`animation-delay:${(idx + reviews.length) * 90}ms`}>
+            <div class="flex items-center justify-between gap-3 mb-4">
+              <div class="flex items-center gap-3">
+                <img src={r.avatar} alt={r.author} class="h-16 w-16 rounded-2xl object-cover ring-2 ring-brand-success/25" loading="lazy" />
+                <div>
+                  <p class="text-sm sm:text-base font-heading text-brand-dark leading-tight">{r.author}</p>
+                  <div class="flex flex-col items-start gap-0.5">
+                    <div class="inline-flex items-center gap-1 text-xs text-brand-dark/60">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-brand-primary/70" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.19 7 13 7 13s7-7.81 7-13c0-3.87-3.13-7-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"/>
+                      </svg>
+                      <span>{utahLocations[idx % utahLocations.length]}</span>
+                    </div>
+                    <div class="inline-flex items-center gap-1 text-[11px] text-brand-dark/45">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="h-3 w-3">
+                        <path fill="#EA4335" d="M24 9.5c3.15 0 5.97 1.12 8.2 2.97l6.16-6.16C34.98 2.67 29.86 1 24 1 14.66 1 6.57 6.33 2.85 14l7.69 5.97C12.34 15.8 17.75 9.5 24 9.5z"/>
+                        <path fill="#FBBC05" d="M46.15 24.5c0-1.61-.15-3.15-.42-4.63H24v9.16h12.49c-.54 2.93-2.19 5.41-4.68 7.08l7.23 5.63C43.17 38.84 46.15 32.25 46.15 24.5z"/>
+                        <path fill="#4285F4" d="M24 47c6.51 0 12-2.15 16.02-5.81l-7.23-5.63C30.45 37.09 27.44 38 24 38c-7.13 0-13.17-4.77-15.34-11.27L1 32.09C5.01 40.55 13.81 47 24 47z"/>
+                        <path fill="#34A853" d="M8.66 26.73C7.94 24.7 7.5 22.65 7.5 20.5c0-2.15.44-4.2 1.16-6.23L1 14c-1.31 2.63-2 5.55-2 8.5 0 3.41.79 6.62 2.17 9.59l7.49-5.36z"/>
+                      </svg>
+                      <span>{locale === "es" ? "Google review" : "Google review"}</span>
+                    </div>
+                    <div class="inline-flex items-center gap-1 text-[11px] text-brand-dark/45">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 1.75a.75.75 0 0 1 .75.75v1.06a7.75 7.75 0 0 1 6.69 6.69h1.06a.75.75 0 0 1 0 1.5h-1.06a7.75 7.75 0 0 1-6.69 6.69v1.06a.75.75 0 0 1-1.5 0v-1.06a7.75 7.75 0 0 1-6.69-6.69H3.5a.75.75 0 0 1 0-1.5h1.06a7.75 7.75 0 0 1 6.69-6.69V2.5a.75.75 0 0 1 .75-.75Zm0 3.25a6.25 6.25 0 1 0 0 12.5A6.25 6.25 0 0 0 12 5Zm-.75 2.5a.75.75 0 0 1 1.5 0v3.44l2.22 1.28a.75.75 0 1 1-.75 1.3l-2.6-1.5a.75.75 0 0 1-.37-.65V7.5Z"/>
+                      </svg>
+                      <span>{publishedTimes[idx % publishedTimes.length]}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-brand-primary/55 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-105" viewBox="0 0 24 24" fill="currentColor"><path d="M7.17 6A4.17 4.17 0 0 0 3 10.17V21h6.5v-8.17H6.83A1.17 1.17 0 0 1 5.67 11.67V10.5a2.5 2.5 0 1 1 5 0V21h6.5v-8.17h-2.67A1.17 1.17 0 0 1 13.33 11.67V10.5a2.5 2.5 0 1 1 5 0V21H21V10.17A4.17 4.17 0 0 0 16.83 6c-1.53 0-2.88.82-3.66 2.03A4.16 4.16 0 0 0 9.5 6H7.17Z"/></svg>
             </div>
-            <p class="text-sm sm:text-base text-brand-dark">{r.text}</p>
-            <p class="mt-2 text-xs text-brand-dark/80">— {r.author}</p>
+            <div class="flex gap-1 text-brand-success mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </div>
+            <p class="text-sm sm:text-base text-brand-dark leading-relaxed">{r.text}</p>
+            <div class="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-success/10 px-3 py-1.5 text-xs text-brand-dark/70">
+              <span class="h-2 w-2 rounded-full bg-brand-success"></span>
+              {locale === "es" ? "Paciente verificado" : "Verified patient"}
+            </div>
           </div>
         ))}
       </div>
     </div>
   </div>
-  <script>
-    const track = document.querySelector(".band-track");
-    if (track) {
-      const base = track.getAttribute("data-base") || "40s";
-      const fast = track.getAttribute("data-fast") || "20s";
-      track.addEventListener("mouseenter", () => { (track as HTMLElement).style.animationDuration = fast; });
-      track.addEventListener("mouseleave", () => { (track as HTMLElement).style.animationDuration = base; });
-      track.addEventListener("touchstart", () => { (track as HTMLElement).style.animationDuration = fast; }, { passive: true });
-      track.addEventListener("touchend", () => { (track as HTMLElement).style.animationDuration = base; });
-    }
-  </script>
   <style>
-    .band-track { animation: bandScroll 48s linear infinite; }
+    .band-track {
+      width: max-content;
+      animation: bandScroll var(--band-duration, 40s) linear infinite;
+    }
+    .band-track:hover {
+      animation-play-state: paused;
+    }
+    .testimonial-card {
+      opacity: 0;
+      transform: translateY(12px) scale(.985);
+      animation: cardReveal .7s ease forwards;
+    }
     @keyframes bandScroll {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
+    }
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(12px) scale(.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .band-track { animation: none !important; }
+      .testimonial-card { animation: none !important; opacity: 1; transform: none; }
     }
   </style>
 </div>

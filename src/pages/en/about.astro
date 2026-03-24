@@ -4,9 +4,7 @@ import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import Section from "../../components/Section.astro";
 import TestimonialsCarousel from "../../components/TestimonialsCarousel.astro";
 import FeatureIcon from "../../components/FeatureIcon.astro";
-import StepCard from "../../components/StepCard.astro";
-import StatGauge from "../../components/StatGauge.astro";
-import StatIcon from "../../components/StatIcon.astro";
+import CTA from "../../components/CTA.astro";
 import { t } from "../../i18n";
 const locale = "en";
 const about = t(locale, "about");
@@ -17,14 +15,9 @@ const stats = about.stats;
 const mission = about.mission;
 const ourTeam = about.ourTeam;
 const howWeCare = about.howWeCare;
-const careStatsValues = [
-  { value: 68, suffix: "%" },
-  { value: 24, suffix: "" },
-  { value: 85, suffix: "%" },
-  { value: 120, suffix: "" }
-];
 const values = about.values;
-const closingCTA = about.closingCTA;
+const clinicMapEmbed = "https://www.google.com/maps?q=6770%20S%20900%20E%2C%20Midvale%2C%20UT%2084047&output=embed";
+const clinicDirections = "https://www.google.com/maps/search/?api=1&query=6770%20S%20900%20E%2C%20Midvale%2C%20UT%2084047";
 ---
 <BaseLayout locale={locale} title={seo.title} description={seo.description} canonical={seo.canonical}>
   <section class="relative overflow-hidden bg-black border-b border-brand-accent min-h-[460px] sm:min-h-[540px] lg:min-h-[620px]">
@@ -60,95 +53,321 @@ const closingCTA = about.closingCTA;
     </script>
   </section>
   <Breadcrumbs items={breadcrumb} />
-  <Section title={stats.title} align="center">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {stats.items.map((s: any, i: number) => {
-        const icons = ["medical", "clipboard", "language"];
-        return (
-          <StatIcon label={s.label} value={s.value} suffix={s.suffix} icon={icons[i % icons.length]} />
-        );
-      })}
+  <Section title={"Impact at a glance"} align="center">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5">
+      {stats.items.map((s: any, i: number) => (
+        <article class="impact-card-en" data-impact-card-en style={`animation-delay:${i * 100}ms`}>
+          <div class="flex items-center justify-between gap-3">
+            <p class="text-sm text-brand-dark/70">{s.label}</p>
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-brand-dark text-white">
+              {i === 0 && <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a5 5 0 0 1 5 5v1h1a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3h1V7a5 5 0 0 1 5-5Zm3 6V7a3 3 0 1 0-6 0v1h6Z"/></svg>}
+              {i === 1 && <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3h11a2 2 0 0 1 2 2v1h1a2 2 0 0 1 2 2v10a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V3Zm2 4v11a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8H7Zm2 2h8v2H9V9Zm0 4h8v2H9v-2Z"/></svg>}
+              {i === 2 && <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm0 3a7 7 0 0 0-6.31 10.03l4.89-2.12A2.5 2.5 0 0 1 12 9.5a2.5 2.5 0 0 1 2.5 2.5c0 .27-.04.54-.12.79l3.93 3.93A7 7 0 0 0 12 5Z"/></svg>}
+            </span>
+          </div>
+          <p class="mt-4 text-4xl sm:text-5xl font-heading text-brand-dark leading-none">
+            <span data-impact-count-en data-count={String(s.value)} data-suffix={String(s.suffix || "")}>0{s.suffix}</span>
+          </p>
+          <div class="mt-4 rounded-xl border border-brand-accent/40 bg-[#f7fbff] p-3">
+            <div class="flex items-center justify-between text-xs text-brand-dark/70">
+              <span>Progress</span>
+              <span>{i === 0 ? "High" : i === 1 ? "Growing" : "Strong"}</span>
+            </div>
+            <div class="mt-2 h-1.5 w-full rounded-full bg-brand-accent/30 overflow-hidden">
+              <div class="impact-bar-en h-full rounded-full bg-brand-primary" data-width={i === 0 ? "78" : i === 1 ? "62" : "85"}></div>
+            </div>
+          </div>
+        </article>
+      ))}
     </div>
   </Section>
   <Section title={`AccidentER® — ${mission.title} & ${ourTeam.title}`} align="center">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-      <div class="rounded-xl bg-white border border-brand-accent p-6 shadow-sm min-h-[240px] flex flex-col items-center text-center gap-4">
-        <div class="flex flex-col items-center gap-1">
-          <span class="inline-flex items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary px-2 py-1 text-xs">AccidentER®</span>
-          <span class="text-xs text-brand-dark/70">Urgent Care MD — Utah</span>
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-5">
+      <article class="mission-pane-en lg:col-span-3 rounded-3xl border border-brand-accent/40 bg-white p-5 sm:p-7 text-brand-dark shadow-sm" data-mission-pane-en>
+        <p class="text-xs uppercase tracking-[0.14em] text-brand-dark/60">Our mission</p>
+        <h3 class="mt-2 text-3xl sm:text-4xl font-heading leading-tight">{mission.title}</h3>
+        <p class="mt-4 text-brand-dark/85 max-w-2xl">{mission.text}</p>
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="rounded-2xl border border-brand-accent/40 bg-[#f7fbff] p-3"><p class="text-xs uppercase text-brand-dark/60 tracking-[0.12em]">Speed</p><p class="mt-1 font-heading">Same-day access</p></div>
+          <div class="rounded-2xl border border-brand-accent/40 bg-[#f7fbff] p-3"><p class="text-xs uppercase text-brand-dark/60 tracking-[0.12em]">Safety</p><p class="mt-1 font-heading">Focused triage</p></div>
+          <div class="rounded-2xl border border-brand-accent/40 bg-[#f7fbff] p-3"><p class="text-xs uppercase text-brand-dark/60 tracking-[0.12em]">Clarity</p><p class="mt-1 font-heading">Written next steps</p></div>
         </div>
-        <FeatureIcon icon="care" title={mission.title} description={mission.text} />
-      </div>
-      <div class="rounded-xl bg-white border border-brand-accent p-6 shadow-sm min-h-[240px] flex flex-col items-center text-center gap-4">
-        <div class="flex flex-col items-center gap-1">
-          <span class="inline-flex items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary px-2 py-1 text-xs">AccidentER®</span>
-          <span class="text-xs text-brand-dark/70">Urgent Care MD — Utah</span>
+      </article>
+      <article class="mission-pane-en lg:col-span-2 rounded-3xl border border-brand-accent/40 bg-white p-5 sm:p-6 text-left shadow-sm" data-mission-pane-en>
+        <p class="text-xs uppercase tracking-[0.14em] text-brand-dark/60">Our team</p>
+        <h3 class="mt-2 text-2xl sm:text-3xl font-heading text-brand-dark">{ourTeam.title}</h3>
+        <p class="mt-3 text-brand-dark/85">{ourTeam.text}</p>
+        <div class="mt-4 space-y-2.5">
+          <span class="inline-flex w-full items-center gap-2 rounded-xl border border-brand-accent/40 bg-[#f7fbff] px-3 py-2 text-sm text-brand-dark"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-brand-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Bilingual support</span>
+          <span class="inline-flex w-full items-center gap-2 rounded-xl border border-brand-accent/40 bg-[#f7fbff] px-3 py-2 text-sm text-brand-dark"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-brand-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M3 4a2 2 0 0 1 2-2h6l2 2h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4zm4 4h10v2H7V8zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/></svg>On-site diagnostics</span>
+          <span class="inline-flex w-full items-center gap-2 rounded-xl border border-brand-accent/40 bg-[#f7fbff] px-3 py-2 text-sm text-brand-dark"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-brand-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm.75 5a.75.75 0 0 0-1.5 0v5.25c0 .27.15.52.39.65l3.25 1.88a.75.75 0 1 0 .75-1.3l-2.89-1.67V7Z"/></svg>Coordinated follow-up</span>
         </div>
-        <FeatureIcon icon="followup" title={ourTeam.title} description={ourTeam.text} />
-        <div class="flex flex-wrap items-center justify-center gap-2">
-          <span class="inline-flex items-center gap-1 rounded-full bg-brand-primary/10 text-brand-primary px-3 py-1 text-xs">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-            Bilingual support
-          </span>
-          <span class="inline-flex items-center gap-1 rounded-full bg-brand-primary/10 text-brand-primary px-3 py-1 text-xs">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M3 4a2 2 0 0 1 2-2h6l2 2h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4zm4 4h10v2H7V8zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/></svg>
-            On‑site diagnostics
-          </span>
-        </div>
-      </div>
+      </article>
     </div>
+    <script>
+      const impactCardsEn = Array.from(document.querySelectorAll("[data-impact-card-en]"));
+      const missionPanesEn = Array.from(document.querySelectorAll("[data-mission-pane-en]"));
+      const valueCardsEn = Array.from(document.querySelectorAll("[data-value-card-en]"));
+      const accreditCardsEn = Array.from(document.querySelectorAll("[data-accredit-card-en]"));
+      const animateImpactCounterEn = (el) => {
+        const target = Number(el.getAttribute("data-count") || "0");
+        const suffix = el.getAttribute("data-suffix") || "";
+        const start = performance.now();
+        const duration = 1200;
+        const tick = (now) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const value = Math.round(target * (1 - Math.pow(1 - progress, 3)));
+          el.textContent = `${value}${suffix}`;
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+      const impactObserverEn = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry, idx) => {
+          if (!entry.isIntersecting) return;
+          const card = entry.target;
+          card.classList.add("is-visible");
+          const count = card.querySelector("[data-impact-count-en]");
+          const bar = card.querySelector(".impact-bar-en");
+          if (count) animateImpactCounterEn(count);
+          if (bar) bar.style.width = `${bar.getAttribute("data-width") || 0}%`;
+          observer.unobserve(card);
+        });
+      }, { threshold: 0.2 });
+      impactCardsEn.forEach((card) => impactObserverEn.observe(card));
+      const missionObserverEn = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry, idx) => {
+          if (!entry.isIntersecting) return;
+          setTimeout(() => entry.target.classList.add("is-visible"), idx * 120);
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.2 });
+      missionPanesEn.forEach((pane) => missionObserverEn.observe(pane));
+      const valuesObserverEn = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry, idx) => {
+          if (!entry.isIntersecting) return;
+          setTimeout(() => entry.target.classList.add("is-visible"), idx * 110);
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.2 });
+      valueCardsEn.forEach((card) => valuesObserverEn.observe(card));
+      const accreditObserverEn = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry, idx) => {
+          if (!entry.isIntersecting) return;
+          setTimeout(() => entry.target.classList.add("is-visible"), idx * 120);
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.2 });
+      accreditCardsEn.forEach((card) => accreditObserverEn.observe(card));
+    </script>
   </Section>
   <Section title={howWeCare.title} align="center">
-    <div class="max-w-3xl mx-auto text-brand-dark">{howWeCare.text}</div>
-    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto justify-items-center">
+    <p class="max-w-3xl mx-auto text-brand-dark/85">{howWeCare.text}</p>
+    <div class="mt-6 max-w-5xl mx-auto space-y-4">
       {howWeCare.items.map((it: string, i: number) => (
-        <StepCard step={i + 1} title={it} text={""} />
+        <article class="about-flow-card" style={`animation-delay:${i * 90}ms`}>
+          <div class="flex items-start gap-3 sm:gap-4">
+            <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-dark text-white font-heading">{i + 1}</span>
+            <div class="text-left">
+              <p class="text-xs uppercase tracking-[0.12em] text-brand-dark/60">Care step</p>
+              <h3 class="mt-1 text-xl font-heading text-brand-dark">{it}</h3>
+            </div>
+          </div>
+        </article>
       ))}
     </div>
   </Section>
   <Section title={values.title} align="center">
-    <div class="max-w-3xl mx-auto grid grid-cols-1 gap-4">
-      {values.items.map((v: any) => (
-        <div class="rounded-xl bg-white border border-brand-accent p-5 shadow-sm text-left">
-          <h3 class="text-base sm:text-lg font-heading text-brand-dark">{v.title}</h3>
-          <p class="mt-2 text-sm sm:text-base text-brand-dark">{v.text}</p>
-        </div>
-      ))}
+    <div class="max-w-6xl mx-auto rounded-3xl border border-brand-accent/40 bg-[#f7fbff] p-5 sm:p-6 lg:p-7">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+        {values.items.map((v: any, i: number) => (
+          <article class="value-card-en" data-value-card-en>
+            <div class="flex items-start gap-3">
+              <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-dark text-white">
+                {i === 0 && <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm0 5a1 1 0 0 0-1 1v4.59l-2.3 2.3a1 1 0 1 0 1.42 1.42l2.59-2.6A1 1 0 0 0 13 13V8a1 1 0 0 0-1-1Z"/></svg>}
+                {i === 1 && <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.25 21 8v8l-9 4.75L3 16V8l9-4.75Zm0 2.08L6 8.5l6 3.17 6-3.17-6-3.17ZM5 10.2v4.6l6 3.17v-4.6L5 10.2Zm14 0-6 3.17v4.6l6-3.17v-4.6Z"/></svg>}
+                {i === 2 && <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 3 6v6c0 5.25 3.84 10.74 9 12 5.16-1.26 9-6.75 9-12V6l-9-4Zm4.24 8.76-4.95 4.95a1 1 0 0 1-1.42 0l-2.11-2.11a1 1 0 1 1 1.42-1.42l1.4 1.4 4.24-4.24a1 1 0 0 1 1.42 1.42Z"/></svg>}
+                {i >= 3 && <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 0 1 9 9c0 3.8-2.36 7.14-5.69 8.45l-.31.12V15a3 3 0 1 0-6 0v5.57l-.31-.12A9 9 0 0 1 12 3Zm0 3a1.75 1.75 0 1 0 0 3.5A1.75 1.75 0 0 0 12 6Z"/></svg>}
+              </span>
+              <div class="text-left">
+                <p class="text-xs uppercase tracking-[0.12em] text-brand-dark/60">Core value</p>
+                <h3 class="mt-1 text-lg sm:text-xl font-heading text-brand-dark">{v.title}</h3>
+                <p class="mt-2 text-sm sm:text-base text-brand-dark/85">{v.text}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
   </Section>
   <Section title={"Accreditations & Experience"} align="center">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="rounded-xl overflow-hidden border border-brand-accent bg-white shadow-sm">
-        <img src="https://images.unsplash.com/photo-1583912268180-87f0c7b994c5?auto=format&fit=crop&w=900&q=80" alt="Accident-focused protocols" class="w-full h-28 object-cover" />
-        <div class="p-4">
-          <h3 class="text-base sm:text-lg font-heading text-brand-dark">Accident‑focused protocols</h3>
-          <p class="mt-2 text-sm text-brand-dark">Processes designed for consistent accident evaluation.</p>
-        </div>
-      </div>
-      <div class="rounded-xl overflow-hidden border border-brand-accent bg-white shadow-sm">
-        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80" alt="On-site imaging capability" class="w-full h-28 object-cover" />
-        <div class="p-4">
-          <h3 class="text-base sm:text-lg font-heading text-brand-dark">On‑site imaging capability</h3>
-          <p class="mt-2 text-sm text-brand-dark">X‑ray and testing available on site.</p>
-        </div>
-      </div>
-      <div class="rounded-xl overflow-hidden border border-brand-accent bg-white shadow-sm">
-        <img src="https://images.unsplash.com/photo-1519494080410-f9aa76cb4283?auto=format&fit=crop&w=900&q=80" alt="Clear follow-up" class="w-full h-28 object-cover" />
-        <div class="p-4">
-          <h3 class="text-base sm:text-lg font-heading text-brand-dark">Clear follow‑up</h3>
-          <p class="mt-2 text-sm text-brand-dark">Written guidance and coordinated next steps.</p>
-        </div>
-      </div>
-      <div class="rounded-xl overflow-hidden border border-brand-accent bg-white shadow-sm">
-        <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=900&q=80" alt="Recovery support" class="w-full h-28 object-cover" />
-        <div class="p-4">
-          <h3 class="text-base sm:text-lg font-heading text-brand-dark">Recovery support</h3>
-          <p class="mt-2 text-sm text-brand-dark">Practical recommendations to start healing safely.</p>
-        </div>
+    <div class="max-w-6xl mx-auto rounded-3xl border border-brand-accent/40 bg-[#f7fbff] p-5 sm:p-6 lg:p-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <article class="accredit-card-en" data-accredit-card-en>
+          <img src="/images/expertise.jpg" alt="Accident-focused protocols" class="w-full h-32 sm:h-36 object-cover rounded-xl" />
+          <div class="mt-4">
+            <h3 class="text-base sm:text-lg font-heading text-brand-dark">Accident-focused protocols</h3>
+            <p class="mt-2 text-sm text-brand-dark/85">Structured clinical pathways designed for consistent accident evaluation.</p>
+          </div>
+        </article>
+        <article class="accredit-card-en" data-accredit-card-en>
+          <img src="/images/diagnostics.jpg" alt="On-site imaging capability" class="w-full h-32 sm:h-36 object-cover rounded-xl" />
+          <div class="mt-4">
+            <h3 class="text-base sm:text-lg font-heading text-brand-dark">On-site imaging capability</h3>
+            <p class="mt-2 text-sm text-brand-dark/85">In-clinic diagnostics accelerate decisions and reduce treatment delays.</p>
+          </div>
+        </article>
+        <article class="accredit-card-en" data-accredit-card-en>
+          <img src="/images/comunication.jpg" alt="Bilingual communication" class="w-full h-32 sm:h-36 object-cover rounded-xl" />
+          <div class="mt-4">
+            <h3 class="text-base sm:text-lg font-heading text-brand-dark">Bilingual communication</h3>
+            <p class="mt-2 text-sm text-brand-dark/85">English and Spanish communication for clear and confident care planning.</p>
+          </div>
+        </article>
+        <article class="accredit-card-en" data-accredit-card-en>
+          <img src="/images/efficient.jpg" alt="Clear follow-up" class="w-full h-32 sm:h-36 object-cover rounded-xl" />
+          <div class="mt-4">
+            <h3 class="text-base sm:text-lg font-heading text-brand-dark">Clear follow-up</h3>
+            <p class="mt-2 text-sm text-brand-dark/85">Written guidance and coordinated next steps after each visit.</p>
+          </div>
+        </article>
+        <article class="accredit-card-en" data-accredit-card-en>
+          <img src="/images/support.jpg" alt="Recovery support" class="w-full h-32 sm:h-36 object-cover rounded-xl" />
+          <div class="mt-4">
+            <h3 class="text-base sm:text-lg font-heading text-brand-dark">Recovery support</h3>
+            <p class="mt-2 text-sm text-brand-dark/85">Practical recommendations and continuity support for safer recovery.</p>
+          </div>
+        </article>
       </div>
     </div>
   </Section>
   <Section title={"What our patients say about AccidentER®"} align="center">
     <TestimonialsCarousel locale={locale} />
   </Section>
+  <section class="container py-8 sm:py-12">
+    <div class="max-w-6xl mx-auto">
+      <div class="rounded-3xl border border-brand-accent/40 bg-[#f4f8ff] p-4 sm:p-6 lg:p-8 shadow-[0_18px_45px_-30px_rgba(10,26,47,0.45)]">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 items-stretch">
+          <div class="lg:col-span-3 overflow-hidden rounded-2xl border border-brand-accent/30 min-h-[280px]">
+            <iframe src={clinicMapEmbed} class="h-full w-full min-h-[280px]" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="AccidentER clinic map"></iframe>
+          </div>
+          <div class="lg:col-span-2 rounded-2xl border border-brand-dark/10 bg-brand-dark p-4 sm:p-5 text-white flex flex-col justify-start">
+            <span class="inline-flex w-fit items-center rounded-full border border-brand-success/35 bg-brand-success/15 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-brand-success">Walk-in care</span>
+            <p class="mt-3 text-sm sm:text-base text-white/90">Fast accident-focused care with bilingual support and on-site diagnostics.</p>
+            <ul class="mt-3.5 space-y-2 text-sm text-white/80">
+              <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-brand-success/90" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.19 7 13 7 13s7-7.81 7-13c0-3.87-3.13-7-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"/></svg><span>6770 S 900 E, Midvale, UT 84047</span></li>
+              <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-brand-success/90" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.75a.75.75 0 0 1 .75.75v8.25h4.75a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75V2.5a.75.75 0 0 1 .75-.75ZM12 4a8 8 0 1 0 8 8 .75.75 0 0 1 1.5 0 9.5 9.5 0 1 1-9.5-9.5.75.75 0 0 1 0 1.5Z"/></svg><span>Mon–Fri · 9:00 AM–7:00 PM</span></li>
+              <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-0.5 text-brand-success/90" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.75a.75.75 0 0 1 .75.75v8.25h4.75a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75V2.5a.75.75 0 0 1 .75-.75ZM12 4a8 8 0 1 0 8 8 .75.75 0 0 1 1.5 0 9.5 9.5 0 1 1-9.5-9.5.75.75 0 0 1 0 1.5Z"/></svg><span>Sat · 9:00 AM–3:00 PM</span></li>
+            </ul>
+            <div class="mt-4 flex flex-col items-center gap-2.5">
+              <div class="w-fit scale-90 sm:scale-95 origin-center"><CTA text={"Call Now"} href={"tel:+18019967427"} variant="primary" /></div>
+              <div class="w-fit scale-90 sm:scale-95 origin-center"><CTA text={"Open in Maps"} href={clinicDirections} variant="success" /></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <style>
+    .impact-card-en {
+      border: 1px solid rgba(10, 26, 47, 0.12);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      background: #ffffff;
+      opacity: 0;
+      transform: translateY(16px) scale(.99);
+      transition: opacity .55s ease, transform .55s ease, box-shadow .3s ease;
+    }
+    .impact-card-en.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .impact-card-en:hover {
+      box-shadow: 0 16px 30px -22px rgba(10, 26, 47, 0.75);
+    }
+    .impact-bar-en {
+      width: 0%;
+      transition: width 1s ease;
+    }
+    .mission-pane-en {
+      opacity: 0;
+      transform: translateY(16px) scale(.99);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .mission-pane-en.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .about-flow-card {
+      border: 1px solid rgba(10, 26, 47, 0.12);
+      border-radius: 1rem;
+      padding: 1rem;
+      background: #ffffff;
+      opacity: 0;
+      transform: translateY(14px) scale(.99);
+      animation: aboutReveal .55s ease forwards;
+    }
+    .value-card-en {
+      border: 1px solid rgba(10, 26, 47, 0.12);
+      border-radius: 1rem;
+      background: #ffffff;
+      padding: 1rem;
+      opacity: 0;
+      transform: translateY(14px) scale(.99);
+      transition: opacity .55s ease, transform .55s ease, box-shadow .3s ease;
+    }
+    .value-card-en.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .value-card-en:hover {
+      box-shadow: 0 14px 26px -20px rgba(10, 26, 47, 0.7);
+    }
+    .accredit-card-en {
+      border: 1px solid rgba(10, 26, 47, 0.12);
+      border-radius: 1rem;
+      padding: 0.75rem;
+      background: #ffffff;
+      opacity: 0;
+      transform: translateY(14px) scale(.99);
+      transition: opacity .55s ease, transform .55s ease, box-shadow .3s ease;
+    }
+    .accredit-card-en.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .accredit-card-en:hover {
+      box-shadow: 0 16px 28px -20px rgba(10, 26, 47, 0.72);
+    }
+    @keyframes aboutReveal {
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .impact-card-en,
+      .mission-pane-en {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .impact-bar-en {
+        width: 100%;
+        transition: none;
+      }
+      .about-flow-card {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+      .value-card-en {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .accredit-card-en {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
 </BaseLayout>
