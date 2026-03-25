@@ -36,7 +36,7 @@ jobs:
           raw="${FTP_PATH:-/}"
           clean="$(echo "$raw" | tr -d '\r' | sed 's#//*#/#g' | sed 's#/$##')"
           if [ -z "$clean" ] || [ "$clean" = "/" ]; then
-            target="/public_html"
+            target="/domains/accidenter.com/public_html"
           else
             target="$clean"
           fi
